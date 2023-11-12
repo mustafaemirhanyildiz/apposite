@@ -1,0 +1,12 @@
+/Users/mustafaemirhanyildiz/apposite/Apposite.Core/bin/Debug/net7.0/Apposite.Core.deps.json
+/Users/mustafaemirhanyildiz/apposite/Apposite.Core/bin/Debug/net7.0/Apposite.Core.dll
+/Users/mustafaemirhanyildiz/apposite/Apposite.Core/bin/Debug/net7.0/Apposite.Core.pdb
+/Users/mustafaemirhanyildiz/apposite/Apposite.Core/obj/Debug/net7.0/Apposite.Core.csproj.AssemblyReference.cache
+/Users/mustafaemirhanyildiz/apposite/Apposite.Core/obj/Debug/net7.0/Apposite.Core.GeneratedMSBuildEditorConfig.editorconfig
+/Users/mustafaemirhanyildiz/apposite/Apposite.Core/obj/Debug/net7.0/Apposite.Core.AssemblyInfoInputs.cache
+/Users/mustafaemirhanyildiz/apposite/Apposite.Core/obj/Debug/net7.0/Apposite.Core.AssemblyInfo.cs
+/Users/mustafaemirhanyildiz/apposite/Apposite.Core/obj/Debug/net7.0/Apposite.Core.csproj.CoreCompileInputs.cache
+/Users/mustafaemirhanyildiz/apposite/Apposite.Core/obj/Debug/net7.0/Apposite.Core.dll
+/Users/mustafaemirhanyildiz/apposite/Apposite.Core/obj/Debug/net7.0/refint/Apposite.Core.dll
+/Users/mustafaemirhanyildiz/apposite/Apposite.Core/obj/Debug/net7.0/Apposite.Core.pdb
+/Users/mustafaemirhanyildiz/apposite/Apposite.Core/obj/Debug/net7.0/ref/Apposite.Core.dll
