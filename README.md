@@ -7,6 +7,9 @@ docker-compose up
 
 DBeaver settings 
 -> postgre-sql
+
 ->Database = Apposite
+
 ->Username = admin
+
 ->Password = admin
