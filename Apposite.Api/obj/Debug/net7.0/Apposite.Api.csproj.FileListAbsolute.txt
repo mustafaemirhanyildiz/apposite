@@ -100,3 +100,4 @@
 /Users/mustafaemirhanyildiz/apposite/Apposite.Api/bin/Debug/net7.0/Apposite.Core.pdb
 /Users/mustafaemirhanyildiz/apposite/Apposite.Api/bin/Debug/net7.0/Apposite.Domain.pdb
 /Users/mustafaemirhanyildiz/apposite/Apposite.Api/bin/Debug/net7.0/Apposite.Persistence.pdb
+/Users/mustafaemirhanyildiz/apposite/Apposite.Api/bin/Debug/net7.0/MediatR.Extensions.Microsoft.DependencyInjection.dll

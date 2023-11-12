@@ -8,7 +8,5 @@ namespace Apposite.Application.Commands.Login
     {
         public string Email { get; set; }
         public string Password { get; set; }
-        public string userKey { get; set; }
-        public string captchaKey { get; set; }
     }
 }

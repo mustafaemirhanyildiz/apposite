@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "e/xHiMXK6Wo8JdrtSEU6OMTBLz/8nD6E/t16Ahbmsy8bCzCaR6s4ra5YQ25jp/VBSOM9hkUWxOgJaactW+4ZPg==",
+  "dgSpecHash": "TkPIjMPC02kezQFGvbQXusNaThdaGdPOjwQsO+bO0lRhrsvfhxAFX5Z4EClqjmfsSBCJdW+56sb3hClwfEY6rQ==",
   "success": true,
   "projectFilePath": "/Users/mustafaemirhanyildiz/apposite/Apposite.Persistence/Apposite.Persistence.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,9 @@
     "/Users/mustafaemirhanyildiz/.nuget/packages/fluentvalidation/11.8.0/fluentvalidation.11.8.0.nupkg.sha512",
     "/Users/mustafaemirhanyildiz/.nuget/packages/fluentvalidation.dependencyinjectionextensions/11.8.0/fluentvalidation.dependencyinjectionextensions.11.8.0.nupkg.sha512",
     "/Users/mustafaemirhanyildiz/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
+    "/Users/mustafaemirhanyildiz/.nuget/packages/mediatr/11.0.0/mediatr.11.0.0.nupkg.sha512",
+    "/Users/mustafaemirhanyildiz/.nuget/packages/mediatr.contracts/1.0.1/mediatr.contracts.1.0.1.nupkg.sha512",
+    "/Users/mustafaemirhanyildiz/.nuget/packages/mediatr.extensions.microsoft.dependencyinjection/11.1.0/mediatr.extensions.microsoft.dependencyinjection.11.1.0.nupkg.sha512",
     "/Users/mustafaemirhanyildiz/.nuget/packages/microsoft.aspnetcore.antiforgery/2.2.0/microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",
     "/Users/mustafaemirhanyildiz/.nuget/packages/microsoft.aspnetcore.authentication/2.2.0/microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
     "/Users/mustafaemirhanyildiz/.nuget/packages/microsoft.aspnetcore.authentication.abstractions/2.2.0/microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",

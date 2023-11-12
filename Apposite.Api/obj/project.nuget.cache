@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "oJfv+FY73Wr/o2vgJU4qRAmkyA96ob/JaoirLvibheeE3J61Q4fwPt98rrvynpMwGAnDQdjjeg1utM9HZIbm/g==",
+  "dgSpecHash": "2gWORa7V2DmioabBxk0LDKiF3jdOog3xFqHmZwPNAxX3sN2slo1aSH5NIrIn4pXV1rfEZd7CkErLpShEWrM49g==",
   "success": true,
   "projectFilePath": "/Users/mustafaemirhanyildiz/apposite/Apposite.Api/Apposite.Api.csproj",
   "expectedPackageFiles": [
@@ -13,8 +13,9 @@
     "/Users/mustafaemirhanyildiz/.nuget/packages/masstransit.abstractions/8.1.1/masstransit.abstractions.8.1.1.nupkg.sha512",
     "/Users/mustafaemirhanyildiz/.nuget/packages/masstransit.aspnetcore/7.3.1/masstransit.aspnetcore.7.3.1.nupkg.sha512",
     "/Users/mustafaemirhanyildiz/.nuget/packages/masstransit.extensions.dependencyinjection/7.3.1/masstransit.extensions.dependencyinjection.7.3.1.nupkg.sha512",
-    "/Users/mustafaemirhanyildiz/.nuget/packages/mediatr/12.1.1/mediatr.12.1.1.nupkg.sha512",
-    "/Users/mustafaemirhanyildiz/.nuget/packages/mediatr.contracts/2.0.1/mediatr.contracts.2.0.1.nupkg.sha512",
+    "/Users/mustafaemirhanyildiz/.nuget/packages/mediatr/11.0.0/mediatr.11.0.0.nupkg.sha512",
+    "/Users/mustafaemirhanyildiz/.nuget/packages/mediatr.contracts/1.0.1/mediatr.contracts.1.0.1.nupkg.sha512",
+    "/Users/mustafaemirhanyildiz/.nuget/packages/mediatr.extensions.microsoft.dependencyinjection/11.1.0/mediatr.extensions.microsoft.dependencyinjection.11.1.0.nupkg.sha512",
     "/Users/mustafaemirhanyildiz/.nuget/packages/microsoft.aspnetcore.antiforgery/2.2.0/microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",
     "/Users/mustafaemirhanyildiz/.nuget/packages/microsoft.aspnetcore.authentication/2.2.0/microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
     "/Users/mustafaemirhanyildiz/.nuget/packages/microsoft.aspnetcore.authentication.abstractions/2.2.0/microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",

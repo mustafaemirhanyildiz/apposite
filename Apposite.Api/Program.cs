@@ -1,7 +1,4 @@
 using System.Text;
-using Apposite.Application.Commands.User;
-using Apposite.Application.Handlers;
-using Apposite.Application.Handlers.User;
 using Apposite.Application.Middleware;
 using Apposite.Application.ServiceExtensions;
 using Apposite.Application.Services;
@@ -9,16 +6,17 @@ using Apposite.Application.Settings;
 using Apposite.Domain.Entities;
 using Apposite.Persistence;
 using Apposite.Persistence.Seeds;
-using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
+using MediatR;
+using Apposite.Application.Handlers;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -120,10 +118,7 @@ builder.Services.AddSwaggerGen(setup =>
     });
     }
 );
-builder.Services.AddMediator(cfg =>
-{
-    cfg.AddConsumersFromNamespaceContaining<AuthCommandHandler>();
-});
+builder.Services.AddMediatR(typeof(AuthCommandHandler));
 
 var app = builder.Build();
 

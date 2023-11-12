@@ -40,7 +40,7 @@ namespace Apposite.Application.Handlers
                 var user = await _userManager.FindByEmailAsync(request.Email);
                 if (user == null)
                 {
-                    return Response<LoginDto>.Fail("Girdiğiniz mail veya şifre hatalı. Lütfen kontrol ediniz", 404);
+                    return Response<LoginDto>.Fail("Girdiğiniz mail vevya şifre hatalı. Lütfen kontrol ediniz", 404);
 
                 }
                 var signInResult = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
