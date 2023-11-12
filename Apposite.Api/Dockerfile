@@ -1,3 +1,5 @@
+#See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
+
 FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
 WORKDIR /app
 EXPOSE 80
@@ -5,14 +7,18 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["Apposite.Api.csproj", "."]
-RUN dotnet restore "Apposite.Api.csproj"
+COPY ["Apposite.Api/Apposite.Api.csproj", "Apposite.Api/"]
+COPY ["Apposite.Application/Apposite.Application.csproj", "Apposite.Application/"]
+COPY ["Apposite.Core/Apposite.Core.csproj", "Apposite.Core/"]
+COPY ["Apposite.Domain/Apposite.Domain.csproj", "Apposite.Domain/"]
+COPY ["Apposite.Persistence/Apposite.Persistence.csproj", "Apposite.Persistence/"]
+RUN dotnet restore "Apposite.Api/Apposite.Api.csproj"
 COPY . .
-WORKDIR "/src/"
+WORKDIR "/src/Apposite.Api"
 RUN dotnet build "Apposite.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Apposite.Api.csproj" -c Release -o /app/publish
+RUN dotnet publish "Apposite.Api.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
