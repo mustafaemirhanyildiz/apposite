@@ -20,5 +20,10 @@ namespace Apposite.Persistence.Seeds
                 //await SetPermissions(_serviceProvider, ParsToRoles(roleName));
             }
         }
+
+         private static RoleList ParsToRoles(string name)
+        {
+            return Enum.Parse<RoleList>(name);
+        }
     }
 }

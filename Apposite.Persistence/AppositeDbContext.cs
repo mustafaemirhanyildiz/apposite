@@ -6,9 +6,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Apposite.Persistence
 {
-    public class AppositeDbContext : IdentityDbContext<Users, Roles,Guid>
+    public class AppositeDbContext : IdentityDbContext<Users, Roles, Guid>
     {
-        public AppositeDbContext(DbContextOptions<DbContext> options) : base(options) => this.Database.Migrate();
+        public AppositeDbContext(DbContextOptions<AppositeDbContext> options) : base(options)
+        {
+            this.Database.Migrate();
+        }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

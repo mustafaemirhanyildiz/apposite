@@ -7,22 +7,22 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Apposite.Domain.Models;
+using Microsoft.Extensions.Options;
 
 namespace Apposite.Application.Services
 {
     public class JwtGenerator
     {
         private readonly JwtSettings _jwtSettings;
-        private readonly ILogger<JwtGenerator> _logger;
         private readonly UserManager<Users> _userManager;
+        private readonly ILogger<JwtGenerator> _logger;
 
-        public JwtGenerator(JwtSettings jwtSettings, ILogger<JwtGenerator> logger, UserManager<Users> userManager)
+        public JwtGenerator(IOptions<JwtSettings> jwtSettings, UserManager<Users> userManager, ILogger<JwtGenerator> logger)
         {
-            _jwtSettings = jwtSettings;
-            _logger = logger;
             _userManager = userManager;
+            _jwtSettings = jwtSettings.Value;
+            _logger = logger;
         }
-
         public async Task<ValidateTokenResult> ValidateToken(string token, TokenType tokenType = TokenType.AccessToken)
         {
             if (token == null)

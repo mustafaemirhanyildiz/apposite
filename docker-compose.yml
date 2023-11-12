@@ -1,0 +1,91 @@
+version: '3.4'
+
+networks:
+  dev:
+    driver: bridge
+  apposite:
+    external: true
+
+services:
+  apposite-service:
+    depends_on:
+      - db
+      - elasticsearch
+      - rabbitmq
+      - redis 
+    container_name: apposite-service
+    ports:
+      - "5000:80"
+    build:
+      context: .
+      dockerfile: ./src/Apposite.Api/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+    networks:
+      - apposite
+    links:
+      - db
+      - rabbitmq
+      - elasticsearch
+      - redis
+  db:
+    image: postgres:latest
+    container_name: db
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+    ports:
+      - "5432:5432"
+    restart: always
+    networks:
+      - dev
+    hostname: "db"
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.6.2
+    container_name: elasticsearch
+    restart: always
+    environment:
+      - xpack.security.enabled=false
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    cap_add:
+      - IPC_LOCK
+    ports:
+      - 9200:9200
+      - 9300:9300
+    networks:
+      - dev
+    hostname: "elasticsearch"
+
+  redis:
+    image: redis
+    container_name: redis.cache
+    ports:
+      - 6379:6379
+    hostname: "redis"
+    networks:
+      - dev
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    hostname: "rabbitmq"
+    labels:
+      NAME: "rabbitmq"
+    container_name: "rabbitmq"
+    ports:
+    - "5671:5671"
+    - "5672:5672"
+    - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_PASS:M@gnet
+      - RABBITMQ_DEFAULT_USER:magnet
+    networks:
+      - dev
