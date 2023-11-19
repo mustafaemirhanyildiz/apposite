@@ -11,6 +11,10 @@ namespace Apposite.Domain.Entities
         public string Surname { get; set; }
         public string FullName => $"{Name} {Surname}";
         public bool IsDeleted { get; set; } 
+
+        public virtual ICollection<UserHealth> UserHealth { get; set; }
+        public virtual ICollection<CuisinePreferences> CuisinePreferences { get; set; }
+        public virtual ICollection<UserIngredients> UserIngredients { get; set; }
     }
 }
 
