@@ -1,4 +1,4 @@
-﻿namespace Apposite.Application.Dto.User
+﻿namespace Apposite.Application.Dto.Auth
 {
     public class UserDto
     {

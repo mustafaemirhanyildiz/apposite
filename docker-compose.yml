@@ -30,7 +30,7 @@ services:
       - redis
   db:
     image: postgres:latest
-    container_name: db
+    container_name: db.apposite
     environment:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin
@@ -43,7 +43,7 @@ services:
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.6.2
-    container_name: elasticsearch
+    container_name: elasticsearch.apposite
     restart: always
     environment:
       - xpack.security.enabled=false
@@ -67,7 +67,7 @@ services:
 
   redis:
     image: redis
-    container_name: redis.cache
+    container_name: redis.cache.apposite
     ports:
       - 6379:6379
     hostname: "redis"
@@ -79,7 +79,7 @@ services:
     hostname: "rabbitmq"
     labels:
       NAME: "rabbitmq"
-    container_name: "rabbitmq"
+    container_name: "rabbitmq.apposite"
     ports:
     - "5671:5671"
     - "5672:5672"

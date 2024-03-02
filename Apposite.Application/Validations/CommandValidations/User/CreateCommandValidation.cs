@@ -1,4 +1,4 @@
-﻿using Apposite.Application.Commands.User;
+﻿using Apposite.Application.Commands.Auth;
 using Apposite.Application.Validations.FluentValidation;
 using FluentValidation;
 

@@ -1,4 +1,4 @@
-﻿using Apposite.Application.Dto.User;
+﻿using Apposite.Application.Dto.Auth;
 using Apposite.Domain.Entities;
 
 namespace Apposite.Application.Mapping
