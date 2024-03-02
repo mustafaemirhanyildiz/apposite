@@ -1,10 +1,13 @@
+
+
 using Apposite.Core.Entity;
 
 namespace Apposite.Domain.Entities
 {
-      public class CuisinePreferences : BaseEntity
+    public class UserHealthIngredients : BaseEntity
     {
-        public string CuisineType { get; set; }
+    
         public virtual Users User { get; set; }
+        public virtual Material Material { get; set; }   
     }
 }

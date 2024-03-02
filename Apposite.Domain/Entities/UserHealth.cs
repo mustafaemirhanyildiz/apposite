@@ -7,7 +7,6 @@ namespace Apposite.Domain.Entities
     {
         public string HealthCondition { get; set; }
         public string DietaryRestrictions { get; set; }
-        public Guid UserId { get; set; }
         public virtual Users User { get; set; }
     }
 }

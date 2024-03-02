@@ -91,7 +91,6 @@ namespace Apposite.Application.Services
             new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
             new Claim(JwtRegisteredClaimNames.Email,user.Email),
             new Claim(JwtRegisteredClaimNames.Name, user.Name),
-            new Claim(JwtRegisteredClaimNames.FamilyName, user.Surname),
             new Claim("userid", user.Id.ToString()),
             new Claim("role", rolesTxt)
         };

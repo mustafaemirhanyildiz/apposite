@@ -1,4 +1,5 @@
-﻿using Apposite.Application.Dto.Auth;
+﻿using Apposite.Application.Commands.Auth;
+using Apposite.Application.Dto.Auth;
 using Apposite.Domain.Entities;
 
 namespace Apposite.Application.Mapping
@@ -7,7 +8,8 @@ namespace Apposite.Application.Mapping
     {
         public CustomMapping()
         {
-            CreateMap<UserDto,Users>().ReverseMap();
+            CreateMap<Users,UserDto>().ReverseMap();
+            CreateMap<CreateUserCommand,Users>().ReverseMap();
         }
     }
 }

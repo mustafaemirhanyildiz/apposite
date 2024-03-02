@@ -9,6 +9,8 @@ using Apposite.Core.Dtos;
 using Apposite.Domain.Entities;
 using Apposite.Persistence;
 using Apposite.Application.Mapping;
+using StackExchange.Redis;
+using Apposite.Domain.Enums;
 
 
 namespace Apposite.Application.Handlers
@@ -71,34 +73,33 @@ namespace Apposite.Application.Handlers
             try
             {
                 Users user = ObjectMapper.Mapper.Map<Users>(request);
-                var userExist = await _userManager.FindByEmailAsync(request.Email);
-                if (userExist != null && userExist.IsDeleted)
+
+                if (_userManager.PasswordValidators.Any() && request.Password != null)
                 {
-                    userExist.Name = request.Name;
-                    userExist.Surname = request.Surname;
-                    userExist.IsDeleted = false;
-                    userExist.Email = request.Email;
-
-                    if (!string.IsNullOrEmpty(request.Password))
+                    foreach (var validator in _userManager.PasswordValidators)
                     {
-                        var token = await _userManager.GeneratePasswordResetTokenAsync(userExist);
-                        var result = await _userManager.ResetPasswordAsync(userExist, token, request.Password);
+                        var result = await validator.ValidateAsync(_userManager, user, request.Password);
+                        if (!result.Succeeded)
+                        {
+                            await transection.RollbackAsync();
+                            return Response<UserDto>.Fail(result.Errors.Select(x => x.Description).ToList(), 400);
+                        }
                     }
-
-                    await _userManager.UpdateAsync(userExist);
-
-                    await _dbContext.SaveChangesAsync();
-                    await transection.CommitAsync();
-
-                    var userDto = ObjectMapper.Mapper.Map<UserDto>(userExist);
-                    return Response<UserDto>.Success(userDto, 200);
                 }
-
+                
                 idResult = await _userManager.CreateAsync(user, request.Password);
 
                 if (idResult.Succeeded)
                 {
+                    var roleAssigned = await _userManager.AddToRoleAsync(user, RoleList.User.ToString());
+                    if (!roleAssigned.Succeeded)
+                    {
+                        await transection.RollbackAsync();
+                        _logger.LogError("Error occured while creating user");
+                        return Response<UserDto>.Fail("Error occured while creating user", 500);
+                    }
                     var createdUser = ObjectMapper.Mapper.Map<UserDto>(user);
+                    createdUser.Role = RoleList.User.ToString();
                     await _dbContext.SaveChangesAsync();
                     await transection.CommitAsync();
                     return Response<UserDto>.Success(createdUser, 200);
