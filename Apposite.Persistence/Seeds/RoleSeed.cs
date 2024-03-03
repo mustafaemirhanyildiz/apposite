@@ -12,16 +12,19 @@ namespace Apposite.Persistence.Seeds
             using var scope = _serviceProvider.CreateScope();
             var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<Roles>>();
 
-            foreach (var roleName in Enum.GetNames(typeof(RoleList)))
+            if (roleManager.Roles.Count() == 0)
             {
-                bool roleExists = await roleManager.RoleExistsAsync(roleName);
-                if (!roleExists)
-                    await roleManager.CreateAsync(new Roles() { Name = roleName });
-                //await SetPermissions(_serviceProvider, ParsToRoles(roleName));
+                foreach (var roleName in Enum.GetNames(typeof(RoleList)))
+                {
+                    bool roleExists = await roleManager.RoleExistsAsync(roleName);
+                    if (!roleExists)
+                        await roleManager.CreateAsync(new Roles() { Name = roleName });
+                    //await SetPermissions(_serviceProvider, ParsToRoles(roleName));
+                }
             }
         }
 
-         private static RoleList ParsToRoles(string name)
+        private static RoleList ParsToRoles(string name)
         {
             return Enum.Parse<RoleList>(name);
         }

@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Apposite.Persistence.Migrations
 {
     [DbContext(typeof(AppositeDbContext))]
-    [Migration("20231119233609_updateDb")]
-    partial class updateDb
+    [Migration("20240303065811_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,15 +44,12 @@ namespace Apposite.Persistence.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
-
-                    b.Property<Guid>("UserId1")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("CuisinePreferences");
                 });
@@ -95,7 +92,7 @@ namespace Apposite.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Material");
+                    b.ToTable("Materials");
                 });
 
             modelBuilder.Entity("Apposite.Domain.Entities.Recipe", b =>
@@ -133,7 +130,7 @@ namespace Apposite.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Recipe");
+                    b.ToTable("Recipes");
                 });
 
             modelBuilder.Entity("Apposite.Domain.Entities.RecipeIngredients", b =>
@@ -148,19 +145,13 @@ namespace Apposite.Persistence.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<int>("MaterialId")
-                        .HasColumnType("integer");
-
-                    b.Property<Guid>("MaterialId1")
+                    b.Property<Guid>("MaterialId")
                         .HasColumnType("uuid");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("integer");
 
-                    b.Property<int>("RecipeId")
-                        .HasColumnType("integer");
-
-                    b.Property<Guid>("RecipeId1")
+                    b.Property<Guid>("RecipeId")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime?>("UpdatedAt")
@@ -168,9 +159,9 @@ namespace Apposite.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MaterialId1");
+                    b.HasIndex("MaterialId");
 
-                    b.HasIndex("RecipeId1");
+                    b.HasIndex("RecipeId");
 
                     b.ToTable("RecipeIngredients");
                 });
@@ -235,6 +226,36 @@ namespace Apposite.Persistence.Migrations
                     b.ToTable("UserHealth");
                 });
 
+            modelBuilder.Entity("Apposite.Domain.Entities.UserHealthIngredients", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<Guid>("MaterialId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MaterialId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserHealthIngredients");
+                });
+
             modelBuilder.Entity("Apposite.Domain.Entities.UserIngredients", b =>
                 {
                     b.Property<Guid>("Id")
@@ -247,10 +268,7 @@ namespace Apposite.Persistence.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<int>("MaterialId")
-                        .HasColumnType("integer");
-
-                    b.Property<Guid>("MaterialId1")
+                    b.Property<Guid>("MaterialId")
                         .HasColumnType("uuid");
 
                     b.Property<int>("Quantity")
@@ -262,19 +280,16 @@ namespace Apposite.Persistence.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
-
-                    b.Property<Guid>("UserId1")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MaterialId1");
+                    b.HasIndex("MaterialId");
 
                     b.HasIndex("RecipeId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("UserIngredients");
                 });
@@ -462,7 +477,7 @@ namespace Apposite.Persistence.Migrations
                 {
                     b.HasOne("Apposite.Domain.Entities.Users", "User")
                         .WithMany("CuisinePreferences")
-                        .HasForeignKey("UserId1")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -473,13 +488,13 @@ namespace Apposite.Persistence.Migrations
                 {
                     b.HasOne("Apposite.Domain.Entities.Material", "Material")
                         .WithMany("RecipeIngredients")
-                        .HasForeignKey("MaterialId1")
+                        .HasForeignKey("MaterialId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Apposite.Domain.Entities.Recipe", "Recipe")
                         .WithMany("RecipeIngredients")
-                        .HasForeignKey("RecipeId1")
+                        .HasForeignKey("RecipeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -499,11 +514,30 @@ namespace Apposite.Persistence.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Apposite.Domain.Entities.UserHealthIngredients", b =>
+                {
+                    b.HasOne("Apposite.Domain.Entities.Material", "Material")
+                        .WithMany()
+                        .HasForeignKey("MaterialId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Apposite.Domain.Entities.Users", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Material");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Apposite.Domain.Entities.UserIngredients", b =>
                 {
                     b.HasOne("Apposite.Domain.Entities.Material", "Material")
                         .WithMany()
-                        .HasForeignKey("MaterialId1")
+                        .HasForeignKey("MaterialId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -513,7 +547,7 @@ namespace Apposite.Persistence.Migrations
 
                     b.HasOne("Apposite.Domain.Entities.Users", "User")
                         .WithMany("UserIngredients")
-                        .HasForeignKey("UserId1")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
