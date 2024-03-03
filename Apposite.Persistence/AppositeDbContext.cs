@@ -8,6 +8,9 @@ namespace Apposite.Persistence
 {
     public class AppositeDbContext : IdentityDbContext<User, Roles, Guid>
     {
+        // cd .\Apposite.Persistence\
+        // dotnet ef --startup-project ..\Apposite.Api\ migrations add <migration-name>
+        // dotnet ef database update
         public AppositeDbContext(DbContextOptions<AppositeDbContext> options) : base(options)
         {
             this.Database.Migrate();
