@@ -41,8 +41,8 @@ namespace Apposite.Persistence
         public DbSet<UserHealth> UserHealth { get; set; }
         public DbSet<UserCuisinePreference> UserCuisinePreference { get; set; }
         public DbSet<Health> Health { get; set; }
-        
-        
+
+
 
         public override int SaveChanges()
         {
