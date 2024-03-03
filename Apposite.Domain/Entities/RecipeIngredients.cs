@@ -6,6 +6,6 @@ namespace Apposite.Domain.Entities
     {
         public int Quantity { get; set; }
         public virtual Recipe Recipe { get; set; }
-        public virtual Material Material { get; set; }
+        public virtual Ingredients Material { get; set; }
     }
 }

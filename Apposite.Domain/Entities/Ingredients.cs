@@ -2,7 +2,7 @@ using Apposite.Core.Entity;
 
 namespace Apposite.Domain.Entities
 {
-    public class Material : BaseEntity
+    public class Ingredients : BaseEntity
     {
         public string Name { get; set; }
         public string Description { get; set; }
