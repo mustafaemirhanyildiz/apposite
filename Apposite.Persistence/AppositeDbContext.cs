@@ -30,19 +30,19 @@ namespace Apposite.Persistence
 
         }
 
-        public DbSet<User> User { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<Roles> Roles { get; set; }
-        public DbSet<Recipe> Recipe { get; set; }
-        public DbSet<Ingredient> Ingredient { get; set; }
-        public DbSet<CuisinePreference> CuisinePreference { get; set; }
-        public DbSet<UserIngredient> UserIngredient { get; set; }
-        public DbSet<UserHealthIngredient> UserHealthIngredient { get; set; }
-        public DbSet<RecipeIngredient> RecipeIngredient { get; set; }
-        public DbSet<UserHealth> UserHealth { get; set; }
-        public DbSet<UserCuisinePreference> UserCuisinePreference { get; set; }
-        public DbSet<Health> Health { get; set; }
-
-
+        public DbSet<Recipe> Recipes { get; set; }
+        public DbSet<Ingredient> Ingredients { get; set; }
+        public DbSet<CuisinePreference> CuisinePreferences { get; set; }
+        public DbSet<UserIngredient> UserIngredients { get; set; }
+        public DbSet<UserHealthIngredient> UserHealthIngredients { get; set; }
+        public DbSet<RecipeIngredient> RecipeIngredients { get; set; }
+        public DbSet<UserHealth> UserHealths { get; set; }
+        public DbSet<UserCuisinePreference> UserCuisinePreferences { get; set; }
+        public DbSet<Health> Healths { get; set; }
+        
+        
 
         public override int SaveChanges()
         {

@@ -1,8 +1,9 @@
-using Apposite.Core.Entity;
+using Apposite.Core.Dtos;
+using MediatR;
 
-namespace Apposite.Domain.Entities
+namespace Apposite.Application.Commands.Ingredient
 {
-    public class Ingredient : BaseEntity
+    public class CreateIngredientCommand : IRequest<Response<NoContent>>
     {
         public string Name { get; set; }
         public string Description { get; set; }
@@ -10,6 +11,5 @@ namespace Apposite.Domain.Entities
         public double Protein { get; set; }
         public double Fat { get; set; }
         public byte[]? Image { get; set; }
-        public virtual ICollection<RecipeIngredient>? RecipeIngredient { get; set; }
     }
 }

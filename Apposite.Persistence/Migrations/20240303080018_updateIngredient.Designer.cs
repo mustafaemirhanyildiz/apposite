@@ -3,6 +3,7 @@ using System;
 using Apposite.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Apposite.Persistence.Migrations
 {
     [DbContext(typeof(AppositeDbContext))]
-    partial class AppositeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240303080018_updateIngredient")]
+    partial class updateIngredient
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,7 +49,7 @@ namespace Apposite.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CuisinePreferences");
+                    b.ToTable("CuisinePreference");
                 });
 
             modelBuilder.Entity("Apposite.Domain.Entities.Health", b =>
@@ -73,7 +76,7 @@ namespace Apposite.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Healths");
+                    b.ToTable("Health");
                 });
 
             modelBuilder.Entity("Apposite.Domain.Entities.Ingredient", b =>
@@ -113,7 +116,7 @@ namespace Apposite.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Ingredients");
+                    b.ToTable("Ingredient");
                 });
 
             modelBuilder.Entity("Apposite.Domain.Entities.Recipe", b =>
@@ -151,7 +154,7 @@ namespace Apposite.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Recipes");
+                    b.ToTable("Recipe");
                 });
 
             modelBuilder.Entity("Apposite.Domain.Entities.RecipeIngredient", b =>
@@ -184,7 +187,7 @@ namespace Apposite.Persistence.Migrations
 
                     b.HasIndex("RecipeId");
 
-                    b.ToTable("RecipeIngredients");
+                    b.ToTable("RecipeIngredient");
                 });
 
             modelBuilder.Entity("Apposite.Domain.Entities.Roles", b =>
@@ -317,7 +320,7 @@ namespace Apposite.Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserCuisinePreferences");
+                    b.ToTable("UserCuisinePreference");
                 });
 
             modelBuilder.Entity("Apposite.Domain.Entities.UserHealth", b =>
@@ -347,7 +350,7 @@ namespace Apposite.Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserHealths");
+                    b.ToTable("UserHealth");
                 });
 
             modelBuilder.Entity("Apposite.Domain.Entities.UserHealthIngredient", b =>
@@ -377,7 +380,7 @@ namespace Apposite.Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserHealthIngredients");
+                    b.ToTable("UserHealthIngredient");
                 });
 
             modelBuilder.Entity("Apposite.Domain.Entities.UserIngredient", b =>
@@ -415,7 +418,7 @@ namespace Apposite.Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserIngredients");
+                    b.ToTable("UserIngredient");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
