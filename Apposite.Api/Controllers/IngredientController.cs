@@ -29,5 +29,20 @@ namespace Apposite.Api.Controllers
             var response = await _mediator.Send(command);
             return CreateActionResultInstance(response);
         }
+
+        [HttpPut("update")]
+        public async Task<IActionResult> Update([FromBody] UpdateIngredientCommand command)
+        {
+            var response = await _mediator.Send(command);
+            return CreateActionResultInstance(response);
+        }
+
+        [HttpDelete("delete")]
+        public async Task<IActionResult> Delete([FromBody] DeleteIngredientCommand command)
+        {
+            var response = await _mediator.Send(command);
+            return CreateActionResultInstance(response);
+        }
+        
     }
 }
