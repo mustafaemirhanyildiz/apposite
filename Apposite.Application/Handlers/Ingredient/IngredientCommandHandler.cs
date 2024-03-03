@@ -25,30 +25,18 @@ namespace Apposite.Application.Handlers.Ingredient
 
         public async Task<Response<NoContent>> Handle(CreateIngredientCommand request, CancellationToken cancellationToken)
         {
-            try{
                 var ingredient = ObjectMapper.Mapper.Map<Domain.Entities.Ingredient>(request);
                 await _dbContext.Ingredients.AddAsync(ingredient, cancellationToken);
                 await _dbContext.SaveChangesAsync();
                 return Response<NoContent>.Success(204);
-            }
-            catch(Exception ex){
-                _logger.LogError(ex, "Error in CreateIngredientCommand");
-                return Response<NoContent>.Fail("Error in CreateIngredientCommand", 500);
-            }
         }
 
         public async Task<Response<NoContent>> Handle(CreateIngredientBulkCommand request, CancellationToken cancellationToken)
         {
-            try{
                 var ingredients = ObjectMapper.Mapper.Map<List<Domain.Entities.Ingredient>>(request.Ingredients);
                 await _dbContext.Ingredients.AddRangeAsync(ingredients, cancellationToken);
                 await _dbContext.SaveChangesAsync();
                 return Response<NoContent>.Success(204);
-            }
-            catch(Exception ex){
-                _logger.LogError(ex, "Error in CreateIngredientBulkCommand");
-                return Response<NoContent>.Fail("Error in CreateIngredientBulkCommand", 500);
-            }
         }
     }
 }

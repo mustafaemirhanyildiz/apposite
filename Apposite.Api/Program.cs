@@ -138,6 +138,11 @@ using (var migrationSvcScope = app.Services.GetRequiredService<IServiceScopeFact
 RoleSeed.SeedRoles(app.Services).Wait();
 AdminSeed.SeedAdmin(app.Services).Wait();
 
+//var log = app.Services.GetRequiredService<Serilog.ILogger>();
+app.UseMiddleware<CustomExceptionHandler>();
+
+
+
 app.UseMiddleware<JwtMiddleware>();
 
 // Configure the HTTP request pipeline.
@@ -146,6 +151,10 @@ if (app.Environment.IsDevelopment() || true)
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseHttpsRedirection();
+
+app.UseRouting();
 
 app.UseAuthorization();
 

@@ -39,9 +39,6 @@ namespace Apposite.Application.Handlers
 
         public async Task<Response<LoginDto>> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
-            try
-            {
-
                 var user = await _userManager.FindByEmailAsync(request.Email);
                 if (user == null)
                 {
@@ -58,20 +55,12 @@ namespace Apposite.Application.Handlers
 
                 }
                 return Response<LoginDto>.Fail("Girilen şifre hatalı. Lütfen şifrenizi kontrol ediniz.", 404);
-            }
-            catch (Exception ex)
-            {
-                _logger.SendError(ex, nameof(LoginCommand));
-                return Response<LoginDto>.Fail("Bilinmedik bir hata oluştu.", 500);
-            }
         }
 
         public async Task<Response<UserDto>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
             var transection = await _dbContext.Database.BeginTransactionAsync();
             IdentityResult idResult = null;
-            try
-            {
                 User user = ObjectMapper.Mapper.Map<User>(request);
 
                 if (_userManager.PasswordValidators.Any() && request.Password != null)
@@ -110,12 +99,6 @@ namespace Apposite.Application.Handlers
                     _logger.LogError("Error occured while creating user");
                     return Response<UserDto>.Fail("Error occured while creating user", 500);
                 }
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error occured while creating user");
-                return Response<UserDto>.Fail("Error occured while creating user", 500);
-            }
         }
     }
 }

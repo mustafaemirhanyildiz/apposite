@@ -7,16 +7,19 @@ namespace Apposite.Core.Dtos
     public class Response<T>
     {
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public T Data { get; set; }
+        public T? Data { get; set; }
 
         [JsonIgnore]
         public int StatusCode { get; set; }
 
         [JsonIgnore]
         public bool IsSuccessful { get; set; }
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public string Errors { get; set; }
 
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Errors { get; set; }
+
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public Pager Pagination { get; set; }
 
         // Static Factory Method
         public static Response<T> Success(T data, int statusCode, Pager pager = null)
@@ -53,8 +56,6 @@ namespace Apposite.Core.Dtos
         {
             return new Response<T> { Errors = error, StatusCode = statusCode, IsSuccessful = false };
         }
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public Pager Pagination { get; set; }
 
     }
 }
