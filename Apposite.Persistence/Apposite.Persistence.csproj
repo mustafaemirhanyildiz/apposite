@@ -4,9 +4,6 @@
     <ProjectReference Include="..\Apposite.Domain\Apposite.Domain.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Migrations/" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.16" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.16">
       <PrivateAssets>all</PrivateAssets>
