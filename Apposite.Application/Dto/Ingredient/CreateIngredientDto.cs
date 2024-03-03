@@ -1,8 +1,6 @@
-using Apposite.Core.Entity;
-
-namespace Apposite.Domain.Entities
+namespace Apposite.Application.Dto.Ingredient
 {
-    public class Ingredient : BaseEntity
+    public class CreateIngredientDto
     {
         public string Name { get; set; }
         public string Description { get; set; }
@@ -10,6 +8,5 @@ namespace Apposite.Domain.Entities
         public double Protein { get; set; }
         public double Fat { get; set; }
         public byte[]? Image { get; set; }
-        public virtual ICollection<RecipeIngredient>? RecipeIngredient { get; set; }
     }
 }
