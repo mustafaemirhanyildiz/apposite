@@ -14,10 +14,10 @@ namespace Apposite.Application.Services
     public class JwtGenerator
     {
         private readonly JwtSettings _jwtSettings;
-        private readonly UserManager<Users> _userManager;
+        private readonly UserManager<User> _userManager;
         private readonly ILogger<JwtGenerator> _logger;
 
-        public JwtGenerator(IOptions<JwtSettings> jwtSettings, UserManager<Users> userManager, ILogger<JwtGenerator> logger)
+        public JwtGenerator(IOptions<JwtSettings> jwtSettings, UserManager<User> userManager, ILogger<JwtGenerator> logger)
         {
             _userManager = userManager;
             _jwtSettings = jwtSettings.Value;
@@ -74,7 +74,7 @@ namespace Apposite.Application.Services
             }
         }
 
-        public async Task<string> GenerateJwt(Users user)
+        public async Task<string> GenerateJwt(User user)
         {
             string token = "";
 
@@ -118,7 +118,7 @@ namespace Apposite.Application.Services
             return token;
         }
 
-        public async Task<string> GenerateRefreshToken(Users user)
+        public async Task<string> GenerateRefreshToken(User user)
         {
             string token = "";
             try
@@ -156,7 +156,7 @@ namespace Apposite.Application.Services
             return stringClaimValue;
         }
 
-        public async Task Logout(Users user)
+        public async Task Logout(User user)
         {
             await _userManager.RemoveAuthenticationTokenAsync(user, "MyApp", "AccessToken");
             await _userManager.RemoveAuthenticationTokenAsync(user, "MyApp", "RefreshToken");

@@ -2,7 +2,7 @@ using Apposite.Core.Entity;
 
 namespace Apposite.Domain.Entities
 {
-    public class Ingredients : BaseEntity
+    public class Ingredient : BaseEntity
     {
         public string Name { get; set; }
         public string Description { get; set; }
@@ -10,6 +10,6 @@ namespace Apposite.Domain.Entities
         public double Protein { get; set; }
         public double Fat { get; set; }
         public byte[] Image { get; set; }
-        public virtual ICollection<RecipeIngredients> RecipeIngredients { get; set; }
+        public virtual ICollection<RecipeIngredient> RecipeIngredient { get; set; }
     }
 }

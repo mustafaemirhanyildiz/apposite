@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Apposite.Domain.Entities
 {
-    public class Users : IdentityUser<Guid>
+    public class User : IdentityUser<Guid>
     {
         [Required]
         public string Name { get; set; }

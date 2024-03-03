@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Apposite.Persistence
 {
-    public class AppositeDbContext : IdentityDbContext<Users, Roles, Guid>
+    public class AppositeDbContext : IdentityDbContext<User, Roles, Guid>
     {
         public AppositeDbContext(DbContextOptions<AppositeDbContext> options) : base(options)
         {
@@ -17,7 +17,7 @@ namespace Apposite.Persistence
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<Users>().ToTable("Users");
+            builder.Entity<User>().ToTable("User");
             builder.Entity<Roles>().ToTable("Roles");
             builder.Entity<IdentityUserClaim<Guid>>().ToTable("UserClaims");
             builder.Entity<IdentityUserRole<Guid>>().ToTable("UserRoles");
@@ -27,16 +27,16 @@ namespace Apposite.Persistence
 
         }
 
-        public DbSet<Users> Users { get; set; }
+        public DbSet<User> User { get; set; }
         public DbSet<Roles> Roles { get; set; }
-        public DbSet<Recipe> Recipes { get; set; }
-        public DbSet<Ingredients> Ingredients { get; set; }
-        public DbSet<CuisinePreferences> CuisinePreferences { get; set; }
-        public DbSet<UserIngredients> UserIngredients { get; set; }
-        public DbSet<UserHealthIngredients> UserHealthIngredients { get; set; }
-        public DbSet<RecipeIngredients> RecipeIngredients { get; set; }
+        public DbSet<Recipe> Recipe { get; set; }
+        public DbSet<Ingredient> Ingredient { get; set; }
+        public DbSet<CuisinePreference> CuisinePreference { get; set; }
+        public DbSet<UserIngredient> UserIngredient { get; set; }
+        public DbSet<UserHealthIngredient> UserHealthIngredient { get; set; }
+        public DbSet<RecipeIngredient> RecipeIngredient { get; set; }
         public DbSet<UserHealth> UserHealth { get; set; }
-        public DbSet<UserCuisinePreferences> UserCuisinePreferences { get; set; }
+        public DbSet<UserCuisinePreference> UserCuisinePreference { get; set; }
         public DbSet<Health> Health { get; set; }
         
         

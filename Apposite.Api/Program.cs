@@ -43,7 +43,7 @@ Apposite.Application.ServiceExtensions.LoggerExtensions.ConfigureLogging();
 Log.Information("Logger Started");
 builder.Services.RegisterFluentValidationCommandValidators();
 
-builder.Services.AddIdentity<Users, Roles>(options =>
+builder.Services.AddIdentity<User, Roles>(options =>
 {
     options.Tokens.PasswordResetTokenProvider = "passwordReset";
     options.SignIn.RequireConfirmedAccount = false;
@@ -60,7 +60,7 @@ builder.Services.AddIdentity<Users, Roles>(options =>
     .AddEntityFrameworkStores<AppositeDbContext>()
     .AddDefaultTokenProviders()
     // .AddTokenProvider<PasswordResetTokenProvider<Users>>("passwordReset")
-    .AddUserStore<UserStore<Users, Roles, AppositeDbContext, Guid>>()
+    .AddUserStore<UserStore<User, Roles, AppositeDbContext, Guid>>()
     .AddRoleStore<RoleStore<Roles, AppositeDbContext, Guid>>();
 
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");

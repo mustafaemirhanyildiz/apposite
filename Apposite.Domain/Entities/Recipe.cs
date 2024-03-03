@@ -9,7 +9,7 @@ namespace Apposite.Domain.Entities
         public string Instructions { get; set; }
         public int PreparationTime { get; set; }
         public int Servings { get; set; }
-        public virtual ICollection<UserIngredients> UserIngredients { get; set; }
-        public virtual ICollection<RecipeIngredients> RecipeIngredients { get; set; }
+        public virtual ICollection<UserIngredient> UserIngredients { get; set; }
+        public virtual ICollection<RecipeIngredient> RecipeIngredient { get; set; }
     }
 }

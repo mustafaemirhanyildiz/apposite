@@ -20,13 +20,13 @@ namespace Apposite.Application.Handlers
 
     {
         private readonly JwtGenerator _jwtGenerator;
-        private readonly SignInManager<Users> _signInManager;
+        private readonly SignInManager<User> _signInManager;
         private readonly AppositeDbContext _dbContext;
         private readonly ILogger<AuthCommandHandler> _logger;
-        private readonly UserManager<Users> _userManager;
+        private readonly UserManager<User> _userManager;
         private readonly RedisService _redisService;
 
-        public AuthCommandHandler(UserManager<Users> userManager, ILogger<AuthCommandHandler> logger, AppositeDbContext dbContext, SignInManager<Users> signInManager, JwtGenerator jwtGenerator, RedisService redisService)
+        public AuthCommandHandler(UserManager<User> userManager, ILogger<AuthCommandHandler> logger, AppositeDbContext dbContext, SignInManager<User> signInManager, JwtGenerator jwtGenerator, RedisService redisService)
         {
             _userManager = userManager;
             _logger = logger;
@@ -72,7 +72,7 @@ namespace Apposite.Application.Handlers
             IdentityResult idResult = null;
             try
             {
-                Users user = ObjectMapper.Mapper.Map<Users>(request);
+                User user = ObjectMapper.Mapper.Map<User>(request);
 
                 if (_userManager.PasswordValidators.Any() && request.Password != null)
                 {

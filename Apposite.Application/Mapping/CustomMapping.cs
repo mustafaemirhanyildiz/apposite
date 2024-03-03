@@ -8,8 +8,8 @@ namespace Apposite.Application.Mapping
     {
         public CustomMapping()
         {
-            CreateMap<Users,UserDto>().ReverseMap();
-            CreateMap<CreateUserCommand,Users>().ReverseMap();
+            CreateMap<User,UserDto>().ReverseMap();
+            CreateMap<CreateUserCommand,User>().ReverseMap();
         }
     }
 }

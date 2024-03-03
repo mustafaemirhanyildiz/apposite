@@ -14,7 +14,7 @@ namespace Apposite.Application.Middleware
             _next = next;
         }
 
-        public async Task Invoke(HttpContext context, UserManager<Users> _userManager, JwtGenerator jwtGenerator)
+        public async Task Invoke(HttpContext context, UserManager<User> _userManager, JwtGenerator jwtGenerator)
         {
             var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
             var validateTokenResult = await jwtGenerator.ValidateToken(token);
