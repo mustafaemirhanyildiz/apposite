@@ -3,6 +3,7 @@ using System;
 using Apposite.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Apposite.Persistence.Migrations
 {
     [DbContext(typeof(AppositeDbContext))]
-    partial class AppositeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240303071155_updateDb")]
+    partial class updateDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -210,36 +213,6 @@ namespace Apposite.Persistence.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("Roles", (string)null);
-                });
-
-            modelBuilder.Entity("Apposite.Domain.Entities.UserCuisinePreferences", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<Guid>("CuisinePreferencesId")
-                        .HasColumnType("uuid");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CuisinePreferencesId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserCuisinePreferences");
                 });
 
             modelBuilder.Entity("Apposite.Domain.Entities.UserHealth", b =>
@@ -536,25 +509,6 @@ namespace Apposite.Persistence.Migrations
                     b.Navigation("Material");
 
                     b.Navigation("Recipe");
-                });
-
-            modelBuilder.Entity("Apposite.Domain.Entities.UserCuisinePreferences", b =>
-                {
-                    b.HasOne("Apposite.Domain.Entities.CuisinePreferences", "CuisinePreferences")
-                        .WithMany()
-                        .HasForeignKey("CuisinePreferencesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Apposite.Domain.Entities.Users", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CuisinePreferences");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Apposite.Domain.Entities.UserHealth", b =>

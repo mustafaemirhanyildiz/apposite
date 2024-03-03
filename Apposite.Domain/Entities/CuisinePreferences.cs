@@ -5,6 +5,5 @@ namespace Apposite.Domain.Entities
       public class CuisinePreferences : BaseEntity
     {
         public string CuisineType { get; set; }
-        public virtual Users User { get; set; }
     }
 }
