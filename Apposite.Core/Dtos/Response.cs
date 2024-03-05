@@ -12,6 +12,7 @@ namespace Apposite.Core.Dtos
         [JsonIgnore]
         public int StatusCode { get; set; }
 
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<string>? Messages { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
