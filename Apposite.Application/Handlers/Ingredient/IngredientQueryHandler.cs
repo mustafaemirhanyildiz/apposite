@@ -9,6 +9,7 @@ using Apposite.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Nest;
 
 namespace Apposite.Application.Handlers.Ingredient
 {
@@ -17,35 +18,42 @@ namespace Apposite.Application.Handlers.Ingredient
         private readonly AppositeDbContext _dbContext;
         private readonly ILogger<IngredientCommandHandler> _logger;
         private readonly RedisService _redisService;
+        private readonly IElasticClient _elasticClient;
 
-        public IngredientQueryHandler(AppositeDbContext dbContext, ILogger<IngredientCommandHandler> logger, RedisService redisService)
+        public IngredientQueryHandler(AppositeDbContext dbContext, ILogger<IngredientCommandHandler> logger, RedisService redisService, IElasticClient elasticClient)
         {
             _dbContext = dbContext;
             _logger = logger;
             _redisService = redisService;
+            _elasticClient = elasticClient;
         }
 
         public async Task<Response<List<IngredientDto>>> Handle(GetIngredientsQuery request, CancellationToken cancellationToken)
         {
             try{
                 PaginationFilter filter = new PaginationFilter(request.Page, request.PageSize);
-                var query = await _dbContext
-                            .Ingredients
-                            .Where(x => x.IsDeleted == false 
-                                        && (string.IsNullOrEmpty(request.SearchText) || x.Name.ToLower().Contains(request.SearchText.ToLower()))
-                            ).ApplyPaginationQueryable(filter).ToListAsync();
-                
-                if (query == null)
-                {
-                    return Response<List<IngredientDto>>.Fail(404,"No Ingredients Found");
-                }
+                var searchResponse = await _elasticClient.SearchAsync<IngredientDto>(s => s
+                    .Index("ingredient-index")
+                    .Query(q => q
+                         .MultiMatch(m => m
+                                    .Fields(f => f
+                                        .Field(ff => ff.Name)
+                                        .Field(ff => ff.Description)
+                                    )
+                                    .Query(request.SearchText)
+                                    .Analyzer("turkish_search_analyser")
+                                )
+                    )
+                    .From(filter.PageNumber-1)
+                    .Size(filter.PageSize)
+                );
 
-                var ingredientDto = ObjectMapper.Mapper.Map<List<IngredientDto>>(query); 
+                var ingredientDto = searchResponse.Documents.ToList();
 
                 Pager pager = new Pager(){
                     PageNumber = filter.PageNumber,
                     PageSize = filter.PageSize,
-                    TotalRecords = await _dbContext.Ingredients.CountAsync()
+                    TotalRecords = searchResponse.Total 
                 };
                 
 

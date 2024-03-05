@@ -1,6 +1,8 @@
 using Apposite.Application.Commands.Ingredient;
+using Apposite.Application.Dto.ElasticSearch.Ingredient;
 using Apposite.Application.Mapping;
 using Apposite.Application.Services;
+using Apposite.Application.Services.IngredientService;
 using Apposite.Core.Dtos;
 using Apposite.Persistence;
 using MediatR;
@@ -18,18 +20,21 @@ namespace Apposite.Application.Handlers.Ingredient
         private readonly AppositeDbContext _dbContext;
         private readonly ILogger<IngredientCommandHandler> _logger;
         private readonly RedisService _redisService;
+        private readonly IIngredientService _ingredientService;
 
-        public IngredientCommandHandler(AppositeDbContext dbContext, ILogger<IngredientCommandHandler> logger, RedisService redisService)
+        public IngredientCommandHandler(AppositeDbContext dbContext, ILogger<IngredientCommandHandler> logger, RedisService redisService, IIngredientService ingredientService)
         {
             _dbContext = dbContext;
             _logger = logger;
             _redisService = redisService;
+            _ingredientService = ingredientService;
         }
 
         public async Task<Response<NoContent>> Handle(CreateIngredientCommand request, CancellationToken cancellationToken)
         {
             var ingredient = ObjectMapper.Mapper.Map<Domain.Entities.Ingredient>(request);
             await _dbContext.Ingredients.AddAsync(ingredient, cancellationToken);
+            await _ingredientService.CreateIngredientAsync(ObjectMapper.Mapper.Map<CreateElasticIngredientDto>(ingredient));
             await _dbContext.SaveChangesAsync();
             return Response<NoContent>.Success(204);
         }
@@ -38,6 +43,7 @@ namespace Apposite.Application.Handlers.Ingredient
         {
             var ingredients = ObjectMapper.Mapper.Map<List<Domain.Entities.Ingredient>>(request.Ingredients);
             await _dbContext.Ingredients.AddRangeAsync(ingredients, cancellationToken);
+            await _ingredientService.CreateIngredientBulkAsync(ObjectMapper.Mapper.Map<List<CreateElasticIngredientDto>>(ingredients));
             await _dbContext.SaveChangesAsync();
             return Response<NoContent>.Success(204);
         }
