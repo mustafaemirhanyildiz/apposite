@@ -36,7 +36,7 @@ namespace Apposite.Application.Services.TokenService
                 throw new Exception("Token is invalid");
             }
 
-            var userId = jsonToken.Claims.First(claim => claim.Type == "userId").Value;
+            var userId = jsonToken.Claims.First(claim => claim.Type == "id").Value;
 
             return new Guid(userId);
         }

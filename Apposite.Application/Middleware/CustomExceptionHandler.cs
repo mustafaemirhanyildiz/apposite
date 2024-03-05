@@ -34,12 +34,12 @@ namespace Apposite.Application.Middleware
             {
                 //responseModel.Message = ResponseMessage.unauthorized.ToString();
                 responseModel.StatusCode = 401;
-                Log.Error($"Unauthorized Access: {ex.Message}  - - " +
+                Log.Error(ex,$"Unauthorized Access: {ex.Message}  - - " +
                                  $"Request  {httpContext.Request.Method} {httpContext.Request.Path}");
             }
             else
             {
-                Log.Error($"Internal Server Error: {ex.Message}  - - " +
+                Log.Error(ex,$"Internal Server Error: {ex.Message}  - - " +
                                  $"Request  {httpContext.Request.Method} {httpContext.Request.Path}");
             }
 

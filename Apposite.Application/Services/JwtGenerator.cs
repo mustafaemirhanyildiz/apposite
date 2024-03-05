@@ -28,8 +28,8 @@ namespace Apposite.Application.Services
             if (token == null)
                 return new ValidateTokenResult(false, "Please provide valid token!");
 
-            //var dbToken = await _userManager.GetAuthenticationTokenAsync(await _userManager.FindByIdAsync(GetClaim(token,"UserId")), "MyApp", "AccessToken");
-            var userId = GetClaim(token, "userId");
+            //var dbToken = await _userManager.GetAuthenticationTokenAsync(await _userManager.FindByIdAsync(GetClaim(token,"id")), "MyApp", "AccessToken");
+            var userId = GetClaim(token, "id");
             if (string.IsNullOrEmpty(userId))
                 return new ValidateTokenResult(false, "Token not valid! Please login to get new token!");
 
@@ -61,7 +61,7 @@ namespace Apposite.Application.Services
                     ValidateLifetime = true
                 }, out SecurityToken validatedToken);
 
-                return new ValidateTokenResult(true, string.Empty, GetClaim(token, "userId"));
+                return new ValidateTokenResult(true, string.Empty, GetClaim(token, "id"));
             }
             catch (SecurityTokenExpiredException)
             {
@@ -88,10 +88,10 @@ namespace Apposite.Application.Services
                 {
             new Claim(JwtRegisteredClaimNames.Sub, _jwtSettings.Subject),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
+            new Claim(JwtRegisteredClaimNames.Iat, DateTimeOffset.Now.ToUnixTimeSeconds().ToString()),
             new Claim(JwtRegisteredClaimNames.Email,user.Email),
             new Claim(JwtRegisteredClaimNames.Name, user.Name),
-            new Claim("userId", user.Id.ToString()),
+            new Claim("id", user.Id.ToString()),
             new Claim("role", rolesTxt)
         };
 
@@ -130,7 +130,7 @@ namespace Apposite.Application.Services
                     null,
                     expires: DateTime.UtcNow.AddSeconds(_jwtSettings.RefreshTtl),
                     signingCredentials: signIn,
-                    claims: new Claim[] { new Claim("userId", user.Id.ToString()) });
+                    claims: new Claim[] { new Claim("id", user.Id.ToString()) });
                 token = new JwtSecurityTokenHandler().WriteToken(rawToken);
                 await _userManager.SetAuthenticationTokenAsync(user, "MyApp", "RefreshToken", token);
             }
