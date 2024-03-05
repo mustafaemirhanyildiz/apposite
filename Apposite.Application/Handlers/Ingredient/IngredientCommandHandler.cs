@@ -49,7 +49,7 @@ namespace Apposite.Application.Handlers.Ingredient
                 var ingredient = await _dbContext.Ingredients.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
                 if (ingredient == null)
                 {
-                    return Response<NoContent>.Fail("Ingredient not found.", 404);
+                    return Response<NoContent>.Fail(404, "Ingredient not found.");
                 }
 
                 var updatedIngredient = ObjectMapper.Mapper.Map(request, ingredient);
@@ -60,7 +60,7 @@ namespace Apposite.Application.Handlers.Ingredient
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error updating ingredient");
-                return Response<NoContent>.Fail("Error updating ingredient", 500);
+                return Response<NoContent>.Fail(500, "Error updating ingredient");
             }
         }
 
@@ -71,7 +71,7 @@ namespace Apposite.Application.Handlers.Ingredient
                 var ingredient = await _dbContext.Ingredients.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
                 if (ingredient == null)
                 {
-                    return Response<NoContent>.Fail("Ingredient not found.", 404);
+                    return Response<NoContent>.Fail(404, "Ingredient not found.");
                 }
 
                 _dbContext.Ingredients.Remove(ingredient);
@@ -81,7 +81,7 @@ namespace Apposite.Application.Handlers.Ingredient
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error deleting ingredient");
-                return Response<NoContent>.Fail("Error deleting ingredient", 500);
+                return Response<NoContent>.Fail(500, "Error deleting ingredient");
             }
 
         }

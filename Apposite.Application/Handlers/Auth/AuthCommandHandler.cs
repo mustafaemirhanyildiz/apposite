@@ -42,7 +42,7 @@ namespace Apposite.Application.Handlers
                 var user = await _userManager.FindByEmailAsync(request.Email);
                 if (user == null)
                 {
-                    return Response<LoginDto>.Fail("Girdiğiniz mail vevya şifre hatalı. Lütfen kontrol ediniz", 404);
+                    return Response<LoginDto>.Fail(404, "Girdiğiniz mail veya şifre hatalı. Lütfen kontrol ediniz");
 
                 }
                 var signInResult = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
@@ -51,10 +51,10 @@ namespace Apposite.Application.Handlers
                 {
                     var token = await _jwtGenerator.GenerateJwt(user);
                     var refreshToken = await _jwtGenerator.GenerateRefreshToken(user);
-                    return Response<LoginDto>.Success(new LoginDto { Token = token, RefreshToken = refreshToken }, 200);
+                    return Response<LoginDto>.Success(200, new LoginDto { Token = token, RefreshToken = refreshToken });
 
                 }
-                return Response<LoginDto>.Fail("Girilen şifre hatalı. Lütfen şifrenizi kontrol ediniz.", 404);
+                return Response<LoginDto>.Fail(404, "Girilen şifre hatalı. Lütfen şifrenizi kontrol ediniz.");
         }
 
         public async Task<Response<UserDto>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
@@ -71,7 +71,7 @@ namespace Apposite.Application.Handlers
                         if (!result.Succeeded)
                         {
                             await transection.RollbackAsync();
-                            return Response<UserDto>.Fail(result.Errors.Select(x => x.Description).ToList(), 400);
+                            return Response<UserDto>.Fail(400, result.Errors.Select(x => x.Description).ToList());
                         }
                     }
                 }
@@ -85,19 +85,19 @@ namespace Apposite.Application.Handlers
                     {
                         await transection.RollbackAsync();
                         _logger.LogError("Error occured while creating user");
-                        return Response<UserDto>.Fail("Error occured while creating user", 500);
+                        return Response<UserDto>.Fail(500, "Error occured while creating user");
                     }
                     var createdUser = ObjectMapper.Mapper.Map<UserDto>(user);
                     createdUser.Role = RoleList.User.ToString();
                     await _dbContext.SaveChangesAsync();
                     await transection.CommitAsync();
-                    return Response<UserDto>.Success(createdUser, 200);
+                    return Response<UserDto>.Success(200, createdUser);
                 }
                 else
                 {
                     await transection.RollbackAsync();
                     _logger.LogError("Error occured while creating user");
-                    return Response<UserDto>.Fail("Error occured while creating user", 500);
+                    return Response<UserDto>.Fail(500, "Error occured while creating user");
                 }
         }
     }

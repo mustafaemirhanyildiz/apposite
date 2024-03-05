@@ -18,7 +18,7 @@ namespace Apposite.Core.ControllerBases
 
         public IActionResult CreateActionResultInstance<T>(ValidationResult validationResult)
         {
-            return new ObjectResult(Response<T>.Fail(validationResult, 400))
+            return new ObjectResult(Response<T>.Fail(400, validationResult))
             {
                 StatusCode = 400
             };
