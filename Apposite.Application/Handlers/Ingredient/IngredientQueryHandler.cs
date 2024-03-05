@@ -19,7 +19,7 @@ namespace Apposite.Application.Handlers.Ingredient
         private readonly RedisService _redisService;
         private readonly IElasticClient _elasticClient;
 
-        public IngredientQueryHandler(AppositeDbContext dbContext, RedisService redisService)
+        public IngredientQueryHandler(AppositeDbContext dbContext, RedisService redisService, IElasticClient elasticClient)
         {
             _dbContext = dbContext;
             _redisService = redisService;

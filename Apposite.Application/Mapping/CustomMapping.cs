@@ -5,6 +5,7 @@ using Apposite.Application.Dto.ElasticSearch.Ingredient;
 using Apposite.Application.Dto.CuisinePreference;
 using Apposite.Application.Dto.Ingredient;
 using Apposite.Domain.Entities;
+using Apposite.Application.Commands.CuisinePreference;
 
 namespace Apposite.Application.Mapping
 {

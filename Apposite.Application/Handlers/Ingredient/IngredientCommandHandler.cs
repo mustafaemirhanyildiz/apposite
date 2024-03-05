@@ -21,7 +21,7 @@ namespace Apposite.Application.Handlers.Ingredient
         private readonly RedisService _redisService;
         private readonly IIngredientService _ingredientService;
 
-        public IngredientCommandHandler(AppositeDbContext dbContext, RedisService redisService)
+        public IngredientCommandHandler(AppositeDbContext dbContext, RedisService redisService, IIngredientService ingredientService)
         {
             _dbContext = dbContext;
             _redisService = redisService;
