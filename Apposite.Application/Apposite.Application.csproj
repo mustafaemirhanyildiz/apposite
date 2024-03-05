@@ -5,7 +5,6 @@
     <ProjectReference Include="..\Apposite.Persistence\Apposite.Persistence.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Queries/" />
     <Folder Include="Validations/QueryValidations/" />
   </ItemGroup>
   <ItemGroup>
