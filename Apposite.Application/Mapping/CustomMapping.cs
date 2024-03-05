@@ -14,6 +14,7 @@ namespace Apposite.Application.Mapping
             CreateMap<CreateUserCommand,User>().ReverseMap();
             CreateMap<CreateIngredientCommand,Ingredient>().ReverseMap();
             CreateMap<CreateIngredientDto,Ingredient>().ReverseMap();
+            CreateMap<Ingredient,IngredientDto>().ReverseMap();
         }
     }
 }

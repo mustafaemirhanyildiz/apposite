@@ -8,7 +8,7 @@
         {
             get
             {
-                return Convert.ToInt32(Math.Ceiling(((double)TotalRecords / (double)PageSize)));
+                return Convert.ToInt32(Math.Ceiling(((double)TotalRecords / (PageSize == 0 ? 1 : (double)PageSize))));
             }
         }
         public decimal TotalRecords { get; set; }
