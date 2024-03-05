@@ -28,7 +28,7 @@ namespace Apposite.Application.Middleware
         private async Task HandleExceptionAsync(HttpContext httpContext, Exception ex)
         {
             httpContext.Response.ContentType = "application/json";
-            Response<object> responseModel = Response<object>.Fail(500, ex.Message);
+            Response<object> responseModel = Response<object>.Fail(500, "Internal Server Error");
 
             if (ex is UnauthorizedAccessException)
             {

@@ -18,14 +18,12 @@ namespace Apposite.Application.Handlers.Ingredient
     {
 
         private readonly AppositeDbContext _dbContext;
-        private readonly ILogger<IngredientCommandHandler> _logger;
         private readonly RedisService _redisService;
         private readonly IIngredientService _ingredientService;
 
-        public IngredientCommandHandler(AppositeDbContext dbContext, ILogger<IngredientCommandHandler> logger, RedisService redisService, IIngredientService ingredientService)
+        public IngredientCommandHandler(AppositeDbContext dbContext, RedisService redisService)
         {
             _dbContext = dbContext;
-            _logger = logger;
             _redisService = redisService;
             _ingredientService = ingredientService;
         }
@@ -50,8 +48,6 @@ namespace Apposite.Application.Handlers.Ingredient
 
         public async Task<Response<NoContent>> Handle(UpdateIngredientCommand request, CancellationToken cancellationToken)
         {
-            try
-            {
                 var ingredient = await _dbContext.Ingredients.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
                 if (ingredient == null)
                 {
@@ -62,18 +58,10 @@ namespace Apposite.Application.Handlers.Ingredient
                 _dbContext.Ingredients.Update(updatedIngredient);
                 await _dbContext.SaveChangesAsync();
                 return Response<NoContent>.Success(204);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error updating ingredient");
-                return Response<NoContent>.Fail(500, "Error updating ingredient");
-            }
         }
 
         public async Task<Response<NoContent>> Handle(DeleteIngredientCommand request, CancellationToken cancellationToken)
         {
-            try
-            {
                 var ingredient = await _dbContext.Ingredients.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
                 if (ingredient == null)
                 {
@@ -83,13 +71,6 @@ namespace Apposite.Application.Handlers.Ingredient
                 _dbContext.Ingredients.Remove(ingredient);
                 await _dbContext.SaveChangesAsync();
                 return Response<NoContent>.Success(204);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error deleting ingredient");
-                return Response<NoContent>.Fail(500, "Error deleting ingredient");
-            }
-
         }
     }
 }

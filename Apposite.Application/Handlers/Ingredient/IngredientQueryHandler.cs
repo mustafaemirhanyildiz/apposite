@@ -16,21 +16,18 @@ namespace Apposite.Application.Handlers.Ingredient
     public class IngredientQueryHandler : IRequestHandler<GetIngredientsQuery, Response<List<IngredientDto>>>
     {
         private readonly AppositeDbContext _dbContext;
-        private readonly ILogger<IngredientCommandHandler> _logger;
         private readonly RedisService _redisService;
         private readonly IElasticClient _elasticClient;
 
-        public IngredientQueryHandler(AppositeDbContext dbContext, ILogger<IngredientCommandHandler> logger, RedisService redisService, IElasticClient elasticClient)
+        public IngredientQueryHandler(AppositeDbContext dbContext, RedisService redisService)
         {
             _dbContext = dbContext;
-            _logger = logger;
             _redisService = redisService;
             _elasticClient = elasticClient;
         }
 
         public async Task<Response<List<IngredientDto>>> Handle(GetIngredientsQuery request, CancellationToken cancellationToken)
         {
-            try{
                 PaginationFilter filter = new PaginationFilter(request.Page, request.PageSize);
                 var searchResponse = await _elasticClient.SearchAsync<IngredientDto>(s => s
                     .Index("ingredient-index")
@@ -58,12 +55,6 @@ namespace Apposite.Application.Handlers.Ingredient
                 
 
                 return Response<List<IngredientDto>>.Success(200,ingredientDto,pager);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error in GetIngredientsQuery");
-                return Response<List<IngredientDto>>.Fail(500,"Error in GetIngredientsQuery");
-            }
         }
     }
 }

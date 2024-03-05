@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Serilog;
+using Serilog.Events;
 using Serilog.Sinks.Elasticsearch;
 
 namespace Apposite.Application.ServiceExtensions
@@ -25,10 +26,12 @@ namespace Apposite.Application.ServiceExtensions
                     .Enrich.WithMachineName()
                     .WriteTo.Debug()
                     .WriteTo.Console()
+                    .Filter.ByIncludingOnly(e => e.Level == LogEventLevel.Error)
                     .WriteTo.Elasticsearch(ConfigureElasticSink(configuration, environment))
                     .Enrich.WithProperty("Environment", environment)
                     .ReadFrom.Configuration(configuration)
                     .CreateLogger();
+
             }
             catch (Exception ex)
             {
