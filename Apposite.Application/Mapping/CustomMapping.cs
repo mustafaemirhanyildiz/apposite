@@ -7,6 +7,10 @@ using Apposite.Application.Dto.CuisinePreference;
 using Apposite.Application.Dto.Ingredient;
 using Apposite.Domain.Entities;
 using Apposite.Application.Commands.CuisinePreference;
+using Apposite.Application.Commands.Health;
+using Apposite.Application.Dto.Health;
+using Apposite.Application.Dto.ElasticSearch.CuisinePreference;
+using Apposite.Application.Dto.ElasticSearch.Health;
 
 namespace Apposite.Application.Mapping
 {
@@ -24,7 +28,13 @@ namespace Apposite.Application.Mapping
 
             CreateMap<CreateCuisinePreferenceCommand, CuisinePreference>().ReverseMap();
             CreateMap<CreateCuisinePreferenceDto, CuisinePreference>().ReverseMap();
-            CreateMap<CuisinePreference, CuisinePreferenceDto>().ReverseMap();
+            CreateMap<CuisinePreferenceDto, CuisinePreference>().ReverseMap();
+            CreateMap<CreateElasticCuisinePreferenceDto, CuisinePreference>().ReverseMap();
+
+            CreateMap<CreateHealthCommand, Health>().ReverseMap();
+            CreateMap<CreateHealthDto, Health>().ReverseMap();
+            CreateMap<HealthDto, Health>().ReverseMap();
+            CreateMap<CreateElasticHealthDto, Health>().ReverseMap();
 
         }
     }

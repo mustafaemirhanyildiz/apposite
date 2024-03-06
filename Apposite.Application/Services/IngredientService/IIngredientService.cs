@@ -1,5 +1,3 @@
-
-
 using Apposite.Application.Dto.ElasticSearch.Ingredient;
 
 namespace Apposite.Application.Services.IngredientService

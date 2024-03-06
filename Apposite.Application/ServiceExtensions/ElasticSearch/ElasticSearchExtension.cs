@@ -14,7 +14,9 @@ namespace Apposite.Application.ServiceExtensions.ElasticSearch
             var baseUrl = configuration["ElasticConfiguration:Uri"];
             var username = configuration["ElasticConfiguration:Username"];
             var password = configuration["ElasticConfiguration:Password"];
-            var index = configuration["ElasticConfiguration:IngredientIndex"];
+            var ingredientIndex = configuration["ElasticConfiguration:IngredientIndex"];
+            var cuisinePreferenceIndex = configuration["ElasticConfiguration:CuisinePreferenceIndex"];
+            var healthIndex = configuration["ElasticConfiguration:HealthIndex"];
 
             var settings = new ConnectionSettings(new Uri(baseUrl ?? ""));
 
@@ -23,7 +25,7 @@ namespace Apposite.Application.ServiceExtensions.ElasticSearch
             var client = new ElasticClient(settings);
             services.AddSingleton<IElasticClient>(client);
 
-            if (!client.Indices.Exists(index).Exists)
+            if (!client.Indices.Exists(ingredientIndex).Exists)
             {
                 using (var httpClient = new HttpClient())
                 {
@@ -33,7 +35,7 @@ namespace Apposite.Application.ServiceExtensions.ElasticSearch
                     var jsonStr = File.ReadAllText("../Apposite.Application/ServiceExtensions/ElasticSearch/ingredient-index.json");
                     var json = JsonConvert.DeserializeObject(jsonStr);
 
-                    var response = await httpClient.PutAsync($"{baseUrl}/{index}", new StringContent(json.ToString(), Encoding.UTF8, "application/json"));
+                    var response = await httpClient.PutAsync($"{baseUrl}/{ingredientIndex}", new StringContent(json.ToString(), Encoding.UTF8, "application/json"));
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -41,6 +43,46 @@ namespace Apposite.Application.ServiceExtensions.ElasticSearch
                     }
                 }
             }
+
+            if (!client.Indices.Exists(cuisinePreferenceIndex).Exists)
+            {
+                using (var httpClient = new HttpClient())
+                {
+                    var credentials = Encoding.ASCII.GetBytes($"{username}:{password}");
+                    httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(credentials));
+
+                    var jsonStr = File.ReadAllText("../Apposite.Application/ServiceExtensions/ElasticSearch/cuisinePreference-index.json");
+                    var json = JsonConvert.DeserializeObject(jsonStr);
+
+                    var response = await httpClient.PutAsync($"{baseUrl}/{cuisinePreferenceIndex}", new StringContent(json.ToString(), Encoding.UTF8, "application/json"));
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        Console.WriteLine("Index Created");
+                    }
+                }
+            }
+
+            if (!client.Indices.Exists(healthIndex).Exists)
+            {
+                using (var httpClient = new HttpClient())
+                {
+                    var credentials = Encoding.ASCII.GetBytes($"{username}:{password}");
+                    httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(credentials));
+
+                    var jsonStr = File.ReadAllText("../Apposite.Application/ServiceExtensions/ElasticSearch/health-index.json");
+                    var json = JsonConvert.DeserializeObject(jsonStr);
+
+                    var response = await httpClient.PutAsync($"{baseUrl}/{healthIndex}", new StringContent(json.ToString(), Encoding.UTF8, "application/json"));
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        Console.WriteLine("Index Created");
+                    }
+                }
+            }
+
+
         }
     }
 }

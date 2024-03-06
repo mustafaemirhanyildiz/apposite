@@ -1,6 +1,5 @@
-﻿
-using Apposite.Application.Dto.CuisinePreference;
-using Apposite.Application.Queries.CuisinePreference;
+﻿using Apposite.Application.Dto.Health;
+using Apposite.Application.Queries.Health;
 using Apposite.Application.Services;
 using Apposite.Application.Settings;
 using Apposite.Core.Dtos;
@@ -10,9 +9,9 @@ using MediatR;
 using Microsoft.Extensions.Options;
 using Nest;
 
-namespace Apposite.Application.Handlers.CuisinePreference
+namespace Apposite.Application.Handlers.Health
 {
-    public class CuisinePreferenceQueryHandler : IRequestHandler<GetCuisinePreferencesQuery, Response<List<CuisinePreferenceDto>>>
+    public class HealthQueryHandler : IRequestHandler<GetHealthQuery, Response<List<HealthDto>>>
     {
         private readonly AppositeDbContext _dbContext;
         private readonly RedisService _redisService;
@@ -20,20 +19,18 @@ namespace Apposite.Application.Handlers.CuisinePreference
         private readonly ElasticSettings _elasticSettings;
 
 
-
-        public CuisinePreferenceQueryHandler(AppositeDbContext dbContext, RedisService redisService, IElasticClient elasticClient, IOptions<ElasticSettings> elasticSettings)
+        public HealthQueryHandler(AppositeDbContext dbContext, RedisService redisService, IElasticClient elasticClient, IOptions<ElasticSettings> elasticSettings)
         {
             _dbContext = dbContext;
             _redisService = redisService;
             _elasticClient = elasticClient;
             _elasticSettings = elasticSettings.Value;
         }
-
-        public async Task<Response<List<CuisinePreferenceDto>>> Handle(GetCuisinePreferencesQuery request, CancellationToken cancellationToken)
+        public async Task<Response<List<HealthDto>>> Handle(GetHealthQuery request, CancellationToken cancellationToken)
         {
             PaginationFilter filter = new PaginationFilter(request.Page, request.PageSize);
-            var searchResponse = await _elasticClient.SearchAsync<CuisinePreferenceDto>(s => s
-                .Index(_elasticSettings.CuisinePreferenceIndex)
+            var searchResponse = await _elasticClient.SearchAsync<HealthDto>(s => s
+                .Index(_elasticSettings.HealthIndex)
                 .Query(q => q
                      .MultiMatch(m => m
                                 .Fields(f => f
@@ -48,7 +45,7 @@ namespace Apposite.Application.Handlers.CuisinePreference
                 .Size(filter.PageSize)
             );
 
-            var cuisinePreferenceDtos = searchResponse.Documents.ToList();
+            var healthDto = searchResponse.Documents.ToList();
 
             Pager pager = new Pager()
             {
@@ -58,7 +55,7 @@ namespace Apposite.Application.Handlers.CuisinePreference
             };
 
 
-            return Response<List<CuisinePreferenceDto>>.Success(200, cuisinePreferenceDtos, pager);
+            return Response<List<HealthDto>>.Success(200, healthDto, pager);
         }
     }
 }

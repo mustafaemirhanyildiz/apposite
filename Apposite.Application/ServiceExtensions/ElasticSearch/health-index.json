@@ -1,0 +1,119 @@
+{
+  "aliases": {},
+  "settings": {
+    "index": {
+      "number_of_shards": "1",
+      "number_of_replicas": "1",
+      "analysis": {
+        "filter": {
+          "turkish_lowercase_filter": {
+            "type": "lowercase",
+            "language": "turkish"
+          },
+          "turkish_stemmer": {
+            "type": "stemmer",
+            "language": "turkish"
+          },
+          "turkish_asciifolding_filter": {
+            "type": "asciifolding",
+            "preserve_original": "true"
+          },
+          "turkish_stopword_filter": {
+            "type": "stop",
+            "stopwords": "_turkish_"
+          },
+
+          "turkish_ngram_filter": {
+            "type": "ngram",
+            "min_gram": 5,
+            "max_gram": 6
+          }
+        },
+        "analyzer": {
+          "turkish_analyser_with_steeem": {
+            "filter": [
+              "lowercase",
+              "turkish_lowercase_filter",
+              "turkish_asciifolding_filter",
+              "turkish_stemmer"
+            ],
+            "char_filter": [
+              "remove_special_chars",
+              "number_char_filter"
+            ],
+            "type": "custom",
+            "tokenizer": "standard"
+          },
+          "turkish_search_analyser": {
+            "filter": [
+              "lowercase",
+              "turkish_lowercase_filter",
+              "turkish_asciifolding_filter",
+              "turkish_stemmer",
+              "turkish_ngram_filter"
+            ],
+            "char_filter": [
+              "remove_special_chars",
+              "number_char_filter"
+            ],
+            "type": "custom",
+            "tokenizer": "standard"
+          },
+          "only_turkish_analyser": {
+            "filter": [
+              "lowercase",
+              "turkish_lowercase_filter",
+              "turkish_asciifolding_filter"
+            ],
+            "char_filter": [
+              "remove_special_chars",
+              "number_char_filter"
+            ],
+            "type": "custom",
+            "tokenizer": "keyword"
+          }
+        },
+        "char_filter": {
+          "number_char_filter": {
+            "type": "mapping",
+            "mappings": [
+              "1=>",
+              "2=>",
+              "3=>",
+              "4=>",
+              "5=>",
+              "6=>",
+              "7=>",
+              "8=>",
+              "9=>",
+              "0=>"
+            ]
+          },
+          "remove_special_chars": {
+            "type": "mapping",
+            "mappings": [
+              "'=>",
+              ".=>",
+              "-=>",
+              "(=>",
+              ")=>",
+              "&=>"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "description": {
+        "type": "text",
+        "analyzer": "turkish_search_analyser"
+      },
+      "name": {
+        "type": "text",
+        "analyzer": "turkish_search_analyser"
+      }
+    }
+  }
+}
