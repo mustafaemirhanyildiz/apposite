@@ -25,6 +25,8 @@ builder.Configuration.AddJsonFile("jwtSettings.json");
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
 builder.Services.Configure<RedisSettings>(builder.Configuration.GetSection("RedisSettings"));
 builder.Services.Configure<ElasticSettings>(builder.Configuration.GetSection("ElasticConfiguration"));
+builder.Services.Configure<AzureBlobSettings>(builder.Configuration.GetSection("AzureBlobSettings"));
+
 builder.Services.AddDbContext<AppositeDbContext>(options =>
 {
     options.UseNpgsql(Environment.GetEnvironmentVariable("ConnectionString") ?? builder.Configuration.GetConnectionString("localDb"));
@@ -39,7 +41,7 @@ builder.Services.AddSingleton<RedisService>(sp =>
 
     return redis;
 });
-
+builder.Services.AddSingleton<BlobStorageService>();
 builder.Services.AddElasticSearch(builder.Configuration);
 builder.Services.AddLogging().AddSerilog();
 Apposite.Application.ServiceExtensions.LoggerExtensions.ConfigureLogging();
