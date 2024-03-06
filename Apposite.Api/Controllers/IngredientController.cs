@@ -51,6 +51,13 @@ namespace Apposite.Api.Controllers
             var response = await _mediator.Send(query);
             return CreateActionResultInstance(response);
         }
+
+        [HttpPost("sync")]
+        public async Task<IActionResult> Sync()
+        {
+            var response = await _mediator.Send(new SyncIngredientCommand());
+            return CreateActionResultInstance(response);
+        }
         
     }
 }
