@@ -60,6 +60,16 @@ namespace Apposite.Application.Services.IngredientService
             }
         }
 
+        public async Task DeleteIngredientAsync(Guid id)
+        {
+            var response = _elasticClient.Delete<CreateElasticIngredientDto>(id, idx => idx.Index(_elasticSettings.IngredientIndex));
+
+            if (!response.IsValid)
+            {
+                throw new Exception(response.DebugInformation);
+            }
+        }
+
         public async Task SyncIngredientsAsync(List<CreateElasticIngredientDto> ingredients)
         {
             try
@@ -84,6 +94,24 @@ namespace Apposite.Application.Services.IngredientService
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        public async Task UpdateIngredientAsync(CreateElasticIngredientDto ingredient)
+        {
+            var response = _elasticClient.Update<CreateElasticIngredientDto>(ingredient.Id, u => u
+                .Index(_elasticSettings.IngredientIndex)
+                .Doc(new CreateElasticIngredientDto
+                {
+                    Id = ingredient.Id,
+                    Name = ingredient.Name,
+                    Description = ingredient.Description,
+                }));
+
+            if (!response.IsValid)
+            {
+                throw new Exception(response.DebugInformation);
+            }
+            
         }
     }
 }

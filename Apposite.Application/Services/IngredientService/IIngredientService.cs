@@ -8,6 +8,9 @@ namespace Apposite.Application.Services.IngredientService
         public Task CreateIngredientAsync(CreateElasticIngredientDto ingredient);
         public Task CreateIngredientBulkAsync(List<CreateElasticIngredientDto> ingredients);
         public Task SyncIngredientsAsync(List<CreateElasticIngredientDto> ingredients);
+        public Task UpdateIngredientAsync(CreateElasticIngredientDto ingredient);
+        public Task DeleteIngredientAsync(Guid id);
+
         
     }
 }

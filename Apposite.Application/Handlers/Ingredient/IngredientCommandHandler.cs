@@ -14,7 +14,8 @@ namespace Apposite.Application.Handlers.Ingredient
     public class IngredientCommandHandler : IRequestHandler<CreateIngredientCommand, Response<NoContent>>,
                                             IRequestHandler<CreateIngredientBulkCommand, Response<NoContent>>,
                                             IRequestHandler<UpdateIngredientCommand, Response<NoContent>>,
-                                            IRequestHandler<DeleteIngredientCommand, Response<NoContent>>
+                                            IRequestHandler<DeleteIngredientCommand, Response<NoContent>>,
+                                            IRequestHandler<SyncIngredientCommand, Response<NoContent>>
     {
 
         private readonly AppositeDbContext _dbContext;
@@ -55,6 +56,7 @@ namespace Apposite.Application.Handlers.Ingredient
                 }
 
                 var updatedIngredient = ObjectMapper.Mapper.Map(request, ingredient);
+                await _ingredientService.UpdateIngredientAsync(ObjectMapper.Mapper.Map<CreateElasticIngredientDto>(updatedIngredient));
                 _dbContext.Ingredients.Update(updatedIngredient);
                 await _dbContext.SaveChangesAsync();
                 return Response<NoContent>.Success(204);
@@ -67,10 +69,18 @@ namespace Apposite.Application.Handlers.Ingredient
                 {
                     return Response<NoContent>.Fail(404, "Ingredient not found.");
                 }
-
+                await _ingredientService.DeleteIngredientAsync(ingredient.Id);
                 _dbContext.Ingredients.Remove(ingredient);
                 await _dbContext.SaveChangesAsync();
                 return Response<NoContent>.Success(204);
+        }
+
+        public async Task<Response<NoContent>> Handle(SyncIngredientCommand request, CancellationToken cancellationToken)
+        {
+            var ingredients = await _dbContext.Ingredients.ToListAsync(cancellationToken);
+            await _ingredientService.SyncIngredientsAsync(ObjectMapper.Mapper.Map<List<CreateElasticIngredientDto>>(ingredients));
+            return Response<NoContent>.Success(204);
+            
         }
     }
 }
