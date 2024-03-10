@@ -6,19 +6,21 @@ EXPOSE 80
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Apposite.Api/Apposite.Api.csproj", "Apposite.Api/"]
 COPY ["Apposite.Application/Apposite.Application.csproj", "Apposite.Application/"]
 COPY ["Apposite.Core/Apposite.Core.csproj", "Apposite.Core/"]
 COPY ["Apposite.Domain/Apposite.Domain.csproj", "Apposite.Domain/"]
 COPY ["Apposite.Persistence/Apposite.Persistence.csproj", "Apposite.Persistence/"]
-RUN dotnet restore "Apposite.Api/Apposite.Api.csproj"
+RUN dotnet restore "./Apposite.Api/Apposite.Api.csproj"
 COPY . .
 WORKDIR "/src/Apposite.Api"
-RUN dotnet build "Apposite.Api.csproj" -c Release -o /app/build
+RUN dotnet build "./Apposite.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Apposite.Api.csproj" -c Release -o /app/publish /p:UseAppHost=false
+ARG BUILD_CONFIGURATION=Release
+RUN dotnet publish "./Apposite.Api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app

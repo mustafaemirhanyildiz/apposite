@@ -1,36 +1,42 @@
 version: '3.4'
 
+name: apposite
+
 networks:
-  dev:
-    driver: bridge
   apposite:
-    # external: true
+    driver: bridge
 
 services:
   apposite-service:
     depends_on:
-      - db
-      - elasticsearch
-      - rabbitmq
-      - redis 
+      - apposite-db
+      - apposite-elasticsearch
+      - apposite-rabbitmq
+      - apposite-redis 
     container_name: apposite-service
+    restart: on-failure
     ports:
-      - "5000:80"
+      - "127.0.0.1:31260:80"
+      - "127.0.0.1:31261:443"
     build:
       context: .
       dockerfile: ./Apposite.Api/Dockerfile
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
+      - ASPNETCORE_URLS=https://+:443;https://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=Hesoyam%56
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/app/certificate.pfx
     networks:
       - apposite
     links:
-      - db
-      - rabbitmq
-      - elasticsearch
-      - redis
-  db:
+      - apposite-db
+      - apposite-rabbitmq
+      - apposite-elasticsearch
+      - apposite-redis
+
+  apposite-db:
     image: postgres:latest
-    container_name: db.apposite
+    container_name: apposite-db
     environment:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin
@@ -38,12 +44,12 @@ services:
       - "5432:5432"
     restart: always
     networks:
-      - dev
-    hostname: "db"
+      - apposite
+    hostname: "apposite-db"
 
-  elasticsearch:
+  apposite-elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.6.2
-    container_name: elasticsearch.apposite
+    container_name: apposite-elasticsearch
     restart: always
     environment:
       - xpack.security.enabled=false
@@ -62,24 +68,24 @@ services:
       - 9200:9200
       - 9300:9300
     networks:
-      - dev
-    hostname: "elasticsearch"
+      - apposite
+    hostname: "apposite-elasticsearch"
 
-  redis:
+  apposite-redis:
     image: redis
-    container_name: redis.cache.apposite
+    container_name: apposite-redis
     ports:
       - 6379:6379
-    hostname: "redis"
+    hostname: "apposite-redis"
     networks:
-      - dev
+      - apposite
 
-  rabbitmq:
+  apposite-rabbitmq:
     image: rabbitmq:3-management
-    hostname: "rabbitmq"
+    hostname: "apposite-rabbitmq"
     labels:
       NAME: "rabbitmq"
-    container_name: "rabbitmq.apposite"
+    container_name: "apposite-rabbitmq"
     ports:
     - "5671:5671"
     - "5672:5672"
@@ -88,4 +94,4 @@ services:
       - RABBITMQ_DEFAULT_PASS:M@gnet
       - RABBITMQ_DEFAULT_USER:magnet
     networks:
-      - dev
+      - apposite

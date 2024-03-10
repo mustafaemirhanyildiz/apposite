@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Nest;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
@@ -9,6 +11,13 @@ namespace Apposite.Application.ServiceExtensions.ElasticSearch
 {
     public static class ElasticSearchExtension
     {
+        private static bool _isDevelopment;
+
+        public static void Initialize(bool isDevelopment)
+        {
+            _isDevelopment = isDevelopment;
+        }
+
         public static async void AddElasticSearch(this IServiceCollection services, IConfiguration configuration)
         {
             var baseUrl = configuration["ElasticConfiguration:Uri"];
@@ -31,8 +40,11 @@ namespace Apposite.Application.ServiceExtensions.ElasticSearch
                 {
                     var credentials = Encoding.ASCII.GetBytes($"{username}:{password}");
                     httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(credentials));
-
-                    var jsonStr = File.ReadAllText("../Apposite.Application/ServiceExtensions/ElasticSearch/ingredient-index.json");
+                    var jsonStr = "";
+                    if (_isDevelopment)
+                        jsonStr = File.ReadAllText("../Apposite.Application/ServiceExtensions/ElasticSearch/ingredient-index.json");
+                    else
+                        jsonStr = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "ServiceExtensions/ElasticSearch/ingredient-index.json"));
                     var json = JsonConvert.DeserializeObject(jsonStr);
 
                     var response = await httpClient.PutAsync($"{baseUrl}/{ingredientIndex}", new StringContent(json.ToString(), Encoding.UTF8, "application/json"));
@@ -50,8 +62,11 @@ namespace Apposite.Application.ServiceExtensions.ElasticSearch
                 {
                     var credentials = Encoding.ASCII.GetBytes($"{username}:{password}");
                     httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(credentials));
-
-                    var jsonStr = File.ReadAllText("../Apposite.Application/ServiceExtensions/ElasticSearch/cuisinePreference-index.json");
+                    var jsonStr = "";
+                    if(_isDevelopment)
+                    jsonStr = File.ReadAllText("../Apposite.Application/ServiceExtensions/ElasticSearch/cuisinePreference-index.json");
+                    else
+                    jsonStr = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "ServiceExtensions/ElasticSearch/cuisinePreference-index.json"));
                     var json = JsonConvert.DeserializeObject(jsonStr);
 
                     var response = await httpClient.PutAsync($"{baseUrl}/{cuisinePreferenceIndex}", new StringContent(json.ToString(), Encoding.UTF8, "application/json"));
@@ -70,7 +85,11 @@ namespace Apposite.Application.ServiceExtensions.ElasticSearch
                     var credentials = Encoding.ASCII.GetBytes($"{username}:{password}");
                     httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(credentials));
 
-                    var jsonStr = File.ReadAllText("../Apposite.Application/ServiceExtensions/ElasticSearch/health-index.json");
+                    var jsonStr = "";
+                    if (_isDevelopment)
+                        jsonStr = File.ReadAllText("../Apposite.Application/ServiceExtensions/ElasticSearch/health-index.json");
+                    else
+                        jsonStr = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "ServiceExtensions/ElasticSearch/health-index.json"));
                     var json = JsonConvert.DeserializeObject(jsonStr);
 
                     var response = await httpClient.PutAsync($"{baseUrl}/{healthIndex}", new StringContent(json.ToString(), Encoding.UTF8, "application/json"));

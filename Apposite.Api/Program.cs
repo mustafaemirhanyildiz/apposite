@@ -21,6 +21,8 @@ using Apposite.Application.ServiceExtensions.ElasticSearch;
 
 var builder = WebApplication.CreateBuilder(args);
 
+ElasticSearchExtension.Initialize(builder.Environment.IsDevelopment());
+
 builder.Configuration.AddJsonFile("jwtSettings.json");
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
 builder.Services.Configure<RedisSettings>(builder.Configuration.GetSection("RedisSettings"));
