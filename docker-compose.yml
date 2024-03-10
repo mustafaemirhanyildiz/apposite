@@ -21,6 +21,8 @@ services:
     build:
       context: .
       dockerfile: ./Apposite.Api/Dockerfile
+    volumes:
+      - ./certificate.pfx:/app/certificate.pfx
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_URLS=https://+:443;https://+:80
