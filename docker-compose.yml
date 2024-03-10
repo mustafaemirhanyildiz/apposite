@@ -75,7 +75,7 @@ services:
     image: redis
     container_name: apposite-redis
     ports:
-      - 6379:6379
+      - 6380:6380
     hostname: "apposite-redis"
     networks:
       - apposite
@@ -87,9 +87,9 @@ services:
       NAME: "rabbitmq"
     container_name: "apposite-rabbitmq"
     ports:
-    - "5671:5671"
-    - "5672:5672"
-    - "15672:15672"
+    - "5671:5673"
+    - "5672:5674"
+    - "15673:15673"
     environment:
       - RABBITMQ_DEFAULT_PASS:M@gnet
       - RABBITMQ_DEFAULT_USER:magnet
