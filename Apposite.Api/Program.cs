@@ -53,7 +53,7 @@ builder.Services.RegisterFluentValidationCommandValidators();
 
 builder.Services.AddIdentity<User, Roles>(options =>
 {
-    options.Tokens.PasswordResetTokenProvider = "passwordReset";
+    //options.Tokens.PasswordResetTokenProvider = "passwordReset";
     options.SignIn.RequireConfirmedAccount = false;
     options.Password.RequireLowercase = true;
     options.Password.RequireUppercase = true;
@@ -62,7 +62,7 @@ builder.Services.AddIdentity<User, Roles>(options =>
     options.Password.RequireNonAlphanumeric = true;
     options.Password.RequireDigit = true;
     options.User.RequireUniqueEmail = true;
-    options.Tokens.PasswordResetTokenProvider = TokenOptions.DefaultEmailProvider;
+    //options.Tokens.PasswordResetTokenProvider = TokenOptions.DefaultEmailProvider;
 
 })
     .AddEntityFrameworkStores<AppositeDbContext>()
