@@ -4,19 +4,15 @@ using FluentValidation;
 
 namespace Apposite.Application.Validations.CommandValidations.User
 {
-    public class LoginUserCommandValidation : BaseValidator<LoginCommand>
+    public class ForgotPasswordCommandValidation : BaseValidator<ForgotPasswordCommand>
     {
-        public LoginUserCommandValidation()
+        public ForgotPasswordCommandValidation()
         {
             RuleFor(x => x.Email)
                 .Must(x => !string.IsNullOrWhiteSpace(x))
                 .WithMessage("Email Adresi Boş Olamaz")
                 .EmailAddress()
                 .WithMessage("Email Adresi Geçersiz");
-
-            RuleFor(x => x.Password)
-                .Must(x => !string.IsNullOrWhiteSpace(x))
-                .WithMessage("Şifre Geçersiz");
         }
     }
 }

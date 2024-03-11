@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using FluentValidation;
 using FluentValidation.Results;
 using Apposite.Application.Dto.Auth;
+using Apposite.Core.Dtos;
 
 namespace Apposite.Api.Controllers
 {
@@ -14,11 +15,15 @@ namespace Apposite.Api.Controllers
     {
         private readonly IMediator _mediator;
         private readonly IValidator<CreateUserCommand> _createUserCommand;
+        private readonly IValidator<ForgotPasswordCommand> _forgotPasswordCommand;
+        private readonly IValidator<UpdateForgottenPasswordCommand> _updateForgottenPasswordCommand;
 
-        public AuthController(IMediator mediator, IValidator<CreateUserCommand> createUserCommand)
+        public AuthController(IMediator mediator, IValidator<CreateUserCommand> createUserCommand, IValidator<ForgotPasswordCommand> forgotPasswordCommand, IValidator<UpdateForgottenPasswordCommand> updateForgottenPasswordCommand)
         {
             _mediator = mediator;
             _createUserCommand = createUserCommand;
+            _forgotPasswordCommand = forgotPasswordCommand;
+            _updateForgottenPasswordCommand = updateForgottenPasswordCommand;
         }
 
 
@@ -38,6 +43,41 @@ namespace Apposite.Api.Controllers
             {
                 return CreateActionResultInstance<UserDto>(result);
             }
+            var response = await _mediator.Send(command);
+            return CreateActionResultInstance(response);
+        }
+
+        [HttpPut("forgotPassword")]
+        public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordCommand command)
+        {
+            ValidationResult result = await _forgotPasswordCommand.ValidateAsync(command);
+
+            if (!result.IsValid)
+            {
+                return CreateActionResultInstance<NoContent>(result);
+            }
+            var response = await _mediator.Send(command);
+            return CreateActionResultInstance(response);
+        }
+        
+        
+        [HttpPut("updateForgottenPassword")]
+        public async Task<IActionResult> UpdateForgottenPassword([FromBody] UpdateForgottenPasswordCommand command)
+        {
+            ValidationResult result = await _updateForgottenPasswordCommand.ValidateAsync(command);
+
+            if (!result.IsValid)
+            {
+                return CreateActionResultInstance<NoContent>(result);
+            }
+            var response = await _mediator.Send(command);
+            return CreateActionResultInstance(response);
+        }
+
+
+        [HttpPut("confirmEmail")]
+        public async Task<IActionResult> ConfirmEmail([FromBody] ConfirmEmailCommand command)
+        {
             var response = await _mediator.Send(command);
             return CreateActionResultInstance(response);
         }
