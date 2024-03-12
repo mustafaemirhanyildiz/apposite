@@ -129,6 +129,24 @@ builder.Services.AddSwaggerGen(setup =>
 builder.Services.AddMediatR(typeof(AuthCommandHandler));
 builder.Services.ExternalServices();
 
+
+// cors
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigins", policy =>
+    {
+        policy.WithOrigins("http://localhost:3000",
+            "https://test.intelligrade.xyz",
+            "https://www.intelligrade.xyz",
+            "https://intelligrade.xyz"
+            )
+        .SetIsOriginAllowedToAllowWildcardSubdomains()
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowCredentials();
+    });
+});
+
 var app = builder.Build();
 
 using (var migrationSvcScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
@@ -164,6 +182,8 @@ if (app.Environment.IsDevelopment() || true)
 app.UseHttpsRedirection();
 
 app.UseRouting();
+
+app.UseCors("AllowSpecificOrigins");
 
 app.UseAuthorization();
 
