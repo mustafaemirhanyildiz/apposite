@@ -8,6 +8,7 @@ namespace Apposite.Persistence
 {
     public class AppositeDbContext : IdentityDbContext<User, Roles, Guid>
     {
+        // Migration commands
         // cd .\Apposite.Persistence\
         // dotnet ef --startup-project ..\Apposite.Api\ migrations add <migration-name>
         // dotnet ef database update
@@ -27,7 +28,6 @@ namespace Apposite.Persistence
             builder.Entity<IdentityUserLogin<Guid>>().ToTable("UserLogins");
             builder.Entity<IdentityRoleClaim<Guid>>().ToTable("RoleClaims");
             builder.Entity<IdentityUserToken<Guid>>().ToTable("UserTokens");
-
         }
 
         public DbSet<User> Users { get; set; }
@@ -41,6 +41,10 @@ namespace Apposite.Persistence
         public DbSet<UserHealth> UserHealths { get; set; }
         public DbSet<UserCuisinePreference> UserCuisinePreferences { get; set; }
         public DbSet<Health> Healths { get; set; }
+        public DbSet<AiIngredient> AiIngredients { get; set; }
+        public DbSet<AiInstruction> AiInstructions { get; set; }
+        public DbSet<AiRecipe> AiRecipes { get; set; }
+
         
         
 
