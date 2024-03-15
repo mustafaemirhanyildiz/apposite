@@ -17,11 +17,17 @@ using Serilog;
 using MediatR;
 using Apposite.Application.Handlers;
 using Apposite.Application.ServiceExtensions.ElasticSearch;
+using System.Text.Json.Serialization;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 ElasticSearchExtension.Initialize(builder.Environment.IsDevelopment());
+
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+});
 
 builder.Configuration.AddJsonFile("jwtSettings.json");
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));

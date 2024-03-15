@@ -11,6 +11,8 @@ using Apposite.Application.Commands.Health;
 using Apposite.Application.Dto.Health;
 using Apposite.Application.Dto.ElasticSearch.CuisinePreference;
 using Apposite.Application.Dto.ElasticSearch.Health;
+using Apposite.Application.Commands.Ai;
+using Apposite.Application.Dto.Ai;
 
 namespace Apposite.Application.Mapping
 {
@@ -35,6 +37,11 @@ namespace Apposite.Application.Mapping
             CreateMap<CreateHealthDto, Health>().ReverseMap();
             CreateMap<HealthDto, Health>().ReverseMap();
             CreateMap<CreateElasticHealthDto, Health>().ReverseMap();
+
+            CreateMap<CreateRecipeCommand, CreateRecipeFastApiDto>().ForMember(dest => dest.Language, opt => opt.MapFrom(src => src.Language.ToString()));
+            CreateMap<CreateRecipeDto, AiRecipe>().ReverseMap();
+            CreateMap<AiIngredientDto, AiIngredient>().ReverseMap();
+            CreateMap<AiInstructionDto, AiInstruction>().ReverseMap();
 
         }
     }

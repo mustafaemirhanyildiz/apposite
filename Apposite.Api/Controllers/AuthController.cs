@@ -26,7 +26,22 @@ namespace Apposite.Api.Controllers
             _updateForgottenPasswordCommand = updateForgottenPasswordCommand;
         }
 
-
+        /// <summary>
+        /// Login
+        /// </summary>
+        ///<remarks>
+        ///Example Request:
+        ///
+        ///     Admin
+        ///     {
+        ///         "email":"admin@admin.com",
+        ///         "password":"P@ssw0rd"
+        ///     }
+        ///  
+        ///     
+        /// </remarks>
+        /// <returns>
+        /// </returns>
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginCommand command)
         {

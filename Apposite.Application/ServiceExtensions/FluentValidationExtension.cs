@@ -1,5 +1,7 @@
-﻿using Apposite.Application.Commands.Auth;
+﻿using Apposite.Application.Commands.Ai;
+using Apposite.Application.Commands.Auth;
 using Apposite.Application.Services;
+using Apposite.Application.Validations.CommandValidations.Ai;
 using Apposite.Application.Validations.CommandValidations.User;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +16,7 @@ namespace Apposite.Application.ServiceExtensions
             services.AddScoped<IValidator<LoginCommand>, LoginUserCommandValidation>();
             services.AddScoped<IValidator<ForgotPasswordCommand>, ForgotPasswordCommandValidation>();
             services.AddScoped<IValidator<UpdateForgottenPasswordCommand>, UpdateForgottenPasswordValidation>();
+            services.AddScoped<IValidator<CreateRecipeCommand>, CreateRecipeCommandValidation>();
             ValidationService.SetProvider(services);
             return services;
         }
