@@ -24,7 +24,7 @@ namespace Apposite.Application.Handlers.User
 
         public async Task<Response<NoContent>> Handle(CreatePersonalInfoCommand request, CancellationToken cancellationToken)
         {
-            var userId = _tokenService.GetUserIdByToken();
+            var userId = _tokenService.GetUserId();
 
             var userIngredients = new List<UserIngredient>();
             foreach (var ingredient in request.Ingredients)

@@ -18,6 +18,7 @@ using MediatR;
 using Apposite.Application.Handlers;
 using Apposite.Application.ServiceExtensions.ElasticSearch;
 using System.Text.Json.Serialization;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -182,7 +183,12 @@ app.UseMiddleware<JwtMiddleware>();
 if (app.Environment.IsDevelopment() || true)
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Apposite API");
+        c.DocumentTitle = "Apposite API";
+        c.DocExpansion(DocExpansion.None);
+    });
 }
 
 app.UseHttpsRedirection();

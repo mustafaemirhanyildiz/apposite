@@ -2,6 +2,7 @@
 using Apposite.Application.Commands.Auth;
 using Apposite.Application.Dto.Ai;
 using Apposite.Application.Dto.Auth;
+using Apposite.Application.Queries.Ai;
 using Apposite.Core.ControllerBases;
 using FluentValidation;
 using FluentValidation.Results;
@@ -24,6 +25,27 @@ namespace Apposite.Api.Controllers
         {
             _mediator = mediator;
             _createRecipeCommandValidator = createRecipeCommandValidator;
+        }
+
+        [HttpGet("getRecipes")]
+        public async Task<IActionResult> GetRecipes([FromQuery] GetRecipesQuery query)
+        {
+            var response = await _mediator.Send(query);
+            return CreateActionResultInstance(response);
+        }
+
+        [HttpGet("getPublicRecipes")]
+        public async Task<IActionResult> GetPublicRecipes([FromQuery] GetPublicRecipesQuery query)
+        {
+            var response = await _mediator.Send(query);
+            return CreateActionResultInstance(response);
+        }
+
+        [HttpPut("publishRecipe")]
+        public async Task<IActionResult> PublishRecipe([FromBody] PublishRecipeCommand command)
+        {
+            var response = await _mediator.Send(command);
+            return CreateActionResultInstance(response);
         }
 
 

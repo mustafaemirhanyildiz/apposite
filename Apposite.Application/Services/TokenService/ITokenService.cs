@@ -5,7 +5,7 @@ namespace Apposite.Application.Services.TokenService
     public interface ITokenService
     {
 
-        public Guid GetUserIdByToken();
+        public Guid GetUserId();
 
     }
 }

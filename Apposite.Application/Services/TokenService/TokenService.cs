@@ -19,7 +19,7 @@ namespace Apposite.Application.Services.TokenService
         }
 
 
-        public Guid GetUserIdByToken()
+        public Guid GetUserId()
         {
             var token = _contextAccessor.HttpContext?.Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
             if (string.IsNullOrEmpty(token))

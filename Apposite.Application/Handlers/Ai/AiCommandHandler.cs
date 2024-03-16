@@ -14,7 +14,8 @@ using Apposite.Domain.Entities;
 
 namespace Apposite.Application.Handlers.Ai
 {
-    public class AiCommandHandler : IRequestHandler<CreateRecipeCommand, Response<CreateRecipeDto>>
+    public class AiCommandHandler : IRequestHandler<CreateRecipeCommand, Response<CreateRecipeDto>>,
+                                    IRequestHandler<PublishRecipeCommand, Response<NoContent>>
     {
         private readonly AppositeDbContext _dbContext;
         private readonly RedisService _redisService;
@@ -31,9 +32,28 @@ namespace Apposite.Application.Handlers.Ai
             _aiUrl = _configuration["FastApi:Url"];
         }
 
+        public async Task<Response<NoContent>> Handle(PublishRecipeCommand request, CancellationToken cancellationToken)
+        {
+            var userId = _tokenService.GetUserId();
+            var recipe = _dbContext.AiRecipes.FirstOrDefault(x => x.Id == request.RecipeId);
+            if (recipe == null)
+                return Response<NoContent>.Fail(404, "Recipe not found");
+
+            if (recipe.UserId != userId)
+                return Response<NoContent>.Fail(403, "You are not authorized to publish this recipe");
+
+            if(recipe.IsPublic)
+                return Response<NoContent>.Fail(400, "Recipe is already public");
+
+            recipe.IsPublic = true;
+            await _dbContext.SaveChangesAsync();
+
+            return Response<NoContent>.Success(204);
+        }
+
         async Task<Response<CreateRecipeDto>> IRequestHandler<CreateRecipeCommand, Response<CreateRecipeDto>>.Handle(CreateRecipeCommand request, CancellationToken cancellationToken)
         {
-            var userId = _tokenService.GetUserIdByToken();
+            var userId = _tokenService.GetUserId();
             var user = _dbContext.Users.FirstOrDefault(x => x.Id == userId);
             if (user == null)
                 return Response<CreateRecipeDto>.Fail(404,"User not found");
