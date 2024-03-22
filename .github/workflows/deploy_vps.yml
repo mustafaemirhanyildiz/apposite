@@ -23,6 +23,10 @@ jobs:
             cd apposite
             git checkout main
             git pull
+            cd ..
+            cd apposite-fastapi
+            git checkout main
+            git pull
 
       - name: Docker compose down and remove image
         uses: appleboy/ssh-action@master

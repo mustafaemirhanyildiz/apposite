@@ -1,4 +1,4 @@
-version: '3.4'
+version: "3.4"
 
 name: apposite
 
@@ -12,7 +12,7 @@ services:
       - apposite-db
       - apposite-elasticsearch
       - apposite-rabbitmq
-      - apposite-redis 
+      - apposite-redis
     container_name: apposite-service
     restart: on-failure
     ports:
@@ -35,6 +35,22 @@ services:
       - apposite-rabbitmq
       - apposite-elasticsearch
       - apposite-redis
+      - apposite-fastapi-app
+
+  apposite-fastapi-app:
+    image: "tahamuslu/intelligrade-python-ai:latest"
+    container_name: apposite-fastapi-app
+    environment:
+      OPENAI_API_KEY: "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"
+      GOOGLE_AI_API_KEY: "AIzaSyCC9Csv_8ygRg7GIH90ljGbY2vqoMzVtm0"
+    working_dir: /app
+    volumes:
+      - ../apposite-fastapi:/app
+    command: bash -c "pip install -r requirements.txt && uvicorn main:app --host 0.0.0.0 --port 80"
+    ports:
+      - "9123:80"
+    networks:
+      - apposite
 
   apposite-db:
     image: postgres:latest
@@ -89,9 +105,9 @@ services:
       NAME: "rabbitmq"
     container_name: "apposite-rabbitmq"
     ports:
-    - "5673:5671"
-    - "5674:5672"
-    - "15673:15672"
+      - "5673:5671"
+      - "5674:5672"
+      - "15673:15672"
     environment:
       - RABBITMQ_DEFAULT_PASS:M@gnet
       - RABBITMQ_DEFAULT_USER:magnet
