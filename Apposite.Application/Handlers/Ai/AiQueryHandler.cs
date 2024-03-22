@@ -12,8 +12,8 @@ using System.Linq.Expressions;
 
 namespace Apposite.Application.Handlers.Ai
 {
-    public class AiQueryHandler : IRequestHandler<GetRecipesQuery, Response<List<GetRecipeDto>>>,
-                                  IRequestHandler<GetPublicRecipesQuery, Response<List<GetRecipeDto>>>
+    public class AiQueryHandler : IRequestHandler<GetAiRecipesQuery, Response<List<GetAiRecipeDto>>>,
+                                  IRequestHandler<GetPublicAiRecipesQuery, Response<List<GetAiRecipeDto>>>
     {
         private readonly AppositeDbContext _dbContext;
         private readonly ITokenService _tokenService;
@@ -24,7 +24,7 @@ namespace Apposite.Application.Handlers.Ai
             _tokenService = tokenService;
         }
 
-        public async Task<Response<List<GetRecipeDto>>> Handle(GetRecipesQuery request, CancellationToken cancellationToken)
+        public async Task<Response<List<GetAiRecipeDto>>> Handle(GetAiRecipesQuery request, CancellationToken cancellationToken)
         {
             var userId = _tokenService.GetUserId();
             Expression<Func<AiRecipe, bool>> condition = x => x.UserId == userId;
@@ -37,7 +37,7 @@ namespace Apposite.Application.Handlers.Ai
                 .Include(x => x.AiIngredients)
                 .ToList();
 
-            var response = ObjectMapper.Mapper.Map<List<GetRecipeDto>>(recipes);
+            var response = ObjectMapper.Mapper.Map<List<GetAiRecipeDto>>(recipes);
             var pager = new Pager()
             {
                 PageNumber = request.Page,
@@ -45,11 +45,11 @@ namespace Apposite.Application.Handlers.Ai
                 TotalRecords = _dbContext.AiRecipes.Where(condition).Count()
             };
 
-            return Response<List<GetRecipeDto>>.Success(200,response, pager);
+            return Response<List<GetAiRecipeDto>>.Success(200,response, pager);
             
         }
 
-        public async Task<Response<List<GetRecipeDto>>> Handle(GetPublicRecipesQuery request, CancellationToken cancellationToken)
+        public async Task<Response<List<GetAiRecipeDto>>> Handle(GetPublicAiRecipesQuery request, CancellationToken cancellationToken)
         {
             var userId = _tokenService.GetUserId();
             Expression<Func<AiRecipe, bool>> condition = x => x.UserId != userId && x.IsPublic;
@@ -62,7 +62,7 @@ namespace Apposite.Application.Handlers.Ai
                 .Include(x => x.AiIngredients)
                 .ToList();
 
-            var response = ObjectMapper.Mapper.Map<List<GetRecipeDto>>(recipes);
+            var response = ObjectMapper.Mapper.Map<List<GetAiRecipeDto>>(recipes);
             var pager = new Pager()
             {
                 PageNumber = request.Page,
@@ -70,7 +70,7 @@ namespace Apposite.Application.Handlers.Ai
                 TotalRecords = _dbContext.AiRecipes.Where(condition).Count()
             };
 
-            return Response<List<GetRecipeDto>>.Success(200, response, pager);
+            return Response<List<GetAiRecipeDto>>.Success(200, response, pager);
 
         }
     }

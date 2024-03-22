@@ -38,12 +38,12 @@ namespace Apposite.Application.Mapping
             CreateMap<HealthDto, Health>().ReverseMap();
             CreateMap<CreateElasticHealthDto, Health>().ReverseMap();
 
-            CreateMap<CreateRecipeCommand, CreateRecipeFastApiDto>().ForMember(dest => dest.Language, opt => opt.MapFrom(src => src.Language.ToString()));
-            CreateMap<CreateRecipeDto, AiRecipe>().ReverseMap();
+            CreateMap<CreateAiRecipeCommand, CreateAiRecipeFastApiDto>().ForMember(dest => dest.Language, opt => opt.MapFrom(src => src.Language.ToString()));
+            CreateMap<CreateAiRecipeDto, AiRecipe>().ReverseMap();
             CreateMap<AiIngredientDto, AiIngredient>().ReverseMap();
             CreateMap<AiInstructionDto, AiInstruction>().ReverseMap();
 
-            CreateMap<GetRecipeDto, AiRecipe>().ReverseMap();
+            CreateMap<GetAiRecipeDto, AiRecipe>().ReverseMap();
         }
     }
 }

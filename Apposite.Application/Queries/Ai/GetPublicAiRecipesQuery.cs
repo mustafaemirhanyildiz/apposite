@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Apposite.Application.Queries.Ai
 {
-    public class GetPublicRecipesQuery : IRequest<Response<List<GetRecipeDto>>>
+    public class GetPublicAiRecipesQuery : IRequest<Response<List<GetAiRecipeDto>>>
     {
         public int Page { get; init; }
         public int PageSize { get; init; }

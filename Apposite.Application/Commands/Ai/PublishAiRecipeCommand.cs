@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Apposite.Application.Commands.Ai
 {
-    public class PublishRecipeCommand : IRequest<Response<NoContent>>
+    public class PublishAiRecipeCommand : IRequest<Response<NoContent>>
     {
         public Guid RecipeId { get; set; }
     }

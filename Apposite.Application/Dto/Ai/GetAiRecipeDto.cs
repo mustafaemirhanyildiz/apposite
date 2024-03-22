@@ -1,5 +1,4 @@
-﻿using Apposite.Domain.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Apposite.Application.Dto.Ai
 {
-    public class CreateRecipeDto
+    public class GetAiRecipeDto
     {
         public Guid UserId { get; set; }
+        public DateTime? CreatedAt { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public List<AiInstructionDto> AiInstructions { get; set; }

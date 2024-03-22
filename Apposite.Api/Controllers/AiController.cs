@@ -18,45 +18,45 @@ namespace Apposite.Api.Controllers
     public class AiController : CustomControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly IValidator<CreateRecipeCommand> _createRecipeCommandValidator;
+        private readonly IValidator<CreateAiRecipeCommand> _createRecipeCommandValidator;
 
 
-        public AiController(IMediator mediator, IValidator<CreateRecipeCommand> createRecipeCommandValidator)
+        public AiController(IMediator mediator, IValidator<CreateAiRecipeCommand> createRecipeCommandValidator)
         {
             _mediator = mediator;
             _createRecipeCommandValidator = createRecipeCommandValidator;
         }
 
-        [HttpGet("getRecipes")]
-        public async Task<IActionResult> GetRecipes([FromQuery] GetRecipesQuery query)
+        [HttpGet("getAiRecipes")]
+        public async Task<IActionResult> GetAiRecipes([FromQuery] GetAiRecipesQuery query)
         {
             var response = await _mediator.Send(query);
             return CreateActionResultInstance(response);
         }
 
-        [HttpGet("getPublicRecipes")]
-        public async Task<IActionResult> GetPublicRecipes([FromQuery] GetPublicRecipesQuery query)
+        [HttpGet("getPublicAiRecipes")]
+        public async Task<IActionResult> GetPublicAiRecipes([FromQuery] GetPublicAiRecipesQuery query)
         {
             var response = await _mediator.Send(query);
             return CreateActionResultInstance(response);
         }
 
-        [HttpPut("publishRecipe")]
-        public async Task<IActionResult> PublishRecipe([FromBody] PublishRecipeCommand command)
+        [HttpPut("publishAiRecipe")]
+        public async Task<IActionResult> PublishAiRecipe([FromBody] PublishAiRecipeCommand command)
         {
             var response = await _mediator.Send(command);
             return CreateActionResultInstance(response);
         }
 
 
-        [HttpPost("createRecipe")]
-        public async Task<IActionResult> CreateRecipe([FromBody] CreateRecipeCommand command)
+        [HttpPost("createAiRecipe")]
+        public async Task<IActionResult> CreateAiRecipe([FromBody] CreateAiRecipeCommand command)
         {
             ValidationResult result = await _createRecipeCommandValidator.ValidateAsync(command);
 
             if (!result.IsValid)
             {
-                return CreateActionResultInstance<CreateRecipeDto>(result);
+                return CreateActionResultInstance<CreateAiRecipeDto>(result);
             }
             var response = await _mediator.Send(command);
             return CreateActionResultInstance(response);
