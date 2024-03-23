@@ -44,6 +44,15 @@ namespace Apposite.Application.Mapping
             CreateMap<AiInstructionDto, AiInstruction>().ReverseMap();
 
             CreateMap<GetRecipeDto, AiRecipe>().ReverseMap();
+
+
+
+            #region Recipe Mapping
+
+            CreateMap<Apposite.Application.Commands.Recipe.CreateRecipeCommand, Recipe>()
+                    .ForMember(dest => dest.MediaFileId, opt => opt.MapFrom(src => src.CoverPhotoId));
+
+            #endregion
         }
     }
 }
