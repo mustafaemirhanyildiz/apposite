@@ -44,7 +44,6 @@ namespace Apposite.Application.Mapping
             CreateMap<AiInstructionDto, AiInstruction>().ReverseMap();
 
             CreateMap<GetAiRecipeDto, AiRecipe>().ReverseMap();
-            CreateMap<GetRecipeDto, AiRecipe>().ReverseMap();
 
 
 

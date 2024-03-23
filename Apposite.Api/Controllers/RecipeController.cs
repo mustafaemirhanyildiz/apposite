@@ -1,5 +1,5 @@
 
-using Apposite.Application.Commands.Ai;
+using Apposite.Application.Commands.Recipe;
 using Apposite.Core.ControllerBases;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
