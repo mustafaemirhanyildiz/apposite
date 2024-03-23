@@ -14,8 +14,8 @@ using Apposite.Domain.Entities;
 
 namespace Apposite.Application.Handlers.Ai
 {
-    public class AiCommandHandler : IRequestHandler<CreateRecipeCommand, Response<CreateRecipeDto>>,
-                                    IRequestHandler<PublishRecipeCommand, Response<NoContent>>
+    public class AiCommandHandler : IRequestHandler<CreateAiRecipeCommand, Response<CreateAiRecipeDto>>,
+                                    IRequestHandler<PublishAiRecipeCommand, Response<NoContent>>
     {
         private readonly AppositeDbContext _dbContext;
         private readonly RedisService _redisService;
@@ -32,7 +32,7 @@ namespace Apposite.Application.Handlers.Ai
             _aiUrl = _configuration["FastApi:Url"];
         }
 
-        public async Task<Response<NoContent>> Handle(PublishRecipeCommand request, CancellationToken cancellationToken)
+        public async Task<Response<NoContent>> Handle(PublishAiRecipeCommand request, CancellationToken cancellationToken)
         {
             var userId = _tokenService.GetUserId();
             var recipe = _dbContext.AiRecipes.FirstOrDefault(x => x.Id == request.RecipeId);
@@ -51,18 +51,18 @@ namespace Apposite.Application.Handlers.Ai
             return Response<NoContent>.Success(204);
         }
 
-        async Task<Response<CreateRecipeDto>> IRequestHandler<CreateRecipeCommand, Response<CreateRecipeDto>>.Handle(CreateRecipeCommand request, CancellationToken cancellationToken)
+        async Task<Response<CreateAiRecipeDto>> IRequestHandler<CreateAiRecipeCommand, Response<CreateAiRecipeDto>>.Handle(CreateAiRecipeCommand request, CancellationToken cancellationToken)
         {
             var userId = _tokenService.GetUserId();
             var user = _dbContext.Users.FirstOrDefault(x => x.Id == userId);
             if (user == null)
-                return Response<CreateRecipeDto>.Fail(404,"User not found");
+                return Response<CreateAiRecipeDto>.Fail(404,"User not found");
 
             var oldRecipes = _dbContext.AiRecipes.Where(x => x.UserId == userId).Select(x => x.Name).ToList();
 
             var client = new HttpClient();
             var request_Api = new HttpRequestMessage(HttpMethod.Post, _aiUrl + "/createRecipe");
-            CreateRecipeFastApiDto json_data = ObjectMapper.Mapper.Map<CreateRecipeFastApiDto>(request);
+            CreateAiRecipeFastApiDto json_data = ObjectMapper.Mapper.Map<CreateAiRecipeFastApiDto>(request);
             json_data.OldRecipes = oldRecipes;
             request_Api.Content = new StringContent(JsonConvert.SerializeObject(json_data), Encoding.UTF8, "application/json");
             var response = await client.SendAsync(request_Api);
@@ -90,7 +90,7 @@ namespace Apposite.Application.Handlers.Ai
                     Servings = int.Parse(recipeObject["Servings"].ToString()),
                     Id = Guid.NewGuid()
                 };
-                CreateRecipeDto recipe = ObjectMapper.Mapper.Map<CreateRecipeDto>(aiRecipe);
+                CreateAiRecipeDto recipe = ObjectMapper.Mapper.Map<CreateAiRecipeDto>(aiRecipe);
                 recipe.AiIngredients = new();
                 recipe.AiInstructions = new();
                 foreach (var ingredient in Ingredients)
@@ -127,10 +127,10 @@ namespace Apposite.Application.Handlers.Ai
                 _dbContext.AiRecipes.Add(aiRecipe);
 
                 await _dbContext.SaveChangesAsync();
-                return Response<CreateRecipeDto>.Success(200,recipe);
+                return Response<CreateAiRecipeDto>.Success(200,recipe);
             }
             else
-                return Response<CreateRecipeDto>.Fail(500, "Error while creating recipe");
+                return Response<CreateAiRecipeDto>.Fail(500, "Error while creating recipe");
 
         }
     }

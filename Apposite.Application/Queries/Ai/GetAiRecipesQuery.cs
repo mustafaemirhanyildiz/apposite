@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Apposite.Application.Queries.Ai
 {
-    public class GetRecipesQuery : IRequest<Response<List<GetRecipeDto>>>
+    public class GetAiRecipesQuery : IRequest<Response<List<GetAiRecipeDto>>>
     {
         public int Page { get; init; }
         public int PageSize { get; init; }

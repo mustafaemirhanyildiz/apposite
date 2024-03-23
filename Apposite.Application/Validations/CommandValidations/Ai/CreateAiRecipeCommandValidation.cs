@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Apposite.Application.Validations.CommandValidations.Ai
 {
-    public class CreateRecipeCommandValidation : BaseValidator<CreateRecipeCommand>
+    public class CreateAiRecipeCommandValidation : BaseValidator<CreateAiRecipeCommand>
     {
-        public CreateRecipeCommandValidation()
+        public CreateAiRecipeCommandValidation()
         {
             RuleFor(x => x.Language)
                 .IsInEnum()

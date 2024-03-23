@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Apposite.Application.Dto.Ai
 {
-    public class CreateRecipeFastApiDto
+    public class CreateAiRecipeFastApiDto
     {
         public string? Cuisine { get; set; }
         public string? MealType { get; set; }

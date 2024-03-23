@@ -16,7 +16,7 @@ namespace Apposite.Application.ServiceExtensions
             services.AddScoped<IValidator<LoginCommand>, LoginUserCommandValidation>();
             services.AddScoped<IValidator<ForgotPasswordCommand>, ForgotPasswordCommandValidation>();
             services.AddScoped<IValidator<UpdateForgottenPasswordCommand>, UpdateForgottenPasswordValidation>();
-            services.AddScoped<IValidator<CreateRecipeCommand>, CreateRecipeCommandValidation>();
+            services.AddScoped<IValidator<CreateAiRecipeCommand>, CreateAiRecipeCommandValidation>();
             ValidationService.SetProvider(services);
             return services;
         }

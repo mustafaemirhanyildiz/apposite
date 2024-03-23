@@ -6,7 +6,7 @@ using MediatR;
 
 namespace Apposite.Application.Commands.Ai
 {
-    public class CreateRecipeCommand : IRequest<Response<CreateRecipeDto>>
+    public class CreateAiRecipeCommand : IRequest<Response<CreateAiRecipeDto>>
     {
         public string? Cuisine { get; set; }
         public string? MealType { get; set; }
