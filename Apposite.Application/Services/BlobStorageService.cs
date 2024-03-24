@@ -18,7 +18,7 @@ namespace Apposite.Application.Services
         public BlobStorageService(IOptions<AzureBlobSettings> azureBlobSettings, ILogger<BlobStorageService> logger)
         {
             _azureBlobSettings = azureBlobSettings.Value;
-            _blobContainerClient = new BlobContainerClient(new Uri(_azureBlobSettings.Uri));
+            _blobContainerClient = new BlobContainerClient(_azureBlobSettings.Uri, _azureBlobSettings.AppositeContainer);
             _logger = logger;
         }
         public async Task<Stream> DownloadAsync(string fileName, string containerName)

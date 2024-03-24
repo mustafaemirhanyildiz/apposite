@@ -44,6 +44,7 @@ namespace Apposite.Persistence
         public DbSet<AiIngredient> AiIngredients { get; set; }
         public DbSet<AiInstruction> AiInstructions { get; set; }
         public DbSet<AiRecipe> AiRecipes { get; set; }
+        public DbSet<MediaFile> MediaFiles { get; set; }
 
         
         

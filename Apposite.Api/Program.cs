@@ -54,6 +54,7 @@ builder.Services.AddSingleton<BlobStorageService>();
 builder.Services.AddElasticSearch(builder.Configuration);
 builder.Services.AddLogging().AddSerilog();
 Apposite.Application.ServiceExtensions.LoggerExtensions.ConfigureLogging();
+ConfigurationExtension.Initialize(builder.Configuration);
 
 Log.Information("Logger Started");
 builder.Services.RegisterFluentValidationCommandValidators();

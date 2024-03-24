@@ -13,6 +13,8 @@ using Apposite.Application.Dto.ElasticSearch.CuisinePreference;
 using Apposite.Application.Dto.ElasticSearch.Health;
 using Apposite.Application.Commands.Ai;
 using Apposite.Application.Dto.Ai;
+using Apposite.Application.Dto.MediaFile;
+using Apposite.Application.ServiceExtensions;
 
 namespace Apposite.Application.Mapping
 {
@@ -20,13 +22,13 @@ namespace Apposite.Application.Mapping
     {
         public CustomMapping()
         {
-            CreateMap<User,UserDto>().ReverseMap();
-            CreateMap<CreateUserCommand,User>().ReverseMap();
+            CreateMap<User, UserDto>().ReverseMap();
+            CreateMap<CreateUserCommand, User>().ReverseMap();
 
-            CreateMap<CreateIngredientCommand,Ingredient>().ReverseMap();
-            CreateMap<CreateIngredientDto,Ingredient>().ReverseMap();
-            CreateMap<Ingredient,IngredientDto>().ReverseMap();
-            CreateMap<CreateElasticIngredientDto,Ingredient>().ReverseMap();
+            CreateMap<CreateIngredientCommand, Ingredient>().ReverseMap();
+            CreateMap<CreateIngredientDto, Ingredient>().ReverseMap();
+            CreateMap<Ingredient, IngredientDto>().ReverseMap();
+            CreateMap<CreateElasticIngredientDto, Ingredient>().ReverseMap();
 
             CreateMap<CreateCuisinePreferenceCommand, CuisinePreference>().ReverseMap();
             CreateMap<CreateCuisinePreferenceDto, CuisinePreference>().ReverseMap();
@@ -53,6 +55,13 @@ namespace Apposite.Application.Mapping
                     .ForMember(dest => dest.MediaFileId, opt => opt.MapFrom(src => src.CoverPhotoId));
 
             #endregion
+
+
+            #region MediaFile Mapping
+            CreateMap<MediaFile, GetAllMediaFileDto>()
+                .ForMember(dest => dest.FileUrl, opt => opt.MapFrom(src => $"{ConfigurationExtension.config.GetSection("AzureBlobSettings:BaseUri").Value}mediafiles/{ConfigurationExtension.config.GetSection("AzureBlobSettings:AppositeContainer").Value}/{src.FileName}"));
+            #endregion
+
         }
     }
 }
