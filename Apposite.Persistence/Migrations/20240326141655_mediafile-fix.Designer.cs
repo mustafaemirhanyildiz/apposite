@@ -3,6 +3,7 @@ using System;
 using Apposite.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Apposite.Persistence.Migrations
 {
     [DbContext(typeof(AppositeDbContext))]
-    partial class AppositeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240326141655_mediafile-fix")]
+    partial class mediafilefix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -277,10 +280,15 @@ namespace Apposite.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<Guid?>("RecipeStepId")
+                        .HasColumnType("uuid");
+
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RecipeStepId");
 
                     b.ToTable("MediaFiles");
                 });
@@ -795,6 +803,13 @@ namespace Apposite.Persistence.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Apposite.Domain.Entities.MediaFile", b =>
+                {
+                    b.HasOne("Apposite.Domain.Entities.RecipeStep", null)
+                        .WithMany("MediaFiles")
+                        .HasForeignKey("RecipeStepId");
+                });
+
             modelBuilder.Entity("Apposite.Domain.Entities.Recipe", b =>
                 {
                     b.HasOne("Apposite.Domain.Entities.CuisinePreference", "CuisinePreference")
@@ -1011,6 +1026,11 @@ namespace Apposite.Persistence.Migrations
                     b.Navigation("RecipeIngredient");
 
                     b.Navigation("RecipeStep");
+                });
+
+            modelBuilder.Entity("Apposite.Domain.Entities.RecipeStep", b =>
+                {
+                    b.Navigation("MediaFiles");
                 });
 #pragma warning restore 612, 618
         }

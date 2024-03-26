@@ -11,9 +11,9 @@ namespace Apposite.Application.Commands.Recipe
         public string Description { get; set; }
         public double PreparationTime { get; set; }
         public double Calories { get; set; }
-        public Guid CuisinePreferenceId { get; set; } 
+        public Guid CuisinePreferenceId { get; set; }
         public ICollection<RecipeStepDto> RecipeSteps { get; set; }
-        public ICollection<Guid> RecipeIngredients { get; set; }
+        public ICollection<RecipeIngredientDto> RecipeIngredients { get; set; }
 
     }
 }

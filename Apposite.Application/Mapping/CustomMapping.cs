@@ -15,6 +15,7 @@ using Apposite.Application.Commands.Ai;
 using Apposite.Application.Dto.Ai;
 using Apposite.Application.Dto.MediaFile;
 using Apposite.Application.ServiceExtensions;
+using Apposite.Application.Dto.Recipe;
 
 namespace Apposite.Application.Mapping
 {
@@ -53,6 +54,8 @@ namespace Apposite.Application.Mapping
 
             CreateMap<Apposite.Application.Commands.Recipe.CreateRecipeCommand, Recipe>()
                     .ForMember(dest => dest.MediaFileId, opt => opt.MapFrom(src => src.CoverPhotoId));
+            CreateMap<RecipeStepDto, RecipeStep>().ReverseMap();
+            CreateMap<RecipeIngredientDto, RecipeIngredient>().ReverseMap();
 
             #endregion
 
