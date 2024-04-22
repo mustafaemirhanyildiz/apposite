@@ -24,8 +24,8 @@ namespace Apposite.Application.Handlers
         private readonly JwtGenerator _jwtGenerator;
         private readonly SignInManager<Apposite.Domain.Entities.User> _signInManager;
         private readonly AppositeDbContext _dbContext;
-        private readonly ILogger<AuthCommandHandler> _logger;
         private readonly UserManager<Apposite.Domain.Entities.User> _userManager;
+        private readonly ILogger<AuthCommandHandler> _logger;
         private readonly RedisService _redisService;
         private readonly IMailService _mailService;
 
