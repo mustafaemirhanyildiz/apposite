@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Apposite.Persistence.Migrations
 {
     [DbContext(typeof(AppositeDbContext))]
-    [Migration("20240316082944_isPublicAiRecipe")]
-    partial class isPublicAiRecipe
+    [Migration("20240422085908_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -273,24 +273,19 @@ namespace Apposite.Persistence.Migrations
                     b.Property<int>("FileType")
                         .HasColumnType("integer");
 
-                    b.Property<string>("FileUrl")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<Guid?>("RecipeStepId")
-                        .HasColumnType("uuid");
+                    b.Property<string>("MediaName")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RecipeStepId");
-
-                    b.ToTable("MediaFile");
+                    b.ToTable("MediaFiles");
                 });
 
             modelBuilder.Entity("Apposite.Domain.Entities.Recipe", b =>
@@ -357,8 +352,12 @@ namespace Apposite.Persistence.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<int>("Quantity")
-                        .HasColumnType("integer");
+                    b.Property<double>("Quantity")
+                        .HasColumnType("double precision");
+
+                    b.Property<string>("QuantityType")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<Guid>("RecipeId")
                         .HasColumnType("uuid");
@@ -404,7 +403,37 @@ namespace Apposite.Persistence.Migrations
 
                     b.HasIndex("RecipeId");
 
-                    b.ToTable("RecipeStep");
+                    b.ToTable("RecipeSteps");
+                });
+
+            modelBuilder.Entity("Apposite.Domain.Entities.RecipeStepMediaFile", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<Guid>("MediaFileId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("RecipeStepId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MediaFileId");
+
+                    b.HasIndex("RecipeStepId");
+
+                    b.ToTable("RecipeStepMediaFiles");
                 });
 
             modelBuilder.Entity("Apposite.Domain.Entities.Roles", b =>
@@ -769,15 +798,6 @@ namespace Apposite.Persistence.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Apposite.Domain.Entities.MediaFile", b =>
-                {
-                    b.HasOne("Apposite.Domain.Entities.RecipeStep", "RecipeStep")
-                        .WithMany("MediaFiles")
-                        .HasForeignKey("RecipeStepId");
-
-                    b.Navigation("RecipeStep");
-                });
-
             modelBuilder.Entity("Apposite.Domain.Entities.Recipe", b =>
                 {
                     b.HasOne("Apposite.Domain.Entities.CuisinePreference", "CuisinePreference")
@@ -829,6 +849,25 @@ namespace Apposite.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Recipe");
+                });
+
+            modelBuilder.Entity("Apposite.Domain.Entities.RecipeStepMediaFile", b =>
+                {
+                    b.HasOne("Apposite.Domain.Entities.MediaFile", "MediaFile")
+                        .WithMany()
+                        .HasForeignKey("MediaFileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Apposite.Domain.Entities.RecipeStep", "RecipeStep")
+                        .WithMany()
+                        .HasForeignKey("RecipeStepId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MediaFile");
+
+                    b.Navigation("RecipeStep");
                 });
 
             modelBuilder.Entity("Apposite.Domain.Entities.UserCuisinePreference", b =>
@@ -975,11 +1014,6 @@ namespace Apposite.Persistence.Migrations
                     b.Navigation("RecipeIngredient");
 
                     b.Navigation("RecipeStep");
-                });
-
-            modelBuilder.Entity("Apposite.Domain.Entities.RecipeStep", b =>
-                {
-                    b.Navigation("MediaFiles");
                 });
 #pragma warning restore 612, 618
         }
