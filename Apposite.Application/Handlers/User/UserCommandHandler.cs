@@ -49,7 +49,7 @@ namespace Apposite.Application.Handlers.User
             }
 
             var userHealth = new List<UserHealth>();
-            foreach (var health in request.Health)
+            foreach (var health in request.Healths)
             {
                 var tempUserHealth = new UserHealth
                 {

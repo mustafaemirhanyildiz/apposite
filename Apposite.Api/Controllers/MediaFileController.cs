@@ -3,11 +3,13 @@ using Apposite.Application.Queries.MediaFile;
 using Apposite.Core.ControllerBases;
 using Apposite.Domain.Enums;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Apposite.Api.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("api/[controller]")]
     public class MediaFileController : CustomControllerBase
     {

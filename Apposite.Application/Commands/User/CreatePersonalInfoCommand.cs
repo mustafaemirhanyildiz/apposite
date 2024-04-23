@@ -14,7 +14,7 @@ namespace Apposite.Application.Commands.User
     {
         public required List<Guid> Ingredients { get; set;}
         public required List<Guid> Cuisines { get; set;}
-        public required List<Guid> Health { get; set;}
+        public required List<Guid> Healths { get; set;}
 
         
     }

@@ -3,11 +3,13 @@ using Apposite.Application.Commands.User;
 using Apposite.Application.Queries.User;
 using Apposite.Core.ControllerBases;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Apposite.Api.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class UserController : CustomControllerBase
     {

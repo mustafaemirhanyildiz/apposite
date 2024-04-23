@@ -40,13 +40,16 @@ namespace Apposite.Application.Handlers.User
             if (user == null)
                 Response<GetUserInfoDto>.Fail(400,"User not found");
             var userCuisinePreferences = _dbContext.UserCuisinePreferences.Where(x => x.UserId == userId).Include(x => x.CuisinePreference).ToList();
+            var cuisines = _dbContext.CuisinePreferences.Where(x => userCuisinePreferences.Select(x => x.CuisinePreferenceId).Contains(x.Id)).ToList();
             var userIngredients = _dbContext.UserIngredients.Where(x => x.UserId == userId).Include(x => x.Ingredient).ToList();
+            var ingredients = _dbContext.Ingredients.Where(x => userIngredients.Select(x => x.IngredientId).Contains(x.Id)).ToList();
             var userHealths = _dbContext.UserHealths.Where(x => x.UserId == userId).Include(x => x.Health).ToList();
+            var healths = _dbContext.Healths.Where(x => userHealths.Select(x => x.HealthId).Contains(x.Id)).ToList();
             var getUserInfoDto = new GetUserInfoDto
             {
-                Cuisines = ObjectMapper.Mapper.Map<List<CuisinePreferenceDto>>(userCuisinePreferences),
-                Ingredients = ObjectMapper.Mapper.Map<List<IngredientDto>>(userIngredients),
-                Healths = ObjectMapper.Mapper.Map<List<HealthDto>>(userHealths),
+                Cuisines = ObjectMapper.Mapper.Map<List<CuisinePreferenceDto>>(cuisines),
+                Ingredients = ObjectMapper.Mapper.Map<List<IngredientDto>>(ingredients),
+                Healths = ObjectMapper.Mapper.Map<List<HealthDto>>(healths),
             };
             return Response<GetUserInfoDto>.Success(200,getUserInfoDto);
 

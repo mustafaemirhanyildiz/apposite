@@ -2,11 +2,13 @@
 using Apposite.Application.Queries.CuisinePreference;
 using Apposite.Core.ControllerBases;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Apposite.Api.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class CuisinePreferenceController : CustomControllerBase
     {
