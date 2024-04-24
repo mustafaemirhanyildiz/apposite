@@ -25,8 +25,8 @@
                     
                     "turkish_ngram_filter": {
                         "type": "ngram",
-                        "min_gram": 2,
-                        "max_gram": 6
+                        "min_gram": 3,
+                        "max_gram": 4
                     }
                 },
                 "analyzer": {
