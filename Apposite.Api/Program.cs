@@ -172,6 +172,7 @@ using (var migrationSvcScope = app.Services.GetRequiredService<IServiceScopeFact
 }
 RoleSeed.SeedRoles(app.Services).Wait();
 AdminSeed.SeedAdmin(app.Services).Wait();
+StarterSeed.SeedStarter(app.Services).Wait();
 
 //var log = app.Services.GetRequiredService<Serilog.ILogger>();
 app.UseMiddleware<CustomExceptionHandler>();
