@@ -9,7 +9,8 @@ namespace Apposite.Domain.Entities
         public double Calories { get; set; }
         public double Protein { get; set; }
         public double Fat { get; set; }
-        public byte[]? Image { get; set; }
+        public Guid? MediaFileId { get; set; }
+        public virtual MediaFile? MediaFile { get; set; }
         public virtual ICollection<RecipeIngredient>? RecipeIngredient { get; set; }
     }
 }

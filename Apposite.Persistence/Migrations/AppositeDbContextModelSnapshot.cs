@@ -233,11 +233,11 @@ namespace Apposite.Persistence.Migrations
                     b.Property<double>("Fat")
                         .HasColumnType("double precision");
 
-                    b.Property<byte[]>("Image")
-                        .HasColumnType("bytea");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
+
+                    b.Property<Guid?>("MediaFileId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -250,6 +250,8 @@ namespace Apposite.Persistence.Migrations
                         .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("MediaFileId");
 
                     b.ToTable("Ingredients");
                 });
@@ -793,6 +795,15 @@ namespace Apposite.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Apposite.Domain.Entities.Ingredient", b =>
+                {
+                    b.HasOne("Apposite.Domain.Entities.MediaFile", "MediaFile")
+                        .WithMany()
+                        .HasForeignKey("MediaFileId");
+
+                    b.Navigation("MediaFile");
                 });
 
             modelBuilder.Entity("Apposite.Domain.Entities.Recipe", b =>
