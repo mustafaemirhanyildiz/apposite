@@ -4,8 +4,6 @@ namespace Apposite.Domain.Enums
     {
         RecipeImage = 1,
         UserProfileImage = 2,
-        IngredientImage = 3,
-        StepImage = 4
-        
+        IngredientImage = 3        
     }
 }

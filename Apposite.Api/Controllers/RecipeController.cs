@@ -1,5 +1,7 @@
 
 using Apposite.Application.Commands.Recipe;
+using Apposite.Application.Dto.Recipe;
+using Apposite.Application.Queries.Recipe;
 using Apposite.Core.ControllerBases;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -24,6 +26,27 @@ namespace Apposite.Api.Controllers
         public async Task<IActionResult> CreateRecipe([FromBody] CreateRecipeCommand command)
         {
             var response = await _mediator.Send(command);
+            return CreateActionResultInstance(response);
+        }
+
+        [HttpPut("update")]
+        public async Task<IActionResult> UpdateRecipe([FromBody] UpdateRecipeCommand command)
+        {
+            var response = await _mediator.Send(command);
+            return CreateActionResultInstance(response);
+        }
+
+        [HttpDelete("delete")]
+        public async Task<IActionResult> DeleteRecipe([FromBody] DeleteRecipeCommand command)
+        {
+            var response = await _mediator.Send(command);
+            return CreateActionResultInstance(response);
+        }
+
+        [HttpGet("get")]
+        public async Task<IActionResult> Get([FromQuery] GetRecipesQuery query)
+        {
+            var response = await _mediator.Send(query);
             return CreateActionResultInstance(response);
         }
 

@@ -10,6 +10,7 @@ using Apposite.Application.Services.HealthService;
 using Apposite.Application.Services.IngredientService;
 using Apposite.Application.Settings;
 using Apposite.Persistence;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Nest;
@@ -49,7 +50,7 @@ namespace Apposite.Application.Services
             }
             if ((await elasticClient.SearchAsync<IngredientDto>(s => s.Index(_elasticSettings.IngredientIndex).Size(1))).Total == 0)
             {
-                var ingredients = dbContext.Ingredients.ToList();
+                var ingredients = dbContext.Ingredients.Include(x => x.MediaFile).ToList();
                 var ingredientsDto = ObjectMapper.Mapper.Map<List<CreateElasticIngredientDto>>(ingredients);
                 await ingredientService.CreateIngredientBulkAsync(ingredientsDto);
             }

@@ -14,7 +14,7 @@ namespace Apposite.Domain.Entities
         public virtual User User { get; set; }
         public Guid? CuisinePreferenceId { get; set; }
         public virtual CuisinePreference? CuisinePreference { get; set; }
-        public virtual ICollection<RecipeStep> RecipeStep { get; set; }
-        public virtual ICollection<RecipeIngredient>? RecipeIngredient { get; set; }
+        public virtual ICollection<RecipeStep> RecipeSteps { get; set; }
+        public virtual ICollection<RecipeIngredient>? RecipeIngredients { get; set; }
     }
 }

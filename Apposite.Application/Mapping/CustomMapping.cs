@@ -28,8 +28,8 @@ namespace Apposite.Application.Mapping
 
             CreateMap<CreateIngredientCommand, Ingredient>().ReverseMap();
             CreateMap<CreateIngredientDto, Ingredient>().ReverseMap();
-            CreateMap<Ingredient, IngredientDto>().ReverseMap();
-            CreateMap<CreateElasticIngredientDto, Ingredient>().ReverseMap();
+            CreateMap<Ingredient, IngredientDto>().ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => $"{ConfigurationExtension.config.GetSection("AzureBlobSettings:BaseUri").Value}mediafiles/{ConfigurationExtension.config.GetSection("AzureBlobSettings:AppositeContainer").Value}/{src.MediaFile.FileName}"));
+            CreateMap<Ingredient, CreateElasticIngredientDto>().ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => $"{ConfigurationExtension.config.GetSection("AzureBlobSettings:BaseUri").Value}mediafiles/{ConfigurationExtension.config.GetSection("AzureBlobSettings:AppositeContainer").Value}/{src.MediaFile.FileName}"));
 
             CreateMap<CreateCuisinePreferenceCommand, CuisinePreference>().ReverseMap();
             CreateMap<CreateCuisinePreferenceDto, CuisinePreference>().ReverseMap();
@@ -56,6 +56,13 @@ namespace Apposite.Application.Mapping
                     .ForMember(dest => dest.MediaFileId, opt => opt.MapFrom(src => src.CoverPhotoId));
             CreateMap<RecipeStepDto, RecipeStep>().ReverseMap();
             CreateMap<RecipeIngredientDto, RecipeIngredient>().ReverseMap();
+            CreateMap<Recipe, RecipeDto>()
+                .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => $"{ConfigurationExtension.config.GetSection("AzureBlobSettings:BaseUri").Value}mediafiles/{ConfigurationExtension.config.GetSection("AzureBlobSettings:AppositeContainer").Value}/{src.MediaFile.FileName}"))
+                .ForMember(dest => dest.User, opt => opt.MapFrom(src => new RecipeUserDto() { Id = src.User.Id, Name = src.User.Name, Surname = src.User.Surname }))
+                .ForMember(dest => dest.CuisinePreference, opt => opt.MapFrom(src => new RecipeCuisineDto() { Id = src.CuisinePreference.Id, Name = src.CuisinePreference.Name, Description = src.CuisinePreference.Description }))
+                .ForMember(dest => dest.RecipeSteps, opt => opt.MapFrom(src => src.RecipeSteps.Select(x => new GetRecipeStepDto() { Description = x.Description, StepNumber = x.StepNumber }).ToList()))
+                .ForMember(dest => dest.RecipeIngredients, opt => opt.MapFrom(src => src.RecipeIngredients.Select(x => new GetRecipeIngredientDto() { Id = x.IngredientId, Description = x.Ingredient.Description, Calories = x.Ingredient.Calories, Fat = x.Ingredient.Fat, Name = x.Ingredient.Name, Protein = x.Ingredient.Protein, ImageUrl = $"{ConfigurationExtension.config.GetSection("AzureBlobSettings:BaseUri").Value}mediafiles/{ConfigurationExtension.config.GetSection("AzureBlobSettings:AppositeContainer").Value}/{x.Ingredient.MediaFile.FileName}", Quantity = x.Quantity, QuantityType = x.QuantityType }).ToList()));
+
 
             #endregion
 

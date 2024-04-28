@@ -33,7 +33,9 @@ namespace Apposite.Application.Handlers.Ingredient
         {
             var ingredient = ObjectMapper.Mapper.Map<Domain.Entities.Ingredient>(request);
             await _dbContext.Ingredients.AddAsync(ingredient, cancellationToken);
-            await _ingredientService.CreateIngredientAsync(ObjectMapper.Mapper.Map<CreateElasticIngredientDto>(ingredient));
+            _dbContext.Ingredients.Include(x => x.MediaFile);
+            var elasticDto = ObjectMapper.Mapper.Map<CreateElasticIngredientDto>(ingredient);
+            await _ingredientService.CreateIngredientAsync(elasticDto);
             await _dbContext.SaveChangesAsync();
             return Response<NoContent>.Success(204);
         }
