@@ -1,6 +1,7 @@
 ﻿using Apposite.Application.Dto.Ai;
 using Apposite.Application.Mapping;
 using Apposite.Application.Queries.Ai;
+using Apposite.Application.ServiceExtensions;
 using Apposite.Application.Services.TokenService;
 using Apposite.Core.Dtos;
 using Apposite.Core.Pagination;
@@ -28,11 +29,11 @@ namespace Apposite.Application.Handlers.Ai
         {
             var userId = _tokenService.GetUserId();
             Expression<Func<AiRecipe, bool>> condition = x => x.UserId == userId;
+            PaginationFilter paginationFilter = new PaginationFilter(request.Page, request.PageSize);
             var recipes = _dbContext.AiRecipes
                 .Where(condition)
                 .OrderBy(x => x.CreatedAt)
-                .Skip((request.Page - 1) * request.PageSize)
-                .Take(request.PageSize)
+                .ApplyPaginationQueryable(paginationFilter)
                 .Include(x => x.AiInstructions)
                 .Include(x => x.AiIngredients)
                 .ToList();
@@ -45,19 +46,19 @@ namespace Apposite.Application.Handlers.Ai
                 TotalRecords = _dbContext.AiRecipes.Where(condition).Count()
             };
 
-            return Response<List<GetAiRecipeDto>>.Success(200,response, pager);
-            
+            return Response<List<GetAiRecipeDto>>.Success(200, response, pager);
+
         }
 
         public async Task<Response<List<GetAiRecipeDto>>> Handle(GetPublicAiRecipesQuery request, CancellationToken cancellationToken)
         {
             var userId = _tokenService.GetUserId();
             Expression<Func<AiRecipe, bool>> condition = x => x.UserId != userId && x.IsPublic;
+            PaginationFilter paginationFilter = new PaginationFilter(request.Page, request.PageSize);
             var recipes = _dbContext.AiRecipes
                 .Where(condition)
                 .OrderBy(x => x.CreatedAt)
-                .Skip((request.Page - 1) * request.PageSize)
-                .Take(request.PageSize)
+                .ApplyPaginationQueryable(paginationFilter)
                 .Include(x => x.AiInstructions)
                 .Include(x => x.AiIngredients)
                 .ToList();

@@ -45,15 +45,15 @@ namespace Apposite.Application.Handlers.Recipe
                 var step = ObjectMapper.Mapper.Map<RecipeStep>(recipeStep);
                 step.RecipeId = recipe.Id;
                 _dbContext.RecipeSteps.Add(step);
-                foreach (var mediaFile in recipeStep.MediaFiles)
-                {
-                    var recipeStepMediaFile = new RecipeStepMediaFile
-                    {
-                        RecipeStepId = step.Id,
-                        MediaFileId = mediaFile
-                    };
-                    _dbContext.RecipeStepMediaFiles.Add(recipeStepMediaFile);
-                }
+                //foreach (var mediaFile in recipeStep.MediaFiles)
+                //{
+                //    var recipeStepMediaFile = new RecipeStepMediaFile
+                //    {
+                //        RecipeStepId = step.Id,
+                //        MediaFileId = mediaFile
+                //    };
+                //    _dbContext.RecipeStepMediaFiles.Add(recipeStepMediaFile);
+                //}
             }
 
             // Recipe Ingredients
