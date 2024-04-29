@@ -49,6 +49,13 @@ namespace Apposite.Api.Controllers
             var response = await _mediator.Send(query);
             return CreateActionResultInstance(response);
         }
+        
+        [HttpGet("getMyRecipes")]
+        public async Task<IActionResult> GetMyRecipes([FromQuery] GetMyRecipesQuery query)
+        {
+            var response = await _mediator.Send(query);
+            return CreateActionResultInstance(response);
+        }
 
 
     }
