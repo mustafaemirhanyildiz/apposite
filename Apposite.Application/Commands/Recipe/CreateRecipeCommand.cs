@@ -6,7 +6,7 @@ namespace Apposite.Application.Commands.Recipe
 {
     public class CreateRecipeCommand : IRequest<Response<NoContent>>
     {
-        public Guid CoverPhotoId { get; set; }
+        public Guid? CoverPhotoId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public double PreparationTime { get; set; }
