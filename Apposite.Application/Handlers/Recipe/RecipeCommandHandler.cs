@@ -39,30 +39,7 @@ namespace Apposite.Application.Handlers.Recipe
             recipe.UserId = userId;
             await _dbContext.Recipes.AddAsync(recipe, cancellationToken);
 
-            // Recipe Steps
-            foreach (var recipeStep in request.RecipeSteps)
-            {
-                var step = ObjectMapper.Mapper.Map<RecipeStep>(recipeStep);
-                step.RecipeId = recipe.Id;
-                _dbContext.RecipeSteps.Add(step);
-                //foreach (var mediaFile in recipeStep.MediaFiles)
-                //{
-                //    var recipeStepMediaFile = new RecipeStepMediaFile
-                //    {
-                //        RecipeStepId = step.Id,
-                //        MediaFileId = mediaFile
-                //    };
-                //    _dbContext.RecipeStepMediaFiles.Add(recipeStepMediaFile);
-                //}
-            }
 
-            // Recipe Ingredients
-            foreach (var recipeIngredient in request.RecipeIngredients)
-            {
-                var ingredient = ObjectMapper.Mapper.Map<RecipeIngredient>(recipeIngredient);
-                ingredient.RecipeId = recipe.Id;
-                _dbContext.RecipeIngredients.Add(ingredient);
-            }
 
             await _dbContext.SaveChangesAsync(cancellationToken);
             return Response<NoContent>.Success(204);
