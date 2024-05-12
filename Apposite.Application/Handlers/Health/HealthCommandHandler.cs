@@ -7,13 +7,16 @@ using Microsoft.EntityFrameworkCore;
 using Apposite.Application.Mapping;
 using Apposite.Application.Services.HealthService;
 using Apposite.Application.Dto.ElasticSearch.Health;
+using Apposite.Application.Commands.Ingredient;
+using Apposite.Application.Dto.ElasticSearch.Ingredient;
 
 namespace Apposite.Application.Handlers.Health
 {
     public class HealthCommandHandler : IRequestHandler<CreateHealthCommand, Response<NoContent>>,
                                             IRequestHandler<CreateHealthBulkCommand, Response<NoContent>>,
                                             IRequestHandler<UpdateHealthCommand, Response<NoContent>>,
-                                            IRequestHandler<DeleteHealthCommand, Response<NoContent>>
+                                            IRequestHandler<DeleteHealthCommand, Response<NoContent>>,
+                                            IRequestHandler<SyncHealthCommand, Response<NoContent>>
     {
 
         private readonly AppositeDbContext _dbContext;
@@ -69,6 +72,14 @@ namespace Apposite.Application.Handlers.Health
             _dbContext.Healths.Remove(health);
             await _dbContext.SaveChangesAsync();
             return Response<NoContent>.Success(204);
+        }
+
+        public async Task<Response<NoContent>> Handle(SyncHealthCommand request, CancellationToken cancellationToken)
+        {
+            var healths = await _dbContext.Healths.ToListAsync(cancellationToken);
+            await _healthService.SyncHealthsAsync(ObjectMapper.Mapper.Map<List<CreateElasticHealthDto>>(healths));
+            return Response<NoContent>.Success(204);
+
         }
     }
 }

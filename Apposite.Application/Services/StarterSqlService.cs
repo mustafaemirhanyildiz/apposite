@@ -36,24 +36,17 @@ namespace Apposite.Application.Services
             var elasticClient = scope.ServiceProvider.GetRequiredService<IElasticClient>();
             var _elasticSettings = scope.ServiceProvider.GetRequiredService<IOptions<ElasticSettings>>().Value;
 
-            if ((await elasticClient.SearchAsync<CuisinePreferenceDto>(s => s.Index(_elasticSettings.CuisinePreferenceIndex).Size(1))).Total == 0)
-            {
                 var cuisines = dbContext.CuisinePreferences.ToList();
                 var cuisinesDto = ObjectMapper.Mapper.Map<List<CreateElasticCuisinePreferenceDto>>(cuisines);
-                await cuisinePreferenceService.CreateCuisinePreferenceBulkAsync(cuisinesDto);
-            }
-            if ((await elasticClient.SearchAsync<HealthDto>(s => s.Index(_elasticSettings.HealthIndex).Size(1))).Total == 0)
-            {
+                await cuisinePreferenceService.SyncCuisinePreferencesAsync(cuisinesDto);
+
                 var healths = dbContext.Healths.ToList();
                 var healthsDto = ObjectMapper.Mapper.Map<List<CreateElasticHealthDto>>(healths);
-                await healthService.CreateHealthBulkAsync(healthsDto);
-            }
-            if ((await elasticClient.SearchAsync<IngredientDto>(s => s.Index(_elasticSettings.IngredientIndex).Size(1))).Total == 0)
-            {
+                await healthService.SyncHealthsAsync(healthsDto);
+
                 var ingredients = dbContext.Ingredients.Include(x => x.MediaFile).ToList();
                 var ingredientsDto = ObjectMapper.Mapper.Map<List<CreateElasticIngredientDto>>(ingredients);
-                await ingredientService.CreateIngredientBulkAsync(ingredientsDto);
-            }
+                await ingredientService.SyncIngredientsAsync(ingredientsDto);
         }
     }
 }

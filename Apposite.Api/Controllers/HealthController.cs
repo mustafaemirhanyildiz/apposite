@@ -1,4 +1,5 @@
 ﻿using Apposite.Application.Commands.Health;
+using Apposite.Application.Commands.Ingredient;
 using Apposite.Application.Queries.Health;
 using Apposite.Core.ControllerBases;
 using MediatR;
@@ -51,6 +52,13 @@ namespace Apposite.Api.Controllers
         public async Task<IActionResult> Get([FromQuery] GetHealthQuery query)
         {
             var response = await _mediator.Send(query);
+            return CreateActionResultInstance(response);
+        }
+
+        [HttpPost("sync")]
+        public async Task<IActionResult> Sync()
+        {
+            var response = await _mediator.Send(new SyncHealthCommand());
             return CreateActionResultInstance(response);
         }
     }

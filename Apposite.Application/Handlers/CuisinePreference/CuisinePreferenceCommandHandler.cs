@@ -1,6 +1,8 @@
 ﻿
 using Apposite.Application.Commands.CuisinePreference;
+using Apposite.Application.Commands.Ingredient;
 using Apposite.Application.Dto.ElasticSearch.CuisinePreference;
+using Apposite.Application.Dto.ElasticSearch.Ingredient;
 using Apposite.Application.Mapping;
 using Apposite.Application.Services;
 using Apposite.Application.Services.CuisinePreferenceService;
@@ -14,7 +16,8 @@ namespace Apposite.Application.Handlers.CuisinePreference
     public class CuisinePreferenceCommandHandler : IRequestHandler<CreateCuisinePreferenceCommand, Response<NoContent>>,
                                             IRequestHandler<CreateCuisinePreferenceBulkCommand, Response<NoContent>>,
                                             IRequestHandler<UpdateCuisinePreferenceCommand, Response<NoContent>>,
-                                            IRequestHandler<DeleteCuisinePreferenceCommand, Response<NoContent>>
+                                            IRequestHandler<DeleteCuisinePreferenceCommand, Response<NoContent>>,
+                                            IRequestHandler<SyncCuisineCommand, Response<NoContent>>
     {
 
         private readonly AppositeDbContext _dbContext;
@@ -72,6 +75,14 @@ namespace Apposite.Application.Handlers.CuisinePreference
             _dbContext.CuisinePreferences.Remove(cuisinePreference);
             await _dbContext.SaveChangesAsync();
             return Response<NoContent>.Success(204);
+        }
+
+        public async Task<Response<NoContent>> Handle(SyncCuisineCommand request, CancellationToken cancellationToken)
+        {
+            var cuisines = await _dbContext.CuisinePreferences.ToListAsync(cancellationToken);
+            await _cuisinePreferenceService.SyncCuisinePreferencesAsync(ObjectMapper.Mapper.Map<List<CreateElasticCuisinePreferenceDto>>(cuisines));
+            return Response<NoContent>.Success(204);
+
         }
     }
 }

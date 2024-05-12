@@ -1,4 +1,5 @@
 ﻿using Apposite.Application.Commands.CuisinePreference;
+using Apposite.Application.Commands.Ingredient;
 using Apposite.Application.Queries.CuisinePreference;
 using Apposite.Core.ControllerBases;
 using MediatR;
@@ -52,6 +53,13 @@ namespace Apposite.Api.Controllers
         public async Task<IActionResult> Get([FromQuery] GetCuisinePreferencesQuery query)
         {
             var response = await _mediator.Send(query);
+            return CreateActionResultInstance(response);
+        }
+
+        [HttpPost("sync")]
+        public async Task<IActionResult> Sync()
+        {
+            var response = await _mediator.Send(new SyncCuisineCommand());
             return CreateActionResultInstance(response);
         }
     }
