@@ -23,7 +23,8 @@ using System.Threading.Tasks;
 namespace Apposite.Application.Handlers.Recipe
 {
     public class RecipeQueryHandler : IRequestHandler<GetRecipesQuery, Response<List<RecipeDto>>>,
-                                      IRequestHandler<GetMyRecipesQuery, Response<List<RecipeDto>>>
+                                      IRequestHandler<GetMyRecipesQuery, Response<List<RecipeDto>>>,
+                                      IRequestHandler<GetByIdRecipeQuery, Response<RecipeDto>>
                                        
     {
         private readonly AppositeDbContext _dbContext;
@@ -98,5 +99,34 @@ namespace Apposite.Application.Handlers.Recipe
 
             return Response<List<RecipeDto>>.Success(200, recipesDto, pager);
         }
+
+        public async Task<Response<RecipeDto>> Handle(GetByIdRecipeQuery request, CancellationToken cancellationToken)
+        {
+            var userId = _tokenService.GetUserId();
+            var user = _dbContext.Users.FirstOrDefault(x => x.Id == userId);
+            if (user == null)
+                return Response<RecipeDto>.Fail(404, "User not found");
+
+            var recipe = _dbContext.Recipes
+                .Where(x => x.Id == request.Id)
+                .Include(x => x.User)
+                .Include(x => x.CuisinePreference)
+                .Include(x => x.RecipeSteps)
+                .Include(x => x.MediaFile)
+                .Include(x => x.RecipeIngredients)
+                    .ThenInclude(x => x.Ingredient)
+                        .ThenInclude(x => x.MediaFile)
+                .FirstOrDefault();
+
+            if (recipe == null)
+                return Response<RecipeDto>.Fail(404);
+
+            var recipeDto = ObjectMapper.Mapper.Map<RecipeDto>(recipe);
+
+
+
+            return Response<RecipeDto>.Success(200, recipeDto);
+        }
+
     }
 }

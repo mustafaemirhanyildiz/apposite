@@ -49,7 +49,14 @@ namespace Apposite.Api.Controllers
             var response = await _mediator.Send(query);
             return CreateActionResultInstance(response);
         }
-        
+
+        [HttpGet("getById/{id}")]
+        public async Task<IActionResult> GetById([FromRoute] Guid id)
+        {
+            var response = await _mediator.Send(new GetByIdRecipeQuery() { Id = id});
+            return CreateActionResultInstance(response);
+        }
+
         [HttpGet("getMyRecipes")]
         public async Task<IActionResult> GetMyRecipes([FromQuery] GetMyRecipesQuery query)
         {
