@@ -40,8 +40,7 @@ services:
   apposite-fastapi-app:
     image: "tahamuslu/intelligrade-python-ai:latest"
     container_name: apposite-fastapi-app
-    env_file:
-      - path: .env
+    env_file: .env
     environment:
       OPENAI_API_KEY: ${OPENAI_API_KEY}
       GOOGLE_AI_API_KEY: ${GOOGLE_AI_API_KEY}
