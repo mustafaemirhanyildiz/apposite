@@ -1,9 +1,8 @@
 {
-  "aliases": {},
   "settings": {
     "index": {
-      "number_of_shards": "1",
-      "number_of_replicas": "1",
+      "number_of_shards": 1,
+      "number_of_replicas": 1,
       "analysis": {
         "filter": {
           "turkish_lowercase_filter": {
@@ -16,41 +15,25 @@
           },
           "turkish_asciifolding_filter": {
             "type": "asciifolding",
-            "preserve_original": "true"
+            "preserve_original": true
           },
           "turkish_stopword_filter": {
             "type": "stop",
             "stopwords": "_turkish_"
           },
-
-          "turkish_ngram_filter": {
-            "type": "ngram",
-            "min_gram": 3,
-            "max_gram": 4
+          "turkish_edge_ngram_filter": {
+            "type": "edge_ngram",
+            "min_gram": 2,
+            "max_gram": 10
           }
         },
         "analyzer": {
-          "turkish_analyser_with_steeem": {
-            "filter": [
-              "lowercase",
-              "turkish_lowercase_filter",
-              "turkish_asciifolding_filter",
-              "turkish_stemmer"
-            ],
-            "char_filter": [
-              "remove_special_chars",
-              "number_char_filter"
-            ],
-            "type": "custom",
-            "tokenizer": "standard"
-          },
           "turkish_search_analyser": {
             "filter": [
               "lowercase",
               "turkish_lowercase_filter",
               "turkish_asciifolding_filter",
-              "turkish_stemmer",
-              "turkish_ngram_filter"
+              "turkish_edge_ngram_filter"
             ],
             "char_filter": [
               "remove_special_chars",
@@ -58,19 +41,6 @@
             ],
             "type": "custom",
             "tokenizer": "standard"
-          },
-          "only_turkish_analyser": {
-            "filter": [
-              "lowercase",
-              "turkish_lowercase_filter",
-              "turkish_asciifolding_filter"
-            ],
-            "char_filter": [
-              "remove_special_chars",
-              "number_char_filter"
-            ],
-            "type": "custom",
-            "tokenizer": "keyword"
           }
         },
         "char_filter": {

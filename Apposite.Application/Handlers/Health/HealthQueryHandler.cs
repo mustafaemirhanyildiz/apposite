@@ -35,7 +35,6 @@ namespace Apposite.Application.Handlers.Health
                      .MultiMatch(m => m
                                 .Fields(f => f
                                     .Field(ff => ff.Name)
-                                    .Field(ff => ff.Description)
                                 )
                                 .Query(request.SearchText)
                                 .Analyzer("turkish_search_analyser")
@@ -45,13 +44,16 @@ namespace Apposite.Application.Handlers.Health
                 .Size(filter.PageSize)
             );
 
-            var healthDto = searchResponse.Documents.ToList();
+            var healthDto = searchResponse.Documents
+                .GroupBy(i => i.Name.ToLowerInvariant())
+                .Select(g => g.First())
+                .ToList();
 
             Pager pager = new Pager()
             {
                 PageNumber = filter.PageNumber,
                 PageSize = filter.PageSize,
-                TotalRecords = searchResponse.Total
+                TotalRecords = healthDto.Count
             };
 
 

@@ -32,33 +32,35 @@ namespace Apposite.Application.Handlers.Ingredient
 
         public async Task<Response<List<IngredientDto>>> Handle(GetIngredientsQuery request, CancellationToken cancellationToken)
         {
-                PaginationFilter filter = new PaginationFilter(request.Page, request.PageSize);
-                var searchResponse = await _elasticClient.SearchAsync<IngredientDto>(s => s
-                    .Index(_elasticSettings.IngredientIndex)
-                    .Query(q => q
-                         .MultiMatch(m => m
-                                    .Fields(f => f
-                                        .Field(ff => ff.Name)
-                                        .Field(ff => ff.Description)
-                                    )
-                                    .Query(request.SearchText)
-                                    .Analyzer("turkish_search_analyser")
+            PaginationFilter filter = new PaginationFilter(request.Page, request.PageSize);
+            var searchResponse = await _elasticClient.SearchAsync<IngredientDto>(s => s
+                .Index(_elasticSettings.IngredientIndex)
+                .Query(q => q
+                     .MultiMatch(m => m
+                                .Fields(f => f
+                                    .Field(ff => ff.Name)
                                 )
-                    )
-                    .From(filter.PageNumber-1)
-                    .Size(filter.PageSize)
-                );
+                                .Query(request.SearchText)
+                                .Analyzer("turkish_search_analyser")
+                            )
+                )
+                .From(filter.PageNumber - 1)
+                .Size(filter.PageSize)
+            );
 
-                var ingredientDto = searchResponse.Documents.ToList();
+            var ingredientDto = searchResponse.Documents
+                .GroupBy(i => i.Name.ToLowerInvariant())
+                .Select(g => g.First())
+                .ToList();
 
-                Pager pager = new Pager(){
-                    PageNumber = filter.PageNumber,
-                    PageSize = filter.PageSize,
-                    TotalRecords = searchResponse.Total 
-                };
-                
+            Pager pager = new Pager()
+            {
+                PageNumber = filter.PageNumber,
+                PageSize = filter.PageSize,
+                TotalRecords = ingredientDto.Count 
+            };
 
-                return Response<List<IngredientDto>>.Success(200,ingredientDto,pager);
+            return Response<List<IngredientDto>>.Success(200, ingredientDto, pager);
         }
     }
 }

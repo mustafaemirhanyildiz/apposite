@@ -38,7 +38,6 @@ namespace Apposite.Application.Handlers.CuisinePreference
                      .MultiMatch(m => m
                                 .Fields(f => f
                                     .Field(ff => ff.Name)
-                                    .Field(ff => ff.Description)
                                 )
                                 .Query(request.SearchText)
                                 .Analyzer("turkish_search_analyser")
@@ -48,13 +47,16 @@ namespace Apposite.Application.Handlers.CuisinePreference
                 .Size(filter.PageSize)
             );
 
-            var cuisinePreferenceDtos = searchResponse.Documents.ToList();
+            var cuisinePreferenceDtos =  searchResponse.Documents
+                .GroupBy(i => i.Name.ToLowerInvariant())
+                .Select(g => g.First())
+                .ToList();
 
             Pager pager = new Pager()
             {
                 PageNumber = filter.PageNumber,
                 PageSize = filter.PageSize,
-                TotalRecords = searchResponse.Total
+                TotalRecords = cuisinePreferenceDtos.Count
             };
 
 
