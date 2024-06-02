@@ -80,14 +80,14 @@ namespace Apposite.Application.Handlers.Ai
 
         public async Task<Response<GetAiRecipeDto>> Handle(GetAiRecipeByIdQuery request, CancellationToken cancellationToken)
         {
-            var recipes = _dbContext.AiRecipes
+            var recipe = _dbContext.AiRecipes
                 .Where(recipe => recipe.Id == request.Id)
                 .OrderBy(x => x.CreatedAt)
                 .Include(x => x.AiInstructions)
                 .Include(x => x.AiIngredients)
-                .ToList();
+                .FirstOrDefault();
 
-            var response = ObjectMapper.Mapper.Map<GetAiRecipeDto>(recipes);
+            var response = ObjectMapper.Mapper.Map<GetAiRecipeDto>(recipe);
 
 
             return Response<GetAiRecipeDto>.Success(200, response);
