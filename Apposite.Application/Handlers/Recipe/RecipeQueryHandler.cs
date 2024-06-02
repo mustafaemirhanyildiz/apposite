@@ -42,7 +42,7 @@ namespace Apposite.Application.Handlers.Recipe
         {
             PaginationFilter filter = new PaginationFilter(request.Page, request.PageSize);
             var recipes = _dbContext.Recipes
-                .Where(x => x.Title.Contains(request.SearchText) || x.Description.Contains(request.SearchText))
+                .Where(x => x.Title.ToLower().Contains(request.SearchText.ToLower()) || x.Description.ToLower().Contains(request.SearchText.ToLower()))
                 .Include(x => x.User)
                 .Include(x => x.CuisinePreference)
                 .Include(x => x.RecipeSteps)
@@ -59,7 +59,7 @@ namespace Apposite.Application.Handlers.Recipe
             {
                 PageNumber = filter.PageNumber,
                 PageSize = filter.PageSize,
-                TotalRecords = _dbContext.Recipes.Where(x => x.Title.Contains(request.SearchText) || x.Description.Contains(request.SearchText)).Count()
+                TotalRecords = _dbContext.Recipes.Where(x => x.Title.ToLower().Contains(request.SearchText.ToLower()) || x.Description.ToLower().Contains(request.SearchText.ToLower())).Count()
             };
 
 
