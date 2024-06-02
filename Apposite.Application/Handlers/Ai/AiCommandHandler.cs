@@ -61,7 +61,7 @@ namespace Apposite.Application.Handlers.Ai
             var oldRecipes = _dbContext.AiRecipes.Where(x => x.UserId == userId).Select(x => x.Name).ToList();
 
             var client = new HttpClient();
-            var request_Api = new HttpRequestMessage(HttpMethod.Post, _aiUrl + "/createRecipe");
+            var request_Api = new HttpRequestMessage(HttpMethod.Post, _aiUrl + "/createRecipeWithGpt");
             CreateAiRecipeFastApiDto json_data = ObjectMapper.Mapper.Map<CreateAiRecipeFastApiDto>(request);
             json_data.OldRecipes = oldRecipes;
             request_Api.Content = new StringContent(JsonConvert.SerializeObject(json_data), Encoding.UTF8, "application/json");
