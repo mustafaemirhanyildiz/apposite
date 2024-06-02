@@ -76,7 +76,7 @@ namespace Apposite.Application.Handlers.Recipe
 
             PaginationFilter filter = new PaginationFilter(request.Page, request.PageSize);
             var recipes = _dbContext.Recipes
-                .Where(x => x.Title.Contains(request.SearchText) || x.Description.Contains(request.SearchText) && x.UserId == userId)
+                .Where(x => (x.Title.Contains(request.SearchText) || x.Description.Contains(request.SearchText)) && x.UserId == userId)
                 .Include(x => x.User)
                 .Include(x => x.CuisinePreference)
                 .Include(x => x.RecipeSteps)
