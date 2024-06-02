@@ -8,9 +8,15 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="starter.sql" />
+    <None Remove="starter2.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="starter.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="starter2.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
