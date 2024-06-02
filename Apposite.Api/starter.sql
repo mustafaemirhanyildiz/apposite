@@ -1,5 +1,27 @@
 ﻿CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 insert into public."MediaFiles" ("Id", "FileName", "FileType", "MediaName", "IsDeleted", "UpdatedAt", "CreatedAt") values ('7aa5b730-3340-49cb-89f4-462b4233a5ff', '079ae404-2049-4a7f-a64a-c1f468d950d0.png', 1, 'Food Image', false, null, '2023-07-19 09:46:57');
+insert into public."MediaFiles" ("Id", "FileName", "FileType", "MediaName", "IsDeleted", "UpdatedAt", "CreatedAt") values ('09f1e141-1fdf-4598-9e83-e931a46338d3', '09f1e141-1fdf-4598-9e83-e931a46338d3.png', 1, 'butterChicken', false, null, '2023-07-19 09:46:57');
+insert into public."MediaFiles" ("Id", "FileName", "FileType", "MediaName", "IsDeleted", "UpdatedAt", "CreatedAt") values ('8c0255ed-d2bb-4c13-85da-201b76c7eac0', '8c0255ed-d2bb-4c13-85da-201b76c7eac0.png', 1, 'chana_masala', false, null, '2023-07-19 09:46:57');
+insert into public."MediaFiles" ("Id", "FileName", "FileType", "MediaName", "IsDeleted", "UpdatedAt", "CreatedAt") values ('eaeb35aa-7226-4e67-b89f-f82527596c28', 'eaeb35aa-7226-4e67-b89f-f82527596c28.png', 1, 'cheeseburger', false, null, '2023-07-19 09:46:57');
+insert into public."MediaFiles" ("Id", "FileName", "FileType", "MediaName", "IsDeleted", "UpdatedAt", "CreatedAt") values ('f469a545-6b63-4411-a814-50e7b65f8c80', 'f469a545-6b63-4411-a814-50e7b65f8c80.png', 1, 'classic-moussaka', false, null, '2023-07-19 09:46:57');
+insert into public."MediaFiles" ("Id", "FileName", "FileType", "MediaName", "IsDeleted", "UpdatedAt", "CreatedAt") values ('4a64fe85-d945-4f50-a63e-eff2f884f7d0', '4a64fe85-d945-4f50-a63e-eff2f884f7d0.png', 1, 'enchilada', false, null, '2023-07-19 09:46:57');
+insert into public."MediaFiles" ("Id", "FileName", "FileType", "MediaName", "IsDeleted", "UpdatedAt", "CreatedAt") values ('6afcf470-1726-47c4-a45e-4d1b066fc10b', '6afcf470-1726-47c4-a45e-4d1b066fc10b.png', 1, 'gazpacho', false, null, '2023-07-19 09:46:57');
+insert into public."MediaFiles" ("Id", "FileName", "FileType", "MediaName", "IsDeleted", "UpdatedAt", "CreatedAt") values ('340f8448-deaf-4d32-b473-1dd569ffa26e', '340f8448-deaf-4d32-b473-1dd569ffa26e.png', 1, 'greek salad', false, null, '2023-07-19 09:46:57');
+insert into public."MediaFiles" ("Id", "FileName", "FileType", "MediaName", "IsDeleted", "UpdatedAt", "CreatedAt") values ('ecda0466-1682-4588-97f7-d41cd10d4f58', 'ecda0466-1682-4588-97f7-d41cd10d4f58.png', 1, 'guacamole', false, null, '2023-07-19 09:46:57');
+insert into public."MediaFiles" ("Id", "FileName", "FileType", "MediaName", "IsDeleted", "UpdatedAt", "CreatedAt") values ('596a7547-96f5-44a0-b02a-c1818485367d', '596a7547-96f5-44a0-b02a-c1818485367d.png', 1, 'kung pao tavuk', false, null, '2023-07-19 09:46:57');
+insert into public."MediaFiles" ("Id", "FileName", "FileType", "MediaName", "IsDeleted", "UpdatedAt", "CreatedAt") values ('66e00893-13fe-48b3-a685-9a68d4e8e803', '66e00893-13fe-48b3-a685-9a68d4e8e803.png', 1, 'kuru fasulye', false, null, '2023-07-19 09:46:57');
+insert into public."MediaFiles" ("Id", "FileName", "FileType", "MediaName", "IsDeleted", "UpdatedAt", "CreatedAt") values ('995661bd-743f-4576-b9e2-72b1494f499c', '995661bd-743f-4576-b9e2-72b1494f499c.png', 1, 'mac and cheese', false, null, '2023-07-19 09:46:57');
+insert into public."MediaFiles" ("Id", "FileName", "FileType", "MediaName", "IsDeleted", "UpdatedAt", "CreatedAt") values ('3a628c8b-a7b3-4e8c-8da7-db4bf9947a2b', '3a628c8b-a7b3-4e8c-8da7-db4bf9947a2b.png', 1, 'mercimek çorbası', false, null, '2023-07-19 09:46:57');
+insert into public."MediaFiles" ("Id", "FileName", "FileType", "MediaName", "IsDeleted", "UpdatedAt", "CreatedAt") values ('1d69abaf-c448-4ef0-8ecb-6206fdd08f19', '1d69abaf-c448-4ef0-8ecb-6206fdd08f19.png', 1, 'minestrone çorbası', false, null, '2023-07-19 09:46:57');
+insert into public."MediaFiles" ("Id", "FileName", "FileType", "MediaName", "IsDeleted", "UpdatedAt", "CreatedAt") values ('f3d1f484-a43e-484e-898d-74c3adb6ac62', 'f3d1f484-a43e-484e-898d-74c3adb6ac62.png', 1, 'pesto soslu makarna', false, null, '2023-07-19 09:46:57');
+insert into public."MediaFiles" ("Id", "FileName", "FileType", "MediaName", "IsDeleted", "UpdatedAt", "CreatedAt") values ('bd523293-389a-48d4-bd34-475f5761711c', 'bd523293-389a-48d4-bd34-475f5761711c.png', 1, 'quiche loraraine', false, null, '2023-07-19 09:46:57');
+insert into public."MediaFiles" ("Id", "FileName", "FileType", "MediaName", "IsDeleted", "UpdatedAt", "CreatedAt") values ('54996c78-3024-4c9e-b280-4e20231b3e16', '54996c78-3024-4c9e-b280-4e20231b3e16.png', 1, 'ratatoullie', false, null, '2023-07-19 09:46:57');
+insert into public."MediaFiles" ("Id", "FileName", "FileType", "MediaName", "IsDeleted", "UpdatedAt", "CreatedAt") values ('01c42a3b-9e84-4099-a6e5-639fc84a0bdf', '01c42a3b-9e84-4099-a6e5-639fc84a0bdf.png', 1, 'risotto', false, null, '2023-07-19 09:46:57');
+insert into public."MediaFiles" ("Id", "FileName", "FileType", "MediaName", "IsDeleted", "UpdatedAt", "CreatedAt") values ('48095290-edd0-45d4-834d-e7c50038ff3f', '48095290-edd0-45d4-834d-e7c50038ff3f.png', 1, 'sphagetti carbonara', false, null, '2023-07-19 09:46:57');
+insert into public."MediaFiles" ("Id", "FileName", "FileType", "MediaName", "IsDeleted", "UpdatedAt", "CreatedAt") values ('797595b1-ea24-4fb9-a3cb-a9695bf3b1f9', '797595b1-ea24-4fb9-a3cb-a9695bf3b1f9.png', 1, 'suchi', false, null, '2023-07-19 09:46:57');
+insert into public."MediaFiles" ("Id", "FileName", "FileType", "MediaName", "IsDeleted", "UpdatedAt", "CreatedAt") values ('479e2d14-f245-4203-b997-b67d4f036b41', '479e2d14-f245-4203-b997-b67d4f036b41.png', 1, 'tavuk taco', false, null, '2023-07-19 09:46:57');
+insert into public."MediaFiles" ("Id", "FileName", "FileType", "MediaName", "IsDeleted", "UpdatedAt", "CreatedAt") values ('d12a6515-266b-48dd-892c-82d6bbaf547f', 'd12a6515-266b-48dd-892c-82d6bbaf547f.png', 1, 'tempura', false, null, '2023-07-19 09:46:57');
+insert into public."MediaFiles" ("Id", "FileName", "FileType", "MediaName", "IsDeleted", "UpdatedAt", "CreatedAt") values ('1e720819-5f2e-436e-a593-e75648fd353b', '1e720819-5f2e-436e-a593-e75648fd353b.png', 1, 'tikka masala tavuk', false, null, '2023-07-19 09:46:57');
 
 insert into public."Healths" ("Id", "Name", "Description", "CreatedAt", "UpdatedAt", "IsDeleted") values (uuid_generate_v4(), 'Diyabet', 'Kan şekerini düzenlemek için gereken özel diyet ve ilaç tedavisi.', '2024-06-02 14:30:00', null, false);
 insert into public."Healths" ("Id", "Name", "Description", "CreatedAt", "UpdatedAt", "IsDeleted") values (uuid_generate_v4(), 'Çölyak', 'Gluten içeren yiyeceklerden kaçınmayı gerektiren otomatik bağışıklık hastalığı.', '2024-06-02 14:30:00', null, false);
@@ -41,7 +63,7 @@ values (uuid_generate_v4(), 'Tuz', 'İnce öğütülmüş deniz tuzu.', '2024-06
 
 -- Recipe
 insert into public."Recipes" ("Id", "Title", "Description", "IsDeleted", "UpdatedAt", "CreatedAt", "PreparationTime", "Calories", "MediaFileId", "CuisinePreferenceId", "UserId") 
-values (uuid_generate_v4(), 'Guacamole', 'Olgun avokado, limon suyu, kırmızı soğan, taze kişniş, jalapeno biberi ve domates ile yapılan Meksika sosu.', false, null, '2024-06-02 14:45:00', 15, 200, '7aa5b730-3340-49cb-89f4-462b4233a5ff', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'Meksika Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
+values (uuid_generate_v4(), 'Guacamole', 'Olgun avokado, limon suyu, kırmızı soğan, taze kişniş, jalapeno biberi ve domates ile yapılan Meksika sosu.', false, null, '2024-06-02 14:45:00', 15, 200, 'ecda0466-1682-4588-97f7-d41cd10d4f58', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'Meksika Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
 
 -- Recipe Ingredients
 insert into public."RecipeIngredients" ("Id", "QuantityType", "Quantity", "CreatedAt", "UpdatedAt", "IsDeleted", "RecipeId", "IngredientId") 
@@ -113,7 +135,7 @@ values (uuid_generate_v4(), 'Su', 'Kaynar su.', '2024-06-02 14:50:00', null, fal
 
 -- Recipe
 insert into public."Recipes" ("Id", "Title", "Description", "IsDeleted", "UpdatedAt", "CreatedAt", "PreparationTime", "Calories", "MediaFileId", "CuisinePreferenceId", "UserId") 
-values (uuid_generate_v4(), 'Mercimek Çorbası', 'Kırmızı mercimek, soğan, havuç ve zeytinyağı ile yapılan geleneksel Türk çorbası.', false, null, '2024-06-02 14:50:00', 45, 250, '7aa5b730-3340-49cb-89f4-462b4233a5ff', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'Türk Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
+values (uuid_generate_v4(), 'Mercimek Çorbası', 'Kırmızı mercimek, soğan, havuç ve zeytinyağı ile yapılan geleneksel Türk çorbası.', false, null, '2024-06-02 14:50:00', 45, 250, '3a628c8b-a7b3-4e8c-8da7-db4bf9947a2b', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'Türk Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
 
 -- Recipe Ingredients
 insert into public."RecipeIngredients" ("Id", "QuantityType", "Quantity", "CreatedAt", "UpdatedAt", "IsDeleted", "RecipeId", "IngredientId") 
@@ -195,7 +217,7 @@ values (uuid_generate_v4(), 'Kimyon', 'Yoğun aromalı ve hafif acı bir baharat
 
 -- Recipe
 insert into public."Recipes" ("Id", "Title", "Description", "IsDeleted", "UpdatedAt", "CreatedAt", "PreparationTime", "Calories", "MediaFileId", "CuisinePreferenceId", "UserId") 
-values (uuid_generate_v4(), 'Tavuk Tikka Masala', 'Tavuk göğsü, yoğurt ve baharatlarla yapılan Hint yemeği.', false, null, '2024-06-02 15:00:00', 60, 450, '7aa5b730-3340-49cb-89f4-462b4233a5ff', 
+values (uuid_generate_v4(), 'Tavuk Tikka Masala', 'Tavuk göğsü, yoğurt ve baharatlarla yapılan Hint yemeği.', false, null, '2024-06-02 15:00:00', 60, 450, '1e720819-5f2e-436e-a593-e75648fd353b', 
 (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'Hint Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
 
 -- Recipe Ingredients
@@ -267,7 +289,7 @@ values (uuid_generate_v4(), 'Sirke', 'İspanyol sherry sirkesi.', '2024-06-02 15
 
 -- Recipe
 insert into public."Recipes" ("Id", "Title", "Description", "IsDeleted", "UpdatedAt", "CreatedAt", "PreparationTime", "Calories", "MediaFileId", "CuisinePreferenceId", "UserId") 
-values (uuid_generate_v4(), 'Gazpacho', 'Olgun domates, taze salatalık, tatlı kırmızı biber ve aromatik sarımsak ile hazırlanan soğuk İspanyol çorbası.', false, null, '2024-06-02 15:05:00', 20, 150, '7aa5b730-3340-49cb-89f4-462b4233a5ff', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'İspanyol Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
+values (uuid_generate_v4(), 'Gazpacho', 'Olgun domates, taze salatalık, tatlı kırmızı biber ve aromatik sarımsak ile hazırlanan soğuk İspanyol çorbası.', false, null, '2024-06-02 15:05:00', 20, 150, '6afcf470-1726-47c4-a45e-4d1b066fc10b', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'İspanyol Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
 
 -- Recipe Ingredients
 insert into public."RecipeIngredients" ("Id", "QuantityType", "Quantity", "CreatedAt", "UpdatedAt", "IsDeleted", "RecipeId", "IngredientId") 
@@ -332,7 +354,7 @@ values (uuid_generate_v4(), 'Biberiye', 'Taze biberiye dalları.', '2024-06-02 1
 
 -- Recipe (Tarif) - Ratatouille
 insert into public."Recipes" ("Id", "Title", "Description", "IsDeleted", "UpdatedAt", "CreatedAt", "PreparationTime", "Calories", "MediaFileId", "CuisinePreferenceId", "UserId") 
-values (uuid_generate_v4(), 'Ratatouille', 'Patlıcan, kabak, domates, zeytinyağı ve taze otlarla yapılan geleneksel Fransız yemeği.', false, null, '2024-06-02 15:10:00', 90, 250, '7aa5b730-3340-49cb-89f4-462b4233a5ff', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'Fransız Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
+values (uuid_generate_v4(), 'Ratatouille', 'Patlıcan, kabak, domates, zeytinyağı ve taze otlarla yapılan geleneksel Fransız yemeği.', false, null, '2024-06-02 15:10:00', 90, 250, '54996c78-3024-4c9e-b280-4e20231b3e16', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'Fransız Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
 
 -- Recipe Ingredients (Tarif Malzemeleri)
 insert into public."RecipeIngredients" ("Id", "QuantityType", "Quantity", "CreatedAt", "UpdatedAt", "IsDeleted", "RecipeId", "IngredientId") 
@@ -398,7 +420,7 @@ values (uuid_generate_v4(), 'Tuz', 'Deniz tuzu.', '2024-06-02 15:15:00', null, f
 
 -- Recipe (Tarif) - Sushi
 insert into public."Recipes" ("Id", "Title", "Description", "IsDeleted", "UpdatedAt", "CreatedAt", "PreparationTime", "Calories", "MediaFileId", "CuisinePreferenceId", "UserId") 
-values (uuid_generate_v4(), 'Sushi', 'Suşi pirinci, somon balığı ve nori yaprağı ile yapılan Japon yemeği. Malzemelerin özenle seçildiği, adım adım detaylı anlatımlı suşi tarifi.', false, null, '2024-06-02 15:15:00', 60, 400, '7aa5b730-3340-49cb-89f4-462b4233a5ff', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'Japon Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
+values (uuid_generate_v4(), 'Sushi', 'Suşi pirinci, somon balığı ve nori yaprağı ile yapılan Japon yemeği. Malzemelerin özenle seçildiği, adım adım detaylı anlatımlı suşi tarifi.', false, null, '2024-06-02 15:15:00', 60, 400, '797595b1-ea24-4fb9-a3cb-a9695bf3b1f9', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'Japon Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
 
 -- Recipe Ingredients (Tarif Malzemeleri)
 insert into public."RecipeIngredients" ("Id", "QuantityType", "Quantity", "CreatedAt", "UpdatedAt", "IsDeleted", "RecipeId", "IngredientId") 
@@ -464,7 +486,7 @@ values (uuid_generate_v4(), 'Taze Çekilmiş Karabiber', 'El değirmeninde taze 
 
 -- Recipe (Tarif) - Spaghetti Carbonara
 insert into public."Recipes" ("Id", "Title", "Description", "IsDeleted", "UpdatedAt", "CreatedAt", "PreparationTime", "Calories", "MediaFileId", "CuisinePreferenceId", "UserId") 
-values (uuid_generate_v4(), 'Spaghetti Carbonara', 'Spagetti, pancetta, yumurta ve Pecorino Romano peyniri ile yapılan klasik İtalyan yemeği. Bu tarif, beş yıldızlı bir restoran şefi tarafından özenle seçilmiş malzemelerle hazırlanmıştır.', false, null, '2024-06-02 15:20:00', 25, 600, '7aa5b730-3340-49cb-89f4-462b4233a5ff', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'İtalyan Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
+values (uuid_generate_v4(), 'Spaghetti Carbonara', 'Spagetti, pancetta, yumurta ve Pecorino Romano peyniri ile yapılan klasik İtalyan yemeği. Bu tarif, beş yıldızlı bir restoran şefi tarafından özenle seçilmiş malzemelerle hazırlanmıştır.', false, null, '2024-06-02 15:20:00', 25, 600, '48095290-edd0-45d4-834d-e7c50038ff3f', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'İtalyan Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
 
 -- Recipe Ingredients (Tarif Malzemeleri)
 insert into public."RecipeIngredients" ("Id", "QuantityType", "Quantity", "CreatedAt", "UpdatedAt", "IsDeleted", "RecipeId", "IngredientId") 
@@ -528,7 +550,7 @@ values (uuid_generate_v4(), 'Domates Dilimleri', 'Organik olarak yetiştirilmiş
 
 -- Recipe (Tarif) - Cheeseburger
 insert into public."Recipes" ("Id", "Title", "Description", "IsDeleted", "UpdatedAt", "CreatedAt", "PreparationTime", "Calories", "MediaFileId", "CuisinePreferenceId", "UserId") 
-values (uuid_generate_v4(), 'Gurme Cheeseburger', 'Özenle seçilmiş malzemelerle yapılan, lezzet dolu klasik bir Amerikan cheeseburger.', false, null, '2024-06-02 15:25:00', 30, 900, '7aa5b730-3340-49cb-89f4-462b4233a5ff', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'Amerikan Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
+values (uuid_generate_v4(), 'Gurme Cheeseburger', 'Özenle seçilmiş malzemelerle yapılan, lezzet dolu klasik bir Amerikan cheeseburger.', false, null, '2024-06-02 15:25:00', 30, 900, 'eaeb35aa-7226-4e67-b89f-f82527596c28', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'Amerikan Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
 
 -- Recipe Ingredients (Tarif Malzemeleri)
 insert into public."RecipeIngredients" ("Id", "QuantityType", "Quantity", "CreatedAt", "UpdatedAt", "IsDeleted", "RecipeId", "IngredientId") 
@@ -594,7 +616,7 @@ values (uuid_generate_v4(), 'Karabiber', 'Taze çekilmiş karabiber.', '2024-06-
 
 -- Recipe (Tarif) - Kuru Fasulye
 insert into public."Recipes" ("Id", "Title", "Description", "IsDeleted", "UpdatedAt", "CreatedAt", "PreparationTime", "Calories", "MediaFileId", "CuisinePreferenceId", "UserId") 
-values (uuid_generate_v4(), 'Kuru Fasulye', 'En iyi kalite malzemelerle hazırlanmış, kuru fasulye, soğan ve domates salçası ile yapılan geleneksel Türk yemeği.', false, null, '2024-06-02 15:30:00', 120, 600, '7aa5b730-3340-49cb-89f4-462b4233a5ff', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'Türk Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
+values (uuid_generate_v4(), 'Kuru Fasulye', 'En iyi kalite malzemelerle hazırlanmış, kuru fasulye, soğan ve domates salçası ile yapılan geleneksel Türk yemeği.', false, null, '2024-06-02 15:30:00', 120, 600, '66e00893-13fe-48b3-a685-9a68d4e8e803', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'Türk Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
 
 -- Recipe Ingredients (Tarif Malzemeleri)
 insert into public."RecipeIngredients" ("Id", "QuantityType", "Quantity", "CreatedAt", "UpdatedAt", "IsDeleted", "RecipeId", "IngredientId") 
@@ -656,7 +678,7 @@ values (uuid_generate_v4(), 'Ev Yapımı Guacamole', 'Olgun avokado, lime suyu, 
 
 -- Recipe (Tarif) - Tavuklu Tacos
 insert into public."Recipes" ("Id", "Title", "Description", "IsDeleted", "UpdatedAt", "CreatedAt", "PreparationTime", "Calories", "MediaFileId", "CuisinePreferenceId", "UserId") 
-values (uuid_generate_v4(), 'Tavuklu Tacos', 'Taş değirmende öğütülmüş mısır unundan yapılmış taco ekmeği, serbest dolaşan tavuk göğsü, taze avokado, salsa sosu ve kişniş ile hazırlanan leziz Meksika yemeği.', false, null, '2024-06-02 15:35:00', 45, 400, '7aa5b730-3340-49cb-89f4-462b4233a5ff', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'Meksika Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
+values (uuid_generate_v4(), 'Tavuklu Tacos', 'Taş değirmende öğütülmüş mısır unundan yapılmış taco ekmeği, serbest dolaşan tavuk göğsü, taze avokado, salsa sosu ve kişniş ile hazırlanan leziz Meksika yemeği.', false, null, '2024-06-02 15:35:00', 45, 400, '479e2d14-f245-4203-b997-b67d4f036b41', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'Meksika Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
 
 -- Recipe Ingredients (Tarif Malzemeleri)
 insert into public."RecipeIngredients" ("Id", "QuantityType", "Quantity", "CreatedAt", "UpdatedAt", "IsDeleted", "RecipeId", "IngredientId") 
@@ -743,7 +765,7 @@ values (uuid_generate_v4(), 'Tuz', 'İnce öğütülmüş deniz tuzu.', '2024-06
 
 -- Recipe (Tarif) - Moussaka
 insert into public."Recipes" ("Id", "Title", "Description", "IsDeleted", "UpdatedAt", "CreatedAt", "PreparationTime", "Calories", "MediaFileId", "CuisinePreferenceId", "UserId") 
-values (uuid_generate_v4(), 'Moussaka', 'Patlıcan, dana kıyma ve domates salçası ile yapılan geleneksel Yunan yemeği.', false, null, '2024-06-02 15:40:00', 120, 550, '7aa5b730-3340-49cb-89f4-462b4233a5ff', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'Yunan Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
+values (uuid_generate_v4(), 'Moussaka', 'Patlıcan, dana kıyma ve domates salçası ile yapılan geleneksel Yunan yemeği.', false, null, '2024-06-02 15:40:00', 120, 550, 'f469a545-6b63-4411-a814-50e7b65f8c80', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'Yunan Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
 
 -- Recipe Ingredients (Tarif Malzemeleri)
 insert into public."RecipeIngredients" ("Id", "QuantityType", "Quantity", "CreatedAt", "UpdatedAt", "IsDeleted", "RecipeId", "IngredientId") 
@@ -823,7 +845,7 @@ values (uuid_generate_v4(), 'Sarımsak', 'Taze ve ezilmiş sarımsak dişleri.',
 
 -- Recipe (Tarif) - Butter Chicken
 insert into public."Recipes" ("Id", "Title", "Description", "IsDeleted", "UpdatedAt", "CreatedAt", "PreparationTime", "Calories", "MediaFileId", "CuisinePreferenceId", "UserId") 
-values (uuid_generate_v4(), 'Butter Chicken', 'Tavuk göğsü, domates salçası, tereyağı ve taze baharatlarla yapılan geleneksel Hint yemeği.', false, null, '2024-06-02 15:45:00', 90, 750, '7aa5b730-3340-49cb-89f4-462b4233a5ff', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'Hint Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
+values (uuid_generate_v4(), 'Butter Chicken', 'Tavuk göğsü, domates salçası, tereyağı ve taze baharatlarla yapılan geleneksel Hint yemeği.', false, null, '2024-06-02 15:45:00', 90, 750, '09f1e141-1fdf-4598-9e83-e931a46338d3', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'Hint Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
 
 -- Recipe Ingredients (Tarif Malzemeleri)
 insert into public."RecipeIngredients" ("Id", "QuantityType", "Quantity", "CreatedAt", "UpdatedAt", "IsDeleted", "RecipeId", "IngredientId") 
@@ -895,7 +917,7 @@ values (uuid_generate_v4(), 'Sarımsak', 'Ezilmiş sarımsak, risottoya hafif bi
 
 -- Recipe (Tarif) - Risotto
 insert into public."Recipes" ("Id", "Title", "Description", "IsDeleted", "UpdatedAt", "CreatedAt", "PreparationTime", "Calories", "MediaFileId", "CuisinePreferenceId", "UserId") 
-values (uuid_generate_v4(), 'Risotto', 'Özenle seçilmiş malzemelerle hazırlanan, kremamsı dokusu ve zengin aromasıyla klasik İtalyan yemeği olan Risotto.', false, null, '2024-06-02 15:50:00', 50, 500, '7aa5b730-3340-49cb-89f4-462b4233a5ff', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'İtalyan Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
+values (uuid_generate_v4(), 'Risotto', 'Özenle seçilmiş malzemelerle hazırlanan, kremamsı dokusu ve zengin aromasıyla klasik İtalyan yemeği olan Risotto.', false, null, '2024-06-02 15:50:00', 50, 500, '01c42a3b-9e84-4099-a6e5-639fc84a0bdf', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'İtalyan Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
 
 -- Recipe Ingredients (Tarif Malzemeleri)
 insert into public."RecipeIngredients" ("Id", "QuantityType", "Quantity", "CreatedAt", "UpdatedAt", "IsDeleted", "RecipeId", "IngredientId") 
@@ -967,7 +989,7 @@ values (uuid_generate_v4(), 'Kuruyemiş', 'Taze kavrulmuş yer fıstığı.', '2
 
 -- Recipe (Tarif) - Kung Pao Tavuk
 insert into public."Recipes" ("Id", "Title", "Description", "IsDeleted", "UpdatedAt", "CreatedAt", "PreparationTime", "Calories", "MediaFileId", "CuisinePreferenceId", "UserId") 
-values (uuid_generate_v4(), 'Kung Pao Tavuk', 'Tavuk göğsü, biber, soya sosu ve diğer lezzetli malzemelerle yapılan geleneksel Çin yemeği.', false, null, '2024-06-02 15:55:00', 40, 450, '7aa5b730-3340-49cb-89f4-462b4233a5ff', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'Çin Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
+values (uuid_generate_v4(), 'Kung Pao Tavuk', 'Tavuk göğsü, biber, soya sosu ve diğer lezzetli malzemelerle yapılan geleneksel Çin yemeği.', false, null, '2024-06-02 15:55:00', 40, 450, '596a7547-96f5-44a0-b02a-c1818485367d', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'Çin Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
 
 -- Recipe Ingredients (Tarif Malzemeleri)
 insert into public."RecipeIngredients" ("Id", "QuantityType", "Quantity", "CreatedAt", "UpdatedAt", "IsDeleted", "RecipeId", "IngredientId") 
@@ -1038,7 +1060,7 @@ values (uuid_generate_v4(), 'Gruyère Peyniri', 'Taze rendelenmiş Gruyère peyn
 
 -- Recipe (Tarif) - Quiche Lorraine
 insert into public."Recipes" ("Id", "Title", "Description", "IsDeleted", "UpdatedAt", "CreatedAt", "PreparationTime", "Calories", "MediaFileId", "CuisinePreferenceId", "UserId") 
-values (uuid_generate_v4(), 'Quiche Lorraine', 'Un, tereyağı, soğuk su ve deniz tuzuyla hazırlanan hamur, el yapımı ince dilimlenmiş bacon, taze organik krem şanti, serbest gezen tavuk yumurtası ve taze rendelenmiş Gruyère peyniri ile yapılan geleneksel Fransız tartı.', false, null, '2024-06-02 16:00:00', 90, 800, '7aa5b730-3340-49cb-89f4-462b4233a5ff', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'Fransız Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
+values (uuid_generate_v4(), 'Quiche Lorraine', 'Un, tereyağı, soğuk su ve deniz tuzuyla hazırlanan hamur, el yapımı ince dilimlenmiş bacon, taze organik krem şanti, serbest gezen tavuk yumurtası ve taze rendelenmiş Gruyère peyniri ile yapılan geleneksel Fransız tartı.', false, null, '2024-06-02 16:00:00', 90, 800, 'bd523293-389a-48d4-bd34-475f5761711c', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'Fransız Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
 
 -- Recipe Ingredients (Tarif Malzemeleri)
 insert into public."RecipeIngredients" ("Id", "QuantityType", "Quantity", "CreatedAt", "UpdatedAt", "IsDeleted", "RecipeId", "IngredientId") 
@@ -1109,7 +1131,7 @@ values (uuid_generate_v4(), 'Kişniş', 'Taze doğranmış kişniş yaprakları.
 
 -- Recipe (Tarif) - Enchilada
 insert into public."Recipes" ("Id", "Title", "Description", "IsDeleted", "UpdatedAt", "CreatedAt", "PreparationTime", "Calories", "MediaFileId", "CuisinePreferenceId", "UserId") 
-values (uuid_generate_v4(), 'Enchilada', 'Ev yapımı mısır ekmeği, zeytinyağı ile marine edilmiş tavuk göğsü ve taze baharatlarla zenginleştirilmiş enchilada sosu ile yapılan geleneksel Meksika yemeği.', false, null, '2024-06-02 16:05:00', 60, 550, '7aa5b730-3340-49cb-89f4-462b4233a5ff', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'Meksika Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
+values (uuid_generate_v4(), 'Enchilada', 'Ev yapımı mısır ekmeği, zeytinyağı ile marine edilmiş tavuk göğsü ve taze baharatlarla zenginleştirilmiş enchilada sosu ile yapılan geleneksel Meksika yemeği.', false, null, '2024-06-02 16:05:00', 60, 550, '4a64fe85-d945-4f50-a63e-eff2f884f7d0', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'Meksika Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
 
 -- Recipe Ingredients (Tarif Malzemeleri)
 insert into public."RecipeIngredients" ("Id", "QuantityType", "Quantity", "CreatedAt", "UpdatedAt", "IsDeleted", "RecipeId", "IngredientId") 
@@ -1166,7 +1188,7 @@ values (uuid_generate_v4(), 'Çam Fıstığı', 'Kavrulmuş çam fıstığı.', 
 
 -- Recipe (Tarif) - Pesto Soslu Makarna
 insert into public."Recipes" ("Id", "Title", "Description", "IsDeleted", "UpdatedAt", "CreatedAt", "PreparationTime", "Calories", "MediaFileId", "CuisinePreferenceId", "UserId") 
-values (uuid_generate_v4(), 'Pesto Soslu Makarna', 'Spagetti, ev yapımı taze pesto sosu ve taze rendelenmiş parmesan peyniri ile yapılan, sızma zeytinyağı ve çam fıstığı ile zenginleştirilmiş klasik İtalyan yemeği.', false, null, '2024-06-02 16:10:00', 20, 600, '7aa5b730-3340-49cb-89f4-462b4233a5ff', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'İtalyan Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
+values (uuid_generate_v4(), 'Pesto Soslu Makarna', 'Spagetti, ev yapımı taze pesto sosu ve taze rendelenmiş parmesan peyniri ile yapılan, sızma zeytinyağı ve çam fıstığı ile zenginleştirilmiş klasik İtalyan yemeği.', false, null, '2024-06-02 16:10:00', 20, 600, 'f3d1f484-a43e-484e-898d-74c3adb6ac62', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'İtalyan Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
 
 -- Recipe Ingredients (Tarif Malzemeleri)
 insert into public."RecipeIngredients" ("Id", "QuantityType", "Quantity", "CreatedAt", "UpdatedAt", "IsDeleted", "RecipeId", "IngredientId") 
@@ -1225,7 +1247,7 @@ values (uuid_generate_v4(), 'Daikon Turpu', 'Taze ve ince doğranmış daikon tu
 
 -- Recipe (Tarif) - Tempura
 insert into public."Recipes" ("Id", "Title", "Description", "IsDeleted", "UpdatedAt", "CreatedAt", "PreparationTime", "Calories", "MediaFileId", "CuisinePreferenceId", "UserId") 
-values (uuid_generate_v4(), 'Tempura', 'Taze karides, un ve maden suyu ile yapılan geleneksel Japon kızartması. Soya sosu ve ince doğranmış daikon turpu ile servis edilir.', false, null, '2024-06-02 16:15:00', 45, 350, '7aa5b730-3340-49cb-89f4-462b4233a5ff', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'Japon Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
+values (uuid_generate_v4(), 'Tempura', 'Taze karides, un ve maden suyu ile yapılan geleneksel Japon kızartması. Soya sosu ve ince doğranmış daikon turpu ile servis edilir.', false, null, '2024-06-02 16:15:00', 45, 350, 'd12a6515-266b-48dd-892c-82d6bbaf547f', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'Japon Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
 
 -- Recipe Ingredients (Tarif Malzemeleri)
 insert into public."RecipeIngredients" ("Id", "QuantityType", "Quantity", "CreatedAt", "UpdatedAt", "IsDeleted", "RecipeId", "IngredientId") 
@@ -1293,7 +1315,7 @@ values (uuid_generate_v4(), 'Kekik', 'Kurutulmuş ve ezilmiş taze kekik.', '202
 
 -- Recipe (Tarif) - Greek Salad
 insert into public."Recipes" ("Id", "Title", "Description", "IsDeleted", "UpdatedAt", "CreatedAt", "PreparationTime", "Calories", "MediaFileId", "CuisinePreferenceId", "UserId") 
-values (uuid_generate_v4(), 'Greek Salad', 'Mevsiminde toplanmış taze sebzeler ve yüksek kaliteli feta peyniri ile yapılan geleneksel Yunan salatası.', false, null, '2024-06-02 16:20:00', 20, 200, '7aa5b730-3340-49cb-89f4-462b4233a5ff', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'Yunan Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
+values (uuid_generate_v4(), 'Greek Salad', 'Mevsiminde toplanmış taze sebzeler ve yüksek kaliteli feta peyniri ile yapılan geleneksel Yunan salatası.', false, null, '2024-06-02 16:20:00', 20, 200, '340f8448-deaf-4d32-b473-1dd569ffa26e', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'Yunan Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
 
 -- Recipe Ingredients (Tarif Malzemeleri)
 insert into public."RecipeIngredients" ("Id", "QuantityType", "Quantity", "CreatedAt", "UpdatedAt", "IsDeleted", "RecipeId", "IngredientId") 
@@ -1374,7 +1396,7 @@ values (uuid_generate_v4(), 'Tuz', 'Deniz tuzu, ince taneli.', '2024-06-02 16:25
 
 -- Recipe (Tarif) - Mac and Cheese
 insert into public."Recipes" ("Id", "Title", "Description", "IsDeleted", "UpdatedAt", "CreatedAt", "PreparationTime", "Calories", "MediaFileId", "CuisinePreferenceId", "UserId") 
-values (uuid_generate_v4(), 'Mac and Cheese', 'Makarna, cheddar peyniri ve süt ile yapılan, tereyağı ve un ile zenginleştirilmiş klasik Amerikan yemeği.', false, null, '2024-06-02 16:25:00', 30, 850, '7aa5b730-3340-49cb-89f4-462b4233a5ff', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'Amerikan Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
+values (uuid_generate_v4(), 'Mac and Cheese', 'Makarna, cheddar peyniri ve süt ile yapılan, tereyağı ve un ile zenginleştirilmiş klasik Amerikan yemeği.', false, null, '2024-06-02 16:25:00', 30, 850, '995661bd-743f-4576-b9e2-72b1494f499c', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'Amerikan Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
 
 -- Recipe Ingredients (Tarif Malzemeleri)
 insert into public."RecipeIngredients" ("Id", "QuantityType", "Quantity", "CreatedAt", "UpdatedAt", "IsDeleted", "RecipeId", "IngredientId") 
@@ -1449,7 +1471,7 @@ values (uuid_generate_v4(), 'Kişniş', 'Taze doğranmış kişniş yaprakları.
 
 -- Recipe (Tarif) - Chana Masala
 insert into public."Recipes" ("Id", "Title", "Description", "IsDeleted", "UpdatedAt", "CreatedAt", "PreparationTime", "Calories", "MediaFileId", "CuisinePreferenceId", "UserId") 
-values (uuid_generate_v4(), 'Chana Masala', 'Nohut, domates, soğan ve baharatlarla yapılan geleneksel Hint yemeği. Bu tarifte taze malzemeler kullanılarak ve özenle pişirilerek hazırlanmıştır.', false, null, '2024-06-02 16:30:00', 60, 400, '7aa5b730-3340-49cb-89f4-462b4233a5ff', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'Hint Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
+values (uuid_generate_v4(), 'Chana Masala', 'Nohut, domates, soğan ve baharatlarla yapılan geleneksel Hint yemeği. Bu tarifte taze malzemeler kullanılarak ve özenle pişirilerek hazırlanmıştır.', false, null, '2024-06-02 16:30:00', 60, 400, '8c0255ed-d2bb-4c13-85da-201b76c7eac0', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'Hint Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
 
 -- Recipe Ingredients (Tarif Malzemeleri)
 insert into public."RecipeIngredients" ("Id", "QuantityType", "Quantity", "CreatedAt", "UpdatedAt", "IsDeleted", "RecipeId", "IngredientId") 
@@ -1537,7 +1559,7 @@ values (uuid_generate_v4(), 'Tavuk Suyu', 'Ev yapımı, taze tavuk suyu.', '2024
 
 -- Recipe (Tarif) - Minestrone Çorbası
 insert into public."Recipes" ("Id", "Title", "Description", "IsDeleted", "UpdatedAt", "CreatedAt", "PreparationTime", "Calories", "MediaFileId", "CuisinePreferenceId", "UserId") 
-values (uuid_generate_v4(), 'Minestrone Çorbası', 'Kabak, havuç, domates ve diğer sebzeler ile yapılan klasik İtalyan çorbası.', false, null, '2024-06-02 16:35:00', 60, 250, '7aa5b730-3340-49cb-89f4-462b4233a5ff', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'İtalyan Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
+values (uuid_generate_v4(), 'Minestrone Çorbası', 'Kabak, havuç, domates ve diğer sebzeler ile yapılan klasik İtalyan çorbası.', false, null, '2024-06-02 16:35:00', 60, 250, '1d69abaf-c448-4ef0-8ecb-6206fdd08f19', (SELECT "Id" FROM public."CuisinePreferences" WHERE "Name" = 'İtalyan Mutfağı' LIMIT 1), (SELECT "Id" FROM public."User" ORDER BY random() LIMIT 1));
 
 -- Recipe Ingredients (Tarif Malzemeleri)
 insert into public."RecipeIngredients" ("Id", "QuantityType", "Quantity", "CreatedAt", "UpdatedAt", "IsDeleted", "RecipeId", "IngredientId") 
