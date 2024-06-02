@@ -86,6 +86,7 @@ namespace Apposite.Application.Handlers.Ai
                     Name = recipeObject["Name"].ToString(),
                     Protein = double.Parse(recipeObject["Protein"].ToString()),
                     UserId = userId,
+                    IsPublic = true,
                     PreparationTime = int.Parse(recipeObject["PreparationTime"].ToString()),
                     Servings = int.Parse(recipeObject["Servings"].ToString()),
                     Id = Guid.NewGuid()

@@ -34,6 +34,13 @@ namespace Apposite.Api.Controllers
             return CreateActionResultInstance(response);
         }
 
+        [HttpGet("getAiRecipeById/{id}")]
+        public async Task<IActionResult> GetAiRecipes([FromRoute] Guid id)
+        {
+            var response = await _mediator.Send(new GetAiRecipeByIdQuery() { Id = id });
+            return CreateActionResultInstance(response);
+        }
+
         [HttpGet("getPublicAiRecipes")]
         public async Task<IActionResult> GetPublicAiRecipes([FromQuery] GetPublicAiRecipesQuery query)
         {

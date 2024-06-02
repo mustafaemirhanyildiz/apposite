@@ -1,6 +1,8 @@
 ﻿using Apposite.Application.Dto.Ai;
+using Apposite.Application.Dto.Recipe;
 using Apposite.Application.Mapping;
 using Apposite.Application.Queries.Ai;
+using Apposite.Application.Queries.Recipe;
 using Apposite.Application.ServiceExtensions;
 using Apposite.Application.Services.TokenService;
 using Apposite.Core.Dtos;
@@ -14,7 +16,8 @@ using System.Linq.Expressions;
 namespace Apposite.Application.Handlers.Ai
 {
     public class AiQueryHandler : IRequestHandler<GetAiRecipesQuery, Response<List<GetAiRecipeDto>>>,
-                                  IRequestHandler<GetPublicAiRecipesQuery, Response<List<GetAiRecipeDto>>>
+                                  IRequestHandler<GetPublicAiRecipesQuery, Response<List<GetAiRecipeDto>>>,
+                                  IRequestHandler<GetAiRecipeByIdQuery, Response<GetAiRecipeDto>>
     {
         private readonly AppositeDbContext _dbContext;
         private readonly ITokenService _tokenService;
@@ -73,6 +76,21 @@ namespace Apposite.Application.Handlers.Ai
 
             return Response<List<GetAiRecipeDto>>.Success(200, response, pager);
 
+        }
+
+        public async Task<Response<GetAiRecipeDto>> Handle(GetAiRecipeByIdQuery request, CancellationToken cancellationToken)
+        {
+            var recipes = _dbContext.AiRecipes
+                .Where(recipe => recipe.Id == request.Id)
+                .OrderBy(x => x.CreatedAt)
+                .Include(x => x.AiInstructions)
+                .Include(x => x.AiIngredients)
+                .ToList();
+
+            var response = ObjectMapper.Mapper.Map<GetAiRecipeDto>(recipes);
+
+
+            return Response<GetAiRecipeDto>.Success(200, response);
         }
     }
 }
