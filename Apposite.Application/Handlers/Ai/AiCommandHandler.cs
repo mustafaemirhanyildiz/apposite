@@ -70,8 +70,105 @@ namespace Apposite.Application.Handlers.Ai
             if (response.IsSuccessStatusCode)
             { 
                 var responseContent = await response.Content.ReadAsStringAsync();
-                responseContent = responseContent.Replace("```json", "");
-                responseContent = responseContent.Replace("```", "");
+                Console.WriteLine(responseContent);
+                responseContent = responseContent.Replace("Recipe ", "Recipe");
+                responseContent = responseContent.Replace(" Recipe", "Recipe");
+                responseContent = responseContent.Replace(" Recipe ", "Recipe");
+
+                responseContent = responseContent.Replace("Calories ", "Calories");
+                responseContent = responseContent.Replace(" Calories", "Calories");
+                responseContent = responseContent.Replace(" Calories ", "Calories");
+
+                responseContent = responseContent.Replace("Carbohydrates ", "Carbohydrates");
+                responseContent = responseContent.Replace(" Carbohydrates", "Carbohydrates");
+                responseContent = responseContent.Replace(" Carbohydrates ", "Carbohydrates");
+
+                responseContent = responseContent.Replace("Fat ", "Fat");
+                responseContent = responseContent.Replace(" Fat", "Fat");
+                responseContent = responseContent.Replace(" Fat ", "Fat");
+
+                responseContent = responseContent.Replace("Description ", "Description");
+                responseContent = responseContent.Replace(" Description", "Description");
+                responseContent = responseContent.Replace(" Description ", "Description");
+
+                responseContent = responseContent.Replace("Name ", "Name");
+                responseContent = responseContent.Replace(" Name", "Name");
+                responseContent = responseContent.Replace(" Name ", "Name");
+
+                responseContent = responseContent.Replace("Protein ", "Protein");
+                responseContent = responseContent.Replace(" Protein", "Protein");
+                responseContent = responseContent.Replace(" Protein ", "Protein");
+
+                responseContent = responseContent.Replace("PreparationTime ", "PreparationTime");
+                responseContent = responseContent.Replace(" PreparationTime", "PreparationTime");
+                responseContent = responseContent.Replace(" PreparationTime ", "PreparationTime");
+
+                responseContent = responseContent.Replace("Servings ", "Servings");
+                responseContent = responseContent.Replace(" Servings", "Servings");
+                responseContent = responseContent.Replace(" Servings ", "Servings");
+
+                responseContent = responseContent.Replace("Quantity ", "Quantity");
+                responseContent = responseContent.Replace(" Quantity", "Quantity");
+                responseContent = responseContent.Replace(" Quantity ", "Quantity");
+
+                responseContent = responseContent.Replace("QuantityType ", "QuantityType");
+                responseContent = responseContent.Replace(" QuantityType", "QuantityType");
+                responseContent = responseContent.Replace(" QuantityType ", "QuantityType");
+                
+                responseContent = responseContent.Replace("StepNumber ", "StepNumber");
+                responseContent = responseContent.Replace(" StepNumber", "StepNumber");
+                responseContent = responseContent.Replace(" StepNumber ", "StepNumber");
+
+
+
+                responseContent = responseContent.Replace("recipe ", "recipe");
+                responseContent = responseContent.Replace(" recipe", "recipe");
+                responseContent = responseContent.Replace(" recipe ", "recipe");
+
+                responseContent = responseContent.Replace("calories ", "calories");
+                responseContent = responseContent.Replace(" calories", "calories");
+                responseContent = responseContent.Replace(" calories ", "calories");
+
+                responseContent = responseContent.Replace("carbohydrates ", "carbohydrates");
+                responseContent = responseContent.Replace(" carbohydrates", "carbohydrates");
+                responseContent = responseContent.Replace(" carbohydrates ", "carbohydrates");
+
+                responseContent = responseContent.Replace("fat ", "fat");
+                responseContent = responseContent.Replace(" fat", "fat");
+                responseContent = responseContent.Replace(" fat ", "fat");
+
+                responseContent = responseContent.Replace("description ", "description");
+                responseContent = responseContent.Replace(" description", "description");
+                responseContent = responseContent.Replace(" description ", "description");
+
+                responseContent = responseContent.Replace("name ", "name");
+                responseContent = responseContent.Replace(" name", "name");
+                responseContent = responseContent.Replace(" name ", "name");
+
+                responseContent = responseContent.Replace("protein ", "protein");
+                responseContent = responseContent.Replace(" protein", "protein");
+                responseContent = responseContent.Replace(" protein ", "protein");
+
+                responseContent = responseContent.Replace("preparationTime ", "preparationTime");
+                responseContent = responseContent.Replace(" preparationTime", "preparationTime");
+                responseContent = responseContent.Replace(" preparationTime ", "preparationTime");
+
+                responseContent = responseContent.Replace("servings ", "servings");
+                responseContent = responseContent.Replace(" servings", "servings");
+                responseContent = responseContent.Replace(" servings ", "servings");
+
+                responseContent = responseContent.Replace("quantity ", "quantity");
+                responseContent = responseContent.Replace(" quantity", "quantity");
+                responseContent = responseContent.Replace(" quantity ", "quantity");
+
+                responseContent = responseContent.Replace("quantityType ", "quantityType");
+                responseContent = responseContent.Replace(" quantityType", "quantityType");
+                responseContent = responseContent.Replace(" quantityType ", "quantityType");
+
+                responseContent = responseContent.Replace("stepNumber ", "stepNumber");
+                responseContent = responseContent.Replace(" stepNumber", "stepNumber");
+                responseContent = responseContent.Replace(" stepNumber ", "stepNumber");
+
                 var responseObject = JObject.Parse(responseContent);
                 var recipeObject = JObject.Parse(responseObject["Recipe"].ToString());
                 var Ingredients = JArray.Parse(responseObject["Ingredients"].ToString());
@@ -79,18 +176,19 @@ namespace Apposite.Application.Handlers.Ai
 
                 AiRecipe aiRecipe = new()
                 {
-                    Calories = double.Parse(recipeObject["Calories"].ToString()),
-                    Carbohydrates = double.Parse(recipeObject["Carbohydrates"].ToString()),
-                    Fat = double.Parse(recipeObject["Fat"].ToString()),
-                    Description = recipeObject["Description"].ToString(),
-                    Name = recipeObject["Name"].ToString(),
-                    Protein = double.Parse(recipeObject["Protein"].ToString()),
+                    Calories = double.Parse(recipeObject.ContainsKey("Calories") ? recipeObject["Calories"].ToString() : recipeObject.ContainsKey("calories") ? recipeObject["calories"].ToString() : "0"),
+                    Carbohydrates = double.Parse(recipeObject.ContainsKey("Carbohydrates") ? recipeObject["Carbohydrates"].ToString() : recipeObject.ContainsKey("carbohydrates") ? recipeObject["carbohydrates"].ToString() : "0"),
+                    Fat = double.Parse(recipeObject.ContainsKey("Fat") ? recipeObject["Fat"].ToString() : recipeObject.ContainsKey("fat") ? recipeObject["fat"].ToString() : "0"),
+                    Description = recipeObject.ContainsKey("Description") ? recipeObject["Description"].ToString() : recipeObject.ContainsKey("description") ? recipeObject["description"].ToString() : string.Empty,
+                    Name = recipeObject.ContainsKey("Name") ? recipeObject["Name"].ToString() : recipeObject.ContainsKey("name") ? recipeObject["name"].ToString() : string.Empty,
+                    Protein = double.Parse(recipeObject.ContainsKey("Protein") ? recipeObject["Protein"].ToString() : recipeObject.ContainsKey("protein") ? recipeObject["protein"].ToString() : "0"),
                     UserId = userId,
                     IsPublic = true,
-                    PreparationTime = int.Parse(recipeObject["PreparationTime"].ToString()),
-                    Servings = int.Parse(recipeObject["Servings"].ToString()),
+                    PreparationTime = int.Parse(recipeObject.ContainsKey("PreparationTime") ? recipeObject["PreparationTime"].ToString() : recipeObject.ContainsKey("preparationTime") ? recipeObject["preparationTime"].ToString() : "0"),
+                    Servings = int.Parse(recipeObject.ContainsKey("Servings") ? recipeObject["Servings"].ToString() : recipeObject.ContainsKey("servings") ? recipeObject["servings"].ToString() : "0"),
                     Id = Guid.NewGuid()
                 };
+
                 CreateAiRecipeDto recipe = ObjectMapper.Mapper.Map<CreateAiRecipeDto>(aiRecipe);
                 recipe.AiIngredients = new();
                 recipe.AiInstructions = new();
@@ -99,14 +197,14 @@ namespace Apposite.Application.Handlers.Ai
                     AiIngredient aiIngredient = new()
                     {
                         Id = Guid.NewGuid(),
-                        Name = ingredient["Name"].ToString(),
-                        Description = ingredient["Description"].ToString(),
-                        Carbohydrates = double.Parse(ingredient["Carbohydrates"].ToString()),
-                        Fat = double.Parse(ingredient["Fat"].ToString()),
-                        Calories = double.Parse(ingredient["Calories"].ToString()),
-                        Protein = double.Parse(ingredient["Protein"].ToString()),
-                        Quantity = double.Parse(ingredient["Quantity"].ToString()),
-                        QuantityType = ingredient["QuantityType"].ToString(),
+                        Name = ingredient["Name"]?.ToString() ?? ingredient["name"]?.ToString() ?? string.Empty,
+                        Description = ingredient["Description"]?.ToString() ?? ingredient["description"]?.ToString() ?? string.Empty,
+                        Carbohydrates = double.Parse(ingredient["Carbohydrates"]?.ToString() ?? ingredient["carbohydrates"]?.ToString() ?? "0"),
+                        Fat = double.Parse(ingredient["Fat"]?.ToString() ?? ingredient["fat"]?.ToString() ?? "0"),
+                        Calories = double.Parse(ingredient["Calories"]?.ToString() ?? ingredient["calories"]?.ToString() ?? "0"),
+                        Protein = double.Parse(ingredient["Protein"]?.ToString() ?? ingredient["protein"]?.ToString() ?? "0"),
+                        Quantity = double.Parse(ingredient["Quantity"]?.ToString() ?? ingredient["quantity"]?.ToString() ?? "0"),
+                        QuantityType = ingredient["QuantityType"]?.ToString() ?? ingredient["quantityType"]?.ToString() ?? string.Empty,
                         AiRecipeId = aiRecipe.Id
                     };
                     recipe.AiIngredients.Add(ObjectMapper.Mapper.Map<AiIngredientDto>(aiIngredient));
@@ -118,8 +216,8 @@ namespace Apposite.Application.Handlers.Ai
                     AiInstruction aiInstruction = new()
                     {
                         Id = Guid.NewGuid(),
-                        Description = instruction["Description"].ToString(),
-                        StepNumber = int.Parse(instruction["StepNumber"].ToString()),
+                        Description = instruction["Description"]?.ToString() ?? instruction["description"]?.ToString() ?? string.Empty,
+                        StepNumber = int.Parse(instruction["StepNumber"]?.ToString() ?? instruction["stepNumber"]?.ToString() ?? "0"),
                         AiRecipeId = aiRecipe.Id
                     };
                     recipe.AiInstructions.Add(ObjectMapper.Mapper.Map<AiInstructionDto>(aiInstruction));
