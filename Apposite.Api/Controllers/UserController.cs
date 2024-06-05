@@ -35,5 +35,12 @@ namespace Apposite.Api.Controllers
             return CreateActionResultInstance(response);
         }
 
+
+        [HttpDelete("delete")]
+        public async Task<IActionResult> DeleteUser()
+        {
+            var response = await _mediator.Send(new DeleteUserCommand());
+            return CreateActionResultInstance(response);
+        }
     }
 }
