@@ -96,7 +96,8 @@ namespace Apposite.Application.Handlers
                 var createdUser = ObjectMapper.Mapper.Map<UserDto>(user);
                 createdUser.Role = RoleList.User.ToString();
                 var confirmationToken = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                await _mailService.SendConfirmationMail(createdUser.Email, confirmationToken);
+                await _userManager.ConfirmEmailAsync(user,confirmationToken);
+                //await _mailService.SendConfirmationMail(createdUser.Email, confirmationToken);
                 await _dbContext.SaveChangesAsync();
                 await transection.CommitAsync();
                 return Response<UserDto>.Success(200, createdUser);
