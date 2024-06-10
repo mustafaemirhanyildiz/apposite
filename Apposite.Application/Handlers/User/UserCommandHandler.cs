@@ -84,6 +84,9 @@ namespace Apposite.Application.Handlers.User
             if (user == null)
                 return Response<NoContent>.Fail(404, "User Not Found");
 
+            if(user.Email == "admin@admin.com")
+                return Response<NoContent>.Fail(400, "This User Cannot Deleted");
+
             var airecipes = await _dbContext.AiRecipes.Where(x => x.UserId == userId).ToListAsync();
             await _dbContext.AiIngredients.Where(x => airecipes.Select(x => x.Id).ToList().Contains(x.AiRecipeId)).ExecuteDeleteAsync();
             await _dbContext.AiInstructions.Where(x => airecipes.Select(x => x.Id).ToList().Contains(x.AiRecipeId)).ExecuteDeleteAsync();
